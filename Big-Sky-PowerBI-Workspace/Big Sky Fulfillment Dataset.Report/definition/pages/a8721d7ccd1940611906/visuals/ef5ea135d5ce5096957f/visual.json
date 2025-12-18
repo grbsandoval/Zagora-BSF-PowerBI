@@ -1,0 +1,234 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "name": "ef5ea135d5ce5096957f",
+  "position": {
+    "x": 0,
+    "y": 75.8403869407497,
+    "z": 0,
+    "height": 643.869407496977,
+    "width": 1280,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "primary_clients"
+                    }
+                  },
+                  "Property": "Client"
+                }
+              },
+              "queryRef": "primary_clients.Client",
+              "nativeQueryRef": "Client"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "primary_quickbook_invoices"
+                    }
+                  },
+                  "Property": "CustomerRef_Name"
+                }
+              },
+              "queryRef": "primary_quickbook_invoices.CustomerRef_Name",
+              "nativeQueryRef": "CustomerRef_Name"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "primary_quickbook_invoices"
+                    }
+                  },
+                  "Property": "Document_Number"
+                }
+              },
+              "queryRef": "primary_quickbook_invoices.Document_Number",
+              "nativeQueryRef": "Document_Number"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "primary_quickbook_invoices"
+                    }
+                  },
+                  "Property": "Transaction_Date"
+                }
+              },
+              "queryRef": "primary_quickbook_invoices.Transaction_Date",
+              "nativeQueryRef": "Transaction_Date"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "primary_quickbook_invoices"
+                    }
+                  },
+                  "Property": "Due_Date"
+                }
+              },
+              "queryRef": "primary_quickbook_invoices.Due_Date",
+              "nativeQueryRef": "Due_Date"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "primary_quickbook_invoices"
+                        }
+                      },
+                      "Property": "Total_Amount"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(primary_quickbook_invoices.Total_Amount)",
+              "nativeQueryRef": "Sum of Total_Amount"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "primary_quickbook_invoices"
+                        }
+                      },
+                      "Property": "Balance"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(primary_quickbook_invoices.Balance)",
+              "nativeQueryRef": "Sum of Balance"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "primary_quickbook_invoices"
+                    }
+                  },
+                  "Property": "Days from Due Date"
+                }
+              },
+              "queryRef": "primary_quickbook_invoices.Days from Due Date",
+              "nativeQueryRef": "Days from Due Date"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "primary_quickbook_invoices"
+                    }
+                  },
+                  "Property": "Aged Receivable Bucket"
+                }
+              },
+              "queryRef": "primary_quickbook_invoices.Aged Receivable Bucket",
+              "nativeQueryRef": "Aged Receivable Bucket"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "primary_quickbook_invoices"
+                  }
+                },
+                "Property": "Due_Date"
+              }
+            },
+            "direction": "Descending"
+          }
+        ]
+      }
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "54626e479501e2f74b80",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "primary_quickbook_invoices"
+              }
+            },
+            "Property": "CustomerRef_Name"
+          }
+        },
+        "type": "Categorical",
+        "filter": {
+          "Version": 2,
+          "From": [
+            {
+              "Name": "p",
+              "Entity": "primary_quickbook_invoices",
+              "Type": 0
+            }
+          ],
+          "Where": [
+            {
+              "Condition": {
+                "In": {
+                  "Expressions": [
+                    {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Source": "p"
+                          }
+                        },
+                        "Property": "CustomerRef_Name"
+                      }
+                    }
+                  ],
+                  "Values": [
+                    [
+                      {
+                        "Literal": {
+                          "Value": "'RaNae Merrill Quilt Design'"
+                        }
+                      }
+                    ]
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

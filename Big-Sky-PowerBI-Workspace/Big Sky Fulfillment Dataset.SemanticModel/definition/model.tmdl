@@ -11,6 +11,8 @@ annotation PBI_QueryOrder = ["client_invoices","primary_clients","primary_shipme
 
 annotation __PBI_TimeIntelligenceEnabled = 0
 
+annotation PBI_ProTooling = ["DevMode"]
+
 ref table client_invoices
 ref table primary_clients
 ref table primary_shipments

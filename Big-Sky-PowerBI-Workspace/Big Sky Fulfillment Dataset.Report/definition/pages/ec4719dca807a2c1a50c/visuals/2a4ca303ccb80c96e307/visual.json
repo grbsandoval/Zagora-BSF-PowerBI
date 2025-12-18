@@ -1,0 +1,147 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "name": "2a4ca303ccb80c96e307",
+  "position": {
+    "x": 0,
+    "y": 180.28169014084509,
+    "z": 0,
+    "height": 539.20614596670941,
+    "width": 621.15236875800258,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Location Capacity"
+                    }
+                  },
+                  "Property": "created_at_date"
+                }
+              },
+              "queryRef": "Location Capacity.created_at_date",
+              "nativeQueryRef": "created_at_date"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Location Capacity"
+                    }
+                  },
+                  "Property": "Location Type"
+                }
+              },
+              "queryRef": "Location Capacity.Location Type",
+              "nativeQueryRef": "Location Type"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Location Capacity"
+                        }
+                      },
+                      "Property": "location_name"
+                    }
+                  },
+                  "Function": 5
+                }
+              },
+              "queryRef": "Location Capacity.location_name",
+              "nativeQueryRef": "Count of location_name"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Location Capacity"
+                        }
+                      },
+                      "Property": "Linear Bin Ft"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(Location Capacity.Linear Bin Ft)",
+              "nativeQueryRef": "Sum of Linear Bin Ft"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "5c13d04a7238b9a2371e",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Location Capacity"
+              }
+            },
+            "Property": "created_at_date"
+          }
+        },
+        "type": "Categorical",
+        "filter": {
+          "Version": 2,
+          "From": [
+            {
+              "Name": "l",
+              "Entity": "Location Capacity",
+              "Type": 0
+            }
+          ],
+          "Where": [
+            {
+              "Condition": {
+                "In": {
+                  "Expressions": [
+                    {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Source": "l"
+                          }
+                        },
+                        "Property": "created_at_date"
+                      }
+                    }
+                  ],
+                  "Values": [
+                    [
+                      {
+                        "Literal": {
+                          "Value": "datetime'2025-05-18T00:00:00'"
+                        }
+                      }
+                    ]
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

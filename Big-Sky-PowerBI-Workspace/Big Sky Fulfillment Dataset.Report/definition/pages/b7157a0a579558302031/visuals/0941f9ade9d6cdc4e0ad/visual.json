@@ -1,0 +1,368 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "name": "0941f9ade9d6cdc4e0ad",
+  "position": {
+    "x": 697.57322175732224,
+    "y": 0,
+    "z": 2000,
+    "height": 720.33472803347286,
+    "width": 582.42677824267787,
+    "tabOrder": 2000
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "Avg of Daily Min Hourly Shipments",
+                    "textStyle": {
+                      "fontWeight": "bold"
+                    }
+                  },
+                  {
+                    "value": " = "
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "VAR",
+                    "textStyle": {
+                      "color": "#0000ff"
+                    }
+                  },
+                  {
+                    "value": " "
+                  },
+                  {
+                    "value": "HourlyMinTable",
+                    "textStyle": {
+                      "color": "#008080"
+                    }
+                  },
+                  {
+                    "value": " ="
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "    "
+                  },
+                  {
+                    "value": "SUMMARIZE",
+                    "textStyle": {
+                      "color": "#3165bb"
+                    }
+                  },
+                  {
+                    "value": "("
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "        "
+                  },
+                  {
+                    "value": "ALL",
+                    "textStyle": {
+                      "color": "#3165bb"
+                    }
+                  },
+                  {
+                    "value": "("
+                  },
+                  {
+                    "value": "primary_time[Hour]",
+                    "textStyle": {
+                      "color": "#001080"
+                    }
+                  },
+                  {
+                    "value": "), "
+                  },
+                  {
+                    "value": "-- Removes filter from the visual",
+                    "textStyle": {
+                      "color": "#008000"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "        ",
+                    "textStyle": {
+                      "color": "#0000ff"
+                    }
+                  },
+                  {
+                    "value": "primary_time[Hour]",
+                    "textStyle": {
+                      "color": "#001080"
+                    }
+                  },
+                  {
+                    "value": ","
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "        "
+                  },
+                  {
+                    "value": "\"MinHourlyShipments\"",
+                    "textStyle": {
+                      "color": "#a31515"
+                    }
+                  },
+                  {
+                    "value": ","
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "            "
+                  },
+                  {
+                    "value": "MinX",
+                    "textStyle": {
+                      "color": "#3165bb"
+                    }
+                  },
+                  {
+                    "value": "("
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "                "
+                  },
+                  {
+                    "value": "SUMMARIZE",
+                    "textStyle": {
+                      "color": "#3165bb"
+                    }
+                  },
+                  {
+                    "value": "("
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "                    "
+                  },
+                  {
+                    "value": "ALL",
+                    "textStyle": {
+                      "color": "#3165bb"
+                    }
+                  },
+                  {
+                    "value": "("
+                  },
+                  {
+                    "value": "primary_date[Date]",
+                    "textStyle": {
+                      "color": "#001080"
+                    }
+                  },
+                  {
+                    "value": "),"
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "                    "
+                  },
+                  {
+                    "value": "primary_date[Date]",
+                    "textStyle": {
+                      "color": "#001080"
+                    }
+                  },
+                  {
+                    "value": ","
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "                    "
+                  },
+                  {
+                    "value": "\"HourlyCount\"",
+                    "textStyle": {
+                      "color": "#a31515"
+                    }
+                  },
+                  {
+                    "value": ","
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "                        "
+                  },
+                  {
+                    "value": "CALCULATE",
+                    "textStyle": {
+                      "color": "#3165bb"
+                    }
+                  },
+                  {
+                    "value": "("
+                  },
+                  {
+                    "value": "DISTINCTCOUNT",
+                    "textStyle": {
+                      "color": "#3165bb"
+                    }
+                  },
+                  {
+                    "value": "("
+                  },
+                  {
+                    "value": "shipments[tracking_number]",
+                    "textStyle": {
+                      "color": "#001080"
+                    }
+                  },
+                  {
+                    "value": "))"
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "                ),"
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "                "
+                  },
+                  {
+                    "value": "[HourlyCount]",
+                    "textStyle": {
+                      "color": "#001080"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "            )",
+                    "textStyle": {
+                      "color": "#0000ff"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "    )",
+                    "textStyle": {
+                      "color": "#0000ff"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "RETURN",
+                    "textStyle": {
+                      "color": "#0000ff"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "AVERAGEX",
+                    "textStyle": {
+                      "color": "#3165bb"
+                    }
+                  },
+                  {
+                    "value": "("
+                  },
+                  {
+                    "value": "HourlyMinTable",
+                    "textStyle": {
+                      "color": "#008080"
+                    }
+                  },
+                  {
+                    "value": ", "
+                  },
+                  {
+                    "value": "[MinHourlyShipments]",
+                    "textStyle": {
+                      "color": "#001080"
+                    }
+                  },
+                  {
+                    "value": ")"
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": ""
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": ""
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": ""
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

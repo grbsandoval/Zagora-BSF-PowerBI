@@ -1,0 +1,372 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "name": "16ad7846f06a7819d36c",
+  "position": {
+    "x": 0,
+    "y": 101.75732217573223,
+    "z": 0,
+    "height": 618.57740585774059,
+    "width": 1280,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "pivotTable",
+    "query": {
+      "queryState": {
+        "Columns": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "primary_date"
+                    }
+                  },
+                  "Property": "Date"
+                }
+              },
+              "queryRef": "primary_date.Date",
+              "nativeQueryRef": "Date",
+              "active": true,
+              "displayName": "Date"
+            }
+          ],
+          "fieldParameters": [
+            {
+              "parameterExpr": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Date Aggregation"
+                    }
+                  },
+                  "Property": "Date Aggregation"
+                }
+              },
+              "index": 0,
+              "length": 1
+            }
+          ]
+        },
+        "Rows": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "primary_clients"
+                    }
+                  },
+                  "Property": "Client"
+                }
+              },
+              "queryRef": "primary_clients.Client",
+              "nativeQueryRef": "Client | Carrier | Tracking",
+              "active": true,
+              "displayName": "Client | Carrier | Tracking"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "primary_carriers"
+                    }
+                  },
+                  "Property": "Carrier"
+                }
+              },
+              "queryRef": "primary_carriers.Carrier",
+              "nativeQueryRef": "Carrier",
+              "active": false
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "primary_shipments"
+                    }
+                  },
+                  "Property": "Tracking_#_shipment"
+                }
+              },
+              "queryRef": "primary_shipments.Tracking_#_shipment",
+              "nativeQueryRef": "Tracking_#_shipment",
+              "active": false
+            }
+          ]
+        },
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "measures_table"
+                    }
+                  },
+                  "Property": "Postage Margin Markup"
+                }
+              },
+              "queryRef": "measures_table.Postage Margin",
+              "nativeQueryRef": "Postage Margin"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "measures_table"
+                    }
+                  },
+                  "Property": "Postage Margin Markup %"
+                }
+              },
+              "queryRef": "measures_table.Postage Margin %",
+              "nativeQueryRef": "%",
+              "displayName": "%"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "measures_table"
+                    }
+                  },
+                  "Property": "Net Postage Margin"
+                }
+              },
+              "queryRef": "measures_table.Net Postage Margin",
+              "nativeQueryRef": "Net Postage Margin"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "measures_table"
+                    }
+                  },
+                  "Property": "Net Postage Margin %"
+                }
+              },
+              "queryRef": "measures_table.Net Postage Margin %",
+              "nativeQueryRef": "%1",
+              "displayName": "%"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "measures_table"
+                        }
+                      },
+                      "Property": "Column"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(measures_table.Column)",
+              "nativeQueryRef": " ",
+              "displayName": " "
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "measures_table"
+                  }
+                },
+                "Property": "Net Postage Margin"
+              }
+            },
+            "direction": "Descending"
+          }
+        ]
+      }
+    },
+    "expansionStates": [
+      {
+        "roles": [
+          "Rows"
+        ],
+        "levels": [
+          {
+            "queryRefs": [
+              "primary_clients.Client"
+            ],
+            "isCollapsed": true,
+            "identityKeys": [
+              {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "primary_clients"
+                    }
+                  },
+                  "Property": "Client"
+                }
+              }
+            ],
+            "isPinned": true
+          },
+          {
+            "queryRefs": [
+              "primary_carriers.Carrier"
+            ],
+            "isCollapsed": true,
+            "isPinned": true
+          },
+          {
+            "queryRefs": [
+              "primary_shipments.Tracking_#_shipment"
+            ],
+            "isCollapsed": true
+          }
+        ],
+        "root": {}
+      }
+    ],
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "layout": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Outline'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "rowHeaders": [
+        {
+          "properties": {
+            "repeatRowHeaders": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "subTotals": [
+        {
+          "properties": {
+            "columnSubtotals": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "columnFormatting": [
+        {
+          "properties": {
+            "labelPrecision": {
+              "expr": {
+                "Literal": {
+                  "Value": "0L"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "measures_table.Postage Margin %"
+          }
+        },
+        {
+          "properties": {
+            "labelPrecision": {
+              "expr": {
+                "Literal": {
+                  "Value": "0L"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "measures_table.Net Postage Margin %"
+          }
+        },
+        {
+          "properties": {
+            "backColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 0,
+                      "Percent": -0.1
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Sum(measures_table.Column)"
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "stylePreset": [
+        {
+          "properties": {
+            "name": {
+              "expr": {
+                "Literal": {
+                  "Value": "'BoldHeader'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Postage Tracker'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

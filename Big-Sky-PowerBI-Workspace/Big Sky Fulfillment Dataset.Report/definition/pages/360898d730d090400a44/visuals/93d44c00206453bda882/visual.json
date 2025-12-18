@@ -1,0 +1,89 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "name": "93d44c00206453bda882",
+  "position": {
+    "x": 436.07843137254906,
+    "y": 185.0980392156863,
+    "z": 1000,
+    "height": 534.90196078431381,
+    "width": 407.843137254902,
+    "tabOrder": 1000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "primary_locations"
+                    }
+                  },
+                  "Property": "location_name"
+                }
+              },
+              "queryRef": "primary_locations.location_name",
+              "nativeQueryRef": "location_name"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "item_locations_manual"
+                    }
+                  },
+                  "Property": "location_name"
+                }
+              },
+              "queryRef": "item_locations_manual.location_name",
+              "nativeQueryRef": "location_name1"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "item_locations_manual"
+                        }
+                      },
+                      "Property": "Units"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(item_locations_manual.Units)",
+              "nativeQueryRef": "Sum of Units"
+            }
+          ],
+          "showAll": true
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "primary_locations"
+                  }
+                },
+                "Property": "location_name"
+              }
+            },
+            "direction": "Descending"
+          }
+        ]
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

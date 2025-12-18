@@ -1,0 +1,166 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.0.0/schema.json",
+  "name": "e3abce43b4bc8d46a339",
+  "displayName": "Hourly Shipments",
+  "displayOption": "FitToPage",
+  "height": 720,
+  "width": 1280,
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "0494853b4a051b4236ef",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "prmLASMedian"
+              }
+            },
+            "Property": "prmLASMedian"
+          }
+        },
+        "type": "Advanced",
+        "filter": {
+          "Version": 2,
+          "From": [
+            {
+              "Name": "p",
+              "Entity": "prmLASMedian",
+              "Type": 0
+            }
+          ],
+          "Where": [
+            {
+              "Condition": {
+                "Comparison": {
+                  "ComparisonKind": 0,
+                  "Left": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Source": "p"
+                        }
+                      },
+                      "Property": "prmLASMedian"
+                    }
+                  },
+                  "Right": {
+                    "Literal": {
+                      "Value": "184L"
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "howCreated": "User"
+      },
+      {
+        "name": "e82a3e7f77afaf9ed66a",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "prmLASMax"
+              }
+            },
+            "Property": "prmLASMax"
+          }
+        },
+        "type": "Advanced",
+        "filter": {
+          "Version": 2,
+          "From": [
+            {
+              "Name": "p",
+              "Entity": "prmLASMax",
+              "Type": 0
+            }
+          ],
+          "Where": [
+            {
+              "Condition": {
+                "Comparison": {
+                  "ComparisonKind": 0,
+                  "Left": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Source": "p"
+                        }
+                      },
+                      "Property": "prmLASMax"
+                    }
+                  },
+                  "Right": {
+                    "Literal": {
+                      "Value": "872L"
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "howCreated": "User"
+      },
+      {
+        "name": "45e4fd6a3541e7adeb3c",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "prmLASMin"
+              }
+            },
+            "Property": "prmLASMin"
+          }
+        },
+        "type": "Advanced",
+        "filter": {
+          "Version": 2,
+          "From": [
+            {
+              "Name": "p",
+              "Entity": "prmLASMin",
+              "Type": 0
+            }
+          ],
+          "Where": [
+            {
+              "Condition": {
+                "Comparison": {
+                  "ComparisonKind": 0,
+                  "Left": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Source": "p"
+                        }
+                      },
+                      "Property": "prmLASMin"
+                    }
+                  },
+                  "Right": {
+                    "Literal": {
+                      "Value": "27L"
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "howCreated": "User"
+      }
+    ]
+  },
+  "visualInteractions": [
+    {
+      "source": "5bdcc8ba15b017248225",
+      "target": "2083c0f5423000696062",
+      "type": "DataFilter"
+    }
+  ]
+}

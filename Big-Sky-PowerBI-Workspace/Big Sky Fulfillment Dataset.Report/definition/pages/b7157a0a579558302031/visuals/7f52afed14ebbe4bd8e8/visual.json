@@ -1,0 +1,760 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "name": "7f52afed14ebbe4bd8e8",
+  "position": {
+    "x": 40.167364016736407,
+    "y": 0,
+    "z": 0,
+    "height": 720.33472803347286,
+    "width": 582.42677824267787,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "Logic Cheat Sheet",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontSize": "14pt"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": ""
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Net Postage Margin",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontSize": "11pt"
+                    }
+                  },
+                  {
+                    "value": " = ",
+                    "textStyle": {
+                      "fontSize": "11pt"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "IF",
+                    "textStyle": {
+                      "fontSize": "11pt",
+                      "color": "#3165bb"
+                    }
+                  },
+                  {
+                    "value": "(",
+                    "textStyle": {
+                      "fontSize": "11pt"
+                    }
+                  },
+                  {
+                    "value": "ISBLANK",
+                    "textStyle": {
+                      "fontSize": "11pt",
+                      "color": "#3165bb"
+                    }
+                  },
+                  {
+                    "value": "(",
+                    "textStyle": {
+                      "fontSize": "11pt"
+                    }
+                  },
+                  {
+                    "value": "SUM",
+                    "textStyle": {
+                      "fontSize": "11pt",
+                      "color": "#3165bb"
+                    }
+                  },
+                  {
+                    "value": "(",
+                    "textStyle": {
+                      "fontSize": "11pt"
+                    }
+                  },
+                  {
+                    "value": "primary_shipments[Lojistic Net Shipment Cost]",
+                    "textStyle": {
+                      "fontSize": "11pt",
+                      "color": "#001080"
+                    }
+                  },
+                  {
+                    "value": ")),",
+                    "textStyle": {
+                      "fontSize": "11pt"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "    ",
+                    "textStyle": {
+                      "fontSize": "11pt"
+                    }
+                  },
+                  {
+                    "value": "SUM",
+                    "textStyle": {
+                      "fontSize": "11pt",
+                      "color": "#3165bb"
+                    }
+                  },
+                  {
+                    "value": "(",
+                    "textStyle": {
+                      "fontSize": "11pt"
+                    }
+                  },
+                  {
+                    "value": "primary_shipments[Marked Up Label Cost]",
+                    "textStyle": {
+                      "fontSize": "11pt",
+                      "color": "#001080"
+                    }
+                  },
+                  {
+                    "value": ")-",
+                    "textStyle": {
+                      "fontSize": "11pt"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "    ",
+                    "textStyle": {
+                      "fontSize": "11pt"
+                    }
+                  },
+                  {
+                    "value": "SUM",
+                    "textStyle": {
+                      "fontSize": "11pt",
+                      "color": "#3165bb"
+                    }
+                  },
+                  {
+                    "value": "(",
+                    "textStyle": {
+                      "fontSize": "11pt"
+                    }
+                  },
+                  {
+                    "value": "primary_shipments[Quoted Label Cost]",
+                    "textStyle": {
+                      "fontSize": "11pt",
+                      "color": "#001080"
+                    }
+                  },
+                  {
+                    "value": ")+",
+                    "textStyle": {
+                      "fontSize": "11pt"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "    ",
+                    "textStyle": {
+                      "fontSize": "11pt"
+                    }
+                  },
+                  {
+                    "value": "SUM",
+                    "textStyle": {
+                      "fontSize": "11pt",
+                      "color": "#3165bb"
+                    }
+                  },
+                  {
+                    "value": "(",
+                    "textStyle": {
+                      "fontSize": "11pt"
+                    }
+                  },
+                  {
+                    "value": "primary_shipments[Reconciled Amount Billed]",
+                    "textStyle": {
+                      "fontSize": "11pt",
+                      "color": "#001080"
+                    }
+                  },
+                  {
+                    "value": "),",
+                    "textStyle": {
+                      "fontSize": "11pt"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "        ",
+                    "textStyle": {
+                      "fontSize": "11pt"
+                    }
+                  },
+                  {
+                    "value": "SUM",
+                    "textStyle": {
+                      "fontSize": "11pt",
+                      "color": "#3165bb"
+                    }
+                  },
+                  {
+                    "value": "(",
+                    "textStyle": {
+                      "fontSize": "11pt"
+                    }
+                  },
+                  {
+                    "value": "primary_shipments[Marked Up Label Cost]",
+                    "textStyle": {
+                      "fontSize": "11pt",
+                      "color": "#001080"
+                    }
+                  },
+                  {
+                    "value": ")-",
+                    "textStyle": {
+                      "fontSize": "11pt"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "        ",
+                    "textStyle": {
+                      "fontSize": "11pt"
+                    }
+                  },
+                  {
+                    "value": "SUM",
+                    "textStyle": {
+                      "fontSize": "11pt",
+                      "color": "#3165bb"
+                    }
+                  },
+                  {
+                    "value": "(",
+                    "textStyle": {
+                      "fontSize": "11pt"
+                    }
+                  },
+                  {
+                    "value": "primary_shipments[Lojistic Net Shipment Cost]",
+                    "textStyle": {
+                      "fontSize": "11pt",
+                      "color": "#001080"
+                    }
+                  },
+                  {
+                    "value": ")+",
+                    "textStyle": {
+                      "fontSize": "11pt"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "        ",
+                    "textStyle": {
+                      "fontSize": "11pt"
+                    }
+                  },
+                  {
+                    "value": "SUM",
+                    "textStyle": {
+                      "fontSize": "11pt",
+                      "color": "#3165bb"
+                    }
+                  },
+                  {
+                    "value": "(",
+                    "textStyle": {
+                      "fontSize": "11pt"
+                    }
+                  },
+                  {
+                    "value": "primary_shipments[Reconciled Amount Billed]",
+                    "textStyle": {
+                      "fontSize": "11pt",
+                      "color": "#001080"
+                    }
+                  },
+                  {
+                    "value": ")",
+                    "textStyle": {
+                      "fontSize": "11pt"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": ")"
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": ""
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Postage Margin Markup",
+                    "textStyle": {
+                      "fontWeight": "bold"
+                    }
+                  },
+                  {
+                    "value": " = "
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "CALCULATE",
+                    "textStyle": {
+                      "color": "#3165bb"
+                    }
+                  },
+                  {
+                    "value": "("
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "SUM",
+                    "textStyle": {
+                      "color": "#3165bb"
+                    }
+                  },
+                  {
+                    "value": "("
+                  },
+                  {
+                    "value": "primary_shipments[Marked Up Label Cost]",
+                    "textStyle": {
+                      "color": "#001080"
+                    }
+                  },
+                  {
+                    "value": ") - "
+                  },
+                  {
+                    "value": "SUM",
+                    "textStyle": {
+                      "color": "#3165bb"
+                    }
+                  },
+                  {
+                    "value": "("
+                  },
+                  {
+                    "value": "primary_shipments[Quoted Label Cost]",
+                    "textStyle": {
+                      "color": "#001080"
+                    }
+                  },
+                  {
+                    "value": ")"
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": ")"
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": ""
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": ""
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Avg of Daily Max Hourly Shipments",
+                    "textStyle": {
+                      "fontWeight": "bold"
+                    }
+                  },
+                  {
+                    "value": " = "
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "VAR",
+                    "textStyle": {
+                      "color": "#0000ff"
+                    }
+                  },
+                  {
+                    "value": " "
+                  },
+                  {
+                    "value": "HourlyMaxTable",
+                    "textStyle": {
+                      "color": "#008080"
+                    }
+                  },
+                  {
+                    "value": " ="
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "    "
+                  },
+                  {
+                    "value": "SUMMARIZE",
+                    "textStyle": {
+                      "color": "#3165bb"
+                    }
+                  },
+                  {
+                    "value": "("
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "        "
+                  },
+                  {
+                    "value": "ALL",
+                    "textStyle": {
+                      "color": "#3165bb"
+                    }
+                  },
+                  {
+                    "value": "("
+                  },
+                  {
+                    "value": "primary_time[Hour]",
+                    "textStyle": {
+                      "color": "#001080"
+                    }
+                  },
+                  {
+                    "value": "), "
+                  },
+                  {
+                    "value": "-- Removes filter from the visual",
+                    "textStyle": {
+                      "color": "#008000"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "        "
+                  },
+                  {
+                    "value": "primary_time[Hour]",
+                    "textStyle": {
+                      "color": "#001080"
+                    }
+                  },
+                  {
+                    "value": ","
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "        "
+                  },
+                  {
+                    "value": "\"MaxHourlyShipments\"",
+                    "textStyle": {
+                      "color": "#a31515"
+                    }
+                  },
+                  {
+                    "value": ","
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "            "
+                  },
+                  {
+                    "value": "MAXX",
+                    "textStyle": {
+                      "color": "#3165bb"
+                    }
+                  },
+                  {
+                    "value": "("
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "                "
+                  },
+                  {
+                    "value": "SUMMARIZE",
+                    "textStyle": {
+                      "color": "#3165bb"
+                    }
+                  },
+                  {
+                    "value": "("
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "                    "
+                  },
+                  {
+                    "value": "ALL",
+                    "textStyle": {
+                      "color": "#3165bb"
+                    }
+                  },
+                  {
+                    "value": "("
+                  },
+                  {
+                    "value": "primary_date[Date]",
+                    "textStyle": {
+                      "color": "#001080"
+                    }
+                  },
+                  {
+                    "value": "),"
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "                    "
+                  },
+                  {
+                    "value": "primary_date[Date]",
+                    "textStyle": {
+                      "color": "#001080"
+                    }
+                  },
+                  {
+                    "value": ","
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "                    "
+                  },
+                  {
+                    "value": "\"HourlyCount\"",
+                    "textStyle": {
+                      "color": "#a31515"
+                    }
+                  },
+                  {
+                    "value": ","
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "                        "
+                  },
+                  {
+                    "value": "CALCULATE",
+                    "textStyle": {
+                      "color": "#3165bb"
+                    }
+                  },
+                  {
+                    "value": "("
+                  },
+                  {
+                    "value": "DISTINCTCOUNT",
+                    "textStyle": {
+                      "color": "#3165bb"
+                    }
+                  },
+                  {
+                    "value": "("
+                  },
+                  {
+                    "value": "shipments[tracking_number]",
+                    "textStyle": {
+                      "color": "#001080"
+                    }
+                  },
+                  {
+                    "value": "))"
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "                ),"
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "                "
+                  },
+                  {
+                    "value": "[HourlyCount]",
+                    "textStyle": {
+                      "color": "#001080"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "            )"
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "    )"
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "RETURN",
+                    "textStyle": {
+                      "color": "#0000ff"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "AVERAGEX",
+                    "textStyle": {
+                      "color": "#3165bb"
+                    }
+                  },
+                  {
+                    "value": "("
+                  },
+                  {
+                    "value": "HourlyMaxTable",
+                    "textStyle": {
+                      "color": "#008080"
+                    }
+                  },
+                  {
+                    "value": ", "
+                  },
+                  {
+                    "value": "[MaxHourlyShipments]",
+                    "textStyle": {
+                      "color": "#001080"
+                    }
+                  },
+                  {
+                    "value": ")"
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": ""
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": ""
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

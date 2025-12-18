@@ -1,0 +1,569 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "name": "f40971a308b5b0a8b418",
+  "position": {
+    "x": 0,
+    "y": 105.69872958257713,
+    "z": 0,
+    "height": 615.60798548094374,
+    "width": 1280,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "pivotTable",
+    "query": {
+      "queryState": {
+        "Rows": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "primary_date"
+                    }
+                  },
+                  "Property": "Date"
+                }
+              },
+              "queryRef": "primary_date.Date",
+              "nativeQueryRef": "Date",
+              "active": true,
+              "displayName": "Date"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Location Capacity"
+                    }
+                  },
+                  "Property": "Location Type"
+                }
+              },
+              "queryRef": "Location Capacity.Location Type",
+              "nativeQueryRef": "Location Type",
+              "active": true
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "primary_warehouses"
+                    }
+                  },
+                  "Property": "warehouse_code"
+                }
+              },
+              "queryRef": "primary_warehouses.warehouse_code",
+              "nativeQueryRef": "warehouse_code",
+              "active": false
+            }
+          ],
+          "fieldParameters": [
+            {
+              "parameterExpr": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Date Aggregation"
+                    }
+                  },
+                  "Property": "Date Aggregation"
+                }
+              },
+              "index": 0,
+              "length": 1,
+              "sortDirection": "Descending"
+            }
+          ]
+        },
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Location Capacity"
+                        }
+                      },
+                      "Property": "Linear Bin Ft"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(Location Capacity.Linear Bin Ft)",
+              "nativeQueryRef": "Sum of Linear Bin Ft"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Location Capacity"
+                        }
+                      },
+                      "Property": "Unique Location Warehouse"
+                    }
+                  },
+                  "Function": 2
+                }
+              },
+              "queryRef": "Count(Location Capacity.Unique Location Warehouse)",
+              "nativeQueryRef": "Count of Unique Location Warehouse",
+              "format": "#,0"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "primary_date"
+                  }
+                },
+                "Property": "Date"
+              }
+            },
+            "direction": "Descending"
+          }
+        ]
+      }
+    },
+    "expansionStates": [
+      {
+        "roles": [
+          "Rows"
+        ],
+        "levels": [
+          {
+            "queryRefs": [
+              "primary_date.Date"
+            ],
+            "isCollapsed": true,
+            "identityKeys": [
+              {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "primary_date"
+                    }
+                  },
+                  "Property": "Date"
+                }
+              }
+            ],
+            "isPinned": true
+          },
+          {
+            "queryRefs": [
+              "Location Capacity.Location Type"
+            ],
+            "isCollapsed": true,
+            "identityKeys": [
+              {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Location Capacity"
+                    }
+                  },
+                  "Property": "Location Type"
+                }
+              }
+            ],
+            "isPinned": true
+          },
+          {
+            "queryRefs": [
+              "primary_warehouses.warehouse_code"
+            ],
+            "isCollapsed": true,
+            "isPinned": true
+          }
+        ],
+        "root": {
+          "children": [
+            {
+              "identityValues": [
+                {
+                  "Literal": {
+                    "Value": "datetime'2024-07-19T00:00:00'"
+                  }
+                }
+              ],
+              "isToggled": true
+            },
+            {
+              "identityValues": [
+                {
+                  "Literal": {
+                    "Value": "datetime'2025-07-10T00:00:00'"
+                  }
+                }
+              ],
+              "isToggled": true
+            }
+          ]
+        }
+      }
+    ],
+    "objects": {
+      "general": [
+        {
+          "properties": {}
+        }
+      ],
+      "columnWidth": [
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "65.88524543457402D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "scopeId": {
+                  "Comparison": {
+                    "ComparisonKind": 0,
+                    "Left": {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Entity": "primary_date"
+                          }
+                        },
+                        "Property": "Year-Month"
+                      }
+                    },
+                    "Right": {
+                      "Literal": {
+                        "Value": "'2024-08'"
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "122.1562313701215D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "primary_date.Date"
+          }
+        }
+      ],
+      "columnFormatting": [
+        {
+          "properties": {
+            "labelPrecision": {
+              "expr": {
+                "Literal": {
+                  "Value": "0L"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Count(Location Capacity.Unique Location Warehouse)"
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "stylePreset": [
+        {
+          "properties": {
+            "name": {
+              "expr": {
+                "Literal": {
+                  "Value": "'BoldHeader'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Inventory Capacity'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "1d2b6711730d8c9ab508",
+        "ordinal": 0,
+        "field": {
+          "Aggregation": {
+            "Expression": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "inventory_changes"
+                  }
+                },
+                "Property": "location_name"
+              }
+            },
+            "Function": 5
+          }
+        },
+        "type": "Advanced",
+        "howCreated": "User"
+      },
+      {
+        "name": "f7e5da0281e22485582a",
+        "ordinal": 1,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "primary_date"
+              }
+            },
+            "Property": "Date"
+          }
+        },
+        "type": "Categorical",
+        "filter": {
+          "Version": 2,
+          "From": [
+            {
+              "Name": "p",
+              "Entity": "primary_date",
+              "Type": 0
+            }
+          ],
+          "Where": [
+            {
+              "Condition": {
+                "In": {
+                  "Expressions": [
+                    {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Source": "p"
+                          }
+                        },
+                        "Property": "Date"
+                      }
+                    }
+                  ],
+                  "Values": [
+                    [
+                      {
+                        "Literal": {
+                          "Value": "datetime'2025-07-10T00:00:00'"
+                        }
+                      }
+                    ]
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "name": "bf5ad3473b78103ebe65",
+        "ordinal": 2,
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "measures_table"
+              }
+            },
+            "Property": "Linear Bin Ft (Unique by Location)"
+          }
+        },
+        "type": "Advanced",
+        "howCreated": "User"
+      },
+      {
+        "name": "ffd249805745d8983563",
+        "ordinal": 3,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "inventory_changes"
+              }
+            },
+            "Property": "Location Type"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "User"
+      },
+      {
+        "name": "52bb62f4017edd9b4d50",
+        "ordinal": 4,
+        "field": {
+          "Aggregation": {
+            "Expression": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Location Capacity"
+                  }
+                },
+                "Property": "Linear Bin Ft"
+              }
+            },
+            "Function": 0
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "a08d1fa2fb66f6c7ab8d",
+        "ordinal": 5,
+        "field": {
+          "Aggregation": {
+            "Expression": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Location Capacity"
+                  }
+                },
+                "Property": "Unique Location Warehouse"
+              }
+            },
+            "Function": 2
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "f462839d39aaf10340f8",
+        "ordinal": 6,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Location Capacity"
+              }
+            },
+            "Property": "OnHand"
+          }
+        },
+        "type": "Advanced",
+        "filter": {
+          "Version": 2,
+          "From": [
+            {
+              "Name": "l",
+              "Entity": "Location Capacity",
+              "Type": 0
+            }
+          ],
+          "Where": [
+            {
+              "Condition": {
+                "Comparison": {
+                  "ComparisonKind": 1,
+                  "Left": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Source": "l"
+                        }
+                      },
+                      "Property": "OnHand"
+                    }
+                  },
+                  "Right": {
+                    "Literal": {
+                      "Value": "0L"
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "howCreated": "User"
+      },
+      {
+        "name": "649aae6fc0c35722b57a",
+        "ordinal": 7,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Location Capacity"
+              }
+            },
+            "Property": "Warehouse"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "User"
+      },
+      {
+        "name": "764d7026a2b6744ec9a1",
+        "ordinal": 8,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Location Capacity"
+              }
+            },
+            "Property": "Location Type"
+          }
+        },
+        "type": "Categorical"
+      }
+    ],
+    "filterSortOrder": "Custom"
+  }
+}
