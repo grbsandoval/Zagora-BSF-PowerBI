@@ -1,0 +1,279 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "name": "301353160c13c18233de",
+  "position": {
+    "x": 0,
+    "y": 105.69872958257713,
+    "z": 0,
+    "height": 615.60798548094374,
+    "width": 1280,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "primary_date"
+                    }
+                  },
+                  "Property": "Date"
+                }
+              },
+              "queryRef": "primary_date.Date",
+              "nativeQueryRef": "Date",
+              "displayName": "Date"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "inventory_changes"
+                    }
+                  },
+                  "Property": "warehouse"
+                }
+              },
+              "queryRef": "inventory_changes.warehouse",
+              "nativeQueryRef": "warehouse"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "inventory_changes"
+                    }
+                  },
+                  "Property": "location_name"
+                }
+              },
+              "queryRef": "Min(inventory_changes.location_name)",
+              "nativeQueryRef": "location_name"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "inventory_changes"
+                    }
+                  },
+                  "Property": "sku"
+                }
+              },
+              "queryRef": "inventory_changes.sku",
+              "nativeQueryRef": "sku"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "inventory_changes"
+                    }
+                  },
+                  "Property": "created_at"
+                }
+              },
+              "queryRef": "inventory_changes.created_at",
+              "nativeQueryRef": "created_at"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "inventory_changes"
+                    }
+                  },
+                  "Property": "lot_id"
+                }
+              },
+              "queryRef": "Sum(inventory_changes.lot_id)",
+              "nativeQueryRef": "lot_id"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "inventory_changes"
+                    }
+                  },
+                  "Property": "lot_expiration"
+                }
+              },
+              "queryRef": "inventory_changes.lot_expiration",
+              "nativeQueryRef": "lot_expiration"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "inventory_changes"
+                    }
+                  },
+                  "Property": "previous_on_hand"
+                }
+              },
+              "queryRef": "Sum(inventory_changes.previous_on_hand)",
+              "nativeQueryRef": "previous_on_hand"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "inventory_changes"
+                    }
+                  },
+                  "Property": "quantity"
+                }
+              },
+              "queryRef": "Sum(inventory_changes.quantity)",
+              "nativeQueryRef": "quantity"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "inventory_changes"
+                    }
+                  },
+                  "Property": "source"
+                }
+              },
+              "queryRef": "inventory_changes.source",
+              "nativeQueryRef": "source"
+            }
+          ],
+          "fieldParameters": [
+            {
+              "parameterExpr": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Date Aggregation"
+                    }
+                  },
+                  "Property": "Date Aggregation"
+                }
+              },
+              "index": 0,
+              "length": 1
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "inventory_changes"
+                  }
+                },
+                "Property": "created_at"
+              }
+            },
+            "direction": "Descending"
+          }
+        ]
+      }
+    },
+    "objects": {
+      "general": [
+        {
+          "properties": {}
+        }
+      ],
+      "columnWidth": [
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "65.88524543457402D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "scopeId": {
+                  "Comparison": {
+                    "ComparisonKind": 0,
+                    "Left": {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Entity": "primary_date"
+                          }
+                        },
+                        "Property": "Year-Month"
+                      }
+                    },
+                    "Right": {
+                      "Literal": {
+                        "Value": "'2024-08'"
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "stylePreset": [
+        {
+          "properties": {
+            "name": {
+              "expr": {
+                "Literal": {
+                  "Value": "'BoldHeader'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Inventory Change Log'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}
