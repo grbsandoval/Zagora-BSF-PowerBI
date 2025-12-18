@@ -1,0 +1,236 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "name": "e0a4fa0c72a574c40cc2",
+  "position": {
+    "x": 25.692438402718778,
+    "y": 60.5607476635514,
+    "z": 0,
+    "height": 663.10960067969415,
+    "width": 1220.3908241291419,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "pivotTable",
+    "query": {
+      "queryState": {
+        "Rows": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "primary_date"
+                    }
+                  },
+                  "Property": "Date"
+                }
+              },
+              "queryRef": "primary_date.Date",
+              "nativeQueryRef": "Date",
+              "active": true
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "primary_clients"
+                    }
+                  },
+                  "Property": "Client"
+                }
+              },
+              "queryRef": "primary_clients.Client",
+              "nativeQueryRef": "Client",
+              "active": false
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "primary_warehouses"
+                    }
+                  },
+                  "Property": "warehouse_code"
+                }
+              },
+              "queryRef": "primary_warehouses.warehouse_code",
+              "nativeQueryRef": "warehouse_code",
+              "active": false
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "shipments"
+                    }
+                  },
+                  "Property": "warehouse_code"
+                }
+              },
+              "queryRef": "shipments.warehouse_code",
+              "nativeQueryRef": "warehouse_code1",
+              "active": false
+            }
+          ]
+        },
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "measures_table"
+                    }
+                  },
+                  "Property": "Projected Volume (Next 2 Weeks by Weekday)"
+                }
+              },
+              "queryRef": "measures_table.Projected Volume (Next 2 Weeks)",
+              "nativeQueryRef": "Projections",
+              "displayName": "Projections"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "measures_table"
+                    }
+                  },
+                  "Property": "Shipments"
+                }
+              },
+              "queryRef": "measures_table.Shipments",
+              "nativeQueryRef": "Shipments"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "measures_table"
+                    }
+                  },
+                  "Property": "Wholesale Projected Volume (Next 2 Weeks by Weekday)"
+                }
+              },
+              "queryRef": "measures_table.Wholesale Projected Volume (Next 2 Weeks by Weekday)",
+              "nativeQueryRef": "Wholesale Projected Volume (Next 2 Weeks by Weekday)"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "measures_table"
+                    }
+                  },
+                  "Property": "Wholesale Shipments"
+                }
+              },
+              "queryRef": "measures_table.Wholesale Shipments",
+              "nativeQueryRef": "Wholesale Shipments"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "primary_date"
+                  }
+                },
+                "Property": "Date"
+              }
+            },
+            "direction": "Descending"
+          }
+        ]
+      }
+    },
+    "expansionStates": [
+      {
+        "roles": [
+          "Rows"
+        ],
+        "levels": [
+          {
+            "queryRefs": [
+              "primary_date.Date"
+            ],
+            "isCollapsed": true,
+            "identityKeys": [
+              {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "primary_date"
+                    }
+                  },
+                  "Property": "Date"
+                }
+              }
+            ],
+            "isPinned": true
+          },
+          {
+            "queryRefs": [
+              "primary_clients.Client"
+            ],
+            "isCollapsed": true,
+            "identityKeys": [
+              {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "primary_clients"
+                    }
+                  },
+                  "Property": "Client"
+                }
+              }
+            ],
+            "isPinned": true
+          },
+          {
+            "queryRefs": [
+              "primary_warehouses.warehouse_code"
+            ],
+            "isCollapsed": true,
+            "identityKeys": [
+              {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "primary_warehouses"
+                    }
+                  },
+                  "Property": "warehouse_code"
+                }
+              }
+            ],
+            "isPinned": true
+          },
+          {
+            "queryRefs": [
+              "shipments.warehouse_code"
+            ],
+            "isCollapsed": true,
+            "isPinned": true
+          }
+        ],
+        "root": {}
+      }
+    ],
+    "drillFilterOtherVisuals": true
+  }
+}

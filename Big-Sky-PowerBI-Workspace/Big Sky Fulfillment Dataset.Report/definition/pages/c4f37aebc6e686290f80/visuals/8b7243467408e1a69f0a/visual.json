@@ -1,0 +1,225 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "name": "8b7243467408e1a69f0a",
+  "position": {
+    "x": 0,
+    "y": 75.8403869407497,
+    "z": 0,
+    "height": 643.869407496977,
+    "width": 1280,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "primary_quickbook_bills"
+                    }
+                  },
+                  "Property": "VendorRef_Name"
+                }
+              },
+              "queryRef": "primary_quickbook_bills.VendorRef_Name",
+              "nativeQueryRef": "VendorRef_Name"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "primary_quickbook_bills"
+                    }
+                  },
+                  "Property": "Document_Number"
+                }
+              },
+              "queryRef": "primary_quickbook_bills.Document_Number",
+              "nativeQueryRef": "Document_Number"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "primary_quickbook_bills"
+                        }
+                      },
+                      "Property": "Total_Amount"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(primary_quickbook_bills.Total_Amount)",
+              "nativeQueryRef": "Sum of Total_Amount"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "primary_quickbook_bills"
+                        }
+                      },
+                      "Property": "Balance"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(primary_quickbook_bills.Balance)",
+              "nativeQueryRef": "Sum of Balance"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "primary_quickbook_bills"
+                    }
+                  },
+                  "Property": "Transaction_Date"
+                }
+              },
+              "queryRef": "primary_quickbook_bills.Transaction_Date",
+              "nativeQueryRef": "Transaction_Date"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "primary_quickbook_bills"
+                    }
+                  },
+                  "Property": "Due_Date"
+                }
+              },
+              "queryRef": "primary_quickbook_bills.Due_Date",
+              "nativeQueryRef": "Due_Date"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "primary_quickbook_bills"
+                    }
+                  },
+                  "Property": "Days from Due Date"
+                }
+              },
+              "queryRef": "primary_quickbook_bills.Days from Due Date",
+              "nativeQueryRef": "Days from Due Date"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "primary_quickbook_bills"
+                    }
+                  },
+                  "Property": "Aged Payable Bucket"
+                }
+              },
+              "queryRef": "primary_quickbook_bills.Aged Payable Bucket",
+              "nativeQueryRef": "Aged Payable Bucket"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "primary_quickbook_bills"
+                  }
+                },
+                "Property": "Days from Due Date"
+              }
+            },
+            "direction": "Ascending"
+          }
+        ]
+      }
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "fbf5a306f45b06f51dcf",
+        "field": {
+          "Aggregation": {
+            "Expression": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "primary_quickbook_bills"
+                  }
+                },
+                "Property": "Balance"
+              }
+            },
+            "Function": 0
+          }
+        },
+        "type": "Advanced",
+        "filter": {
+          "Version": 2,
+          "From": [
+            {
+              "Name": "p",
+              "Entity": "primary_quickbook_bills",
+              "Type": 0
+            }
+          ],
+          "Where": [
+            {
+              "Condition": {
+                "Comparison": {
+                  "ComparisonKind": 1,
+                  "Left": {
+                    "Aggregation": {
+                      "Expression": {
+                        "Column": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Source": "p"
+                            }
+                          },
+                          "Property": "Balance"
+                        }
+                      },
+                      "Function": 0
+                    }
+                  },
+                  "Right": {
+                    "Literal": {
+                      "Value": "0L"
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }
+    ]
+  }
+}
