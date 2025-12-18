@@ -1,0 +1,88 @@
+table primary_time
+	lineageTag: 35fab420-0986-4773-9949-9acef93395e9
+
+	column Value
+		formatString: 0
+		lineageTag: dac69f14-a800-4237-82c2-de549e849e76
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Value]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Time
+		formatString: General Date
+		lineageTag: 2f851553-ea14-4dae-aa9a-5037047d57fb
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Time]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Hour
+		formatString: 0
+		lineageTag: 9194b949-5b81-4fa3-8cde-f8facd76d8d0
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Hour]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Minute
+		formatString: 0
+		lineageTag: a3d8d74f-46b7-4def-bbe2-9923a8debf8d
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Minute]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Time Label'
+		dataType: dateTime
+		formatString: Long Time
+		lineageTag: a121b0ed-5cc3-43dc-918c-460748c6358d
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Time Label]
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Time
+
+	column 'Hour Label'
+		dataType: dateTime
+		formatString: Long Time
+		lineageTag: 1b8bc7a8-4ca7-4e64-bcdf-c49c1ce78301
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Hour Label]
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Time
+
+	column Second
+		formatString: 0
+		lineageTag: e8dacc6f-f744-4661-bdae-d8b9fa108138
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Second]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition primary_time = calculated
+		mode: import
+		source =
+				
+				ADDCOLUMNS(
+				    GENERATESERIES(0, 86399, 1),  -- Total seconds in a day
+				    "Time", TIME(INT([Value]/3600), INT(MOD([Value],3600)/60), MOD([Value],60)),
+				    "Hour", INT([Value]/3600),
+				    "Minute", INT(MOD([Value],3600)/60),
+				    "Second", MOD([Value],60),
+				    "Time Label", FORMAT(TIME(INT([Value]/3600), INT(MOD([Value],3600)/60), MOD([Value],60)), "hh:mm:ss AM/PM"),
+				    "Hour Label", FORMAT(TIME(INT([Value]/3600), 0, 0), "h:mm AM/PM")
+				)
+
+	annotation PBI_Id = ff0281d582d942e1b89a68b609e89493
+

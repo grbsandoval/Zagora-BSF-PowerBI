@@ -1,0 +1,53 @@
+table primary_warehouses
+	lineageTag: b0061b7e-0446-47db-aa5c-7f8737fa53dd
+
+	column warehouse_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 1a0d530f-ebc6-402b-be61-8d959b8291c6
+		summarizeBy: sum
+		sourceColumn: warehouse_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column warehouse_uuid
+		dataType: string
+		lineageTag: 5bd177f7-53b0-4ca7-a4a4-419f20c0c1f1
+		summarizeBy: none
+		sourceColumn: warehouse_uuid
+
+		annotation SummarizationSetBy = Automatic
+
+	column warehouse
+		dataType: string
+		lineageTag: 87e554ae-5add-4ac8-ad33-9ce0a9445435
+		summarizeBy: none
+		sourceColumn: warehouse
+
+		annotation SummarizationSetBy = Automatic
+
+	column warehouse_code
+		dataType: string
+		lineageTag: d9da1f25-83e7-4c86-bd06-3cdcd7e71058
+		summarizeBy: none
+		sourceColumn: warehouse_code
+
+		annotation SummarizationSetBy = Automatic
+
+	partition primary_warehouses = m
+		mode: import
+		source =
+				let
+				    Source = PowerPlatform.Dataflows(null),
+				    Workspaces = Source{[Id="Workspaces"]}[Data],
+				    #"2df93ede-c6d5-4e10-a0ee-0fac8ac11c0b" = Workspaces{[workspaceId="2df93ede-c6d5-4e10-a0ee-0fac8ac11c0b"]}[Data],
+				    #"92a73884-2c4c-49d8-8559-5b732846ea0c" = #"2df93ede-c6d5-4e10-a0ee-0fac8ac11c0b"{[dataflowId="92a73884-2c4c-49d8-8559-5b732846ea0c"]}[Data],
+				    inventory_changes_ = #"92a73884-2c4c-49d8-8559-5b732846ea0c"{[entity="primary_warehouses",version=""]}[Data],
+				    #"Filtered Rows" = Table.SelectRows(inventory_changes_, each ([warehouse_uuid] <> null))
+				in
+				    #"Filtered Rows"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

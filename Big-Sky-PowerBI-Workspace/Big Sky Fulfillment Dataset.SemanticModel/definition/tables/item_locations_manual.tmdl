@@ -1,0 +1,237 @@
+table item_locations_manual
+	lineageTag: c1865abe-f5f0-446f-95ae-e051eba58864
+
+	column 'Item Name'
+		dataType: string
+		lineageTag: 5ac40847-00ff-4fc7-b1ac-5e77c36f9b3b
+		summarizeBy: none
+		sourceColumn: Item Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column sku
+		dataType: string
+		lineageTag: e63ae7e6-ad40-4cc3-8ef5-9838e0c0f849
+		summarizeBy: none
+		sourceColumn: sku
+
+		annotation SummarizationSetBy = Automatic
+
+	column Warehouse
+		dataType: string
+		lineageTag: f1e7d4e8-e3c7-4bac-8543-5d2aeb141583
+		summarizeBy: none
+		sourceColumn: Warehouse
+
+		annotation SummarizationSetBy = Automatic
+
+	column Client
+		dataType: string
+		lineageTag: 61405138-4523-4e59-af05-d2a1e5b39991
+		summarizeBy: none
+		sourceColumn: Client
+
+		annotation SummarizationSetBy = Automatic
+
+	column location_name
+		dataType: string
+		lineageTag: 3565a9f5-c741-4a8c-ab08-b29fabe50d1e
+		summarizeBy: none
+		sourceColumn: location_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Location Type'
+		dataType: string
+		lineageTag: f5a66ff9-7a89-460e-b3bb-9774d5954406
+		summarizeBy: none
+		sourceColumn: Location Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column Units
+		dataType: int64
+		formatString: 0
+		lineageTag: afd49d3f-610f-4632-9910-77102bfeb17f
+		summarizeBy: sum
+		sourceColumn: Units
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Is Active'
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: f06c45d9-49dc-4652-9bbc-0cec07f13903
+		summarizeBy: none
+		sourceColumn: Is Active
+
+		annotation SummarizationSetBy = Automatic
+
+	column Pickable
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 4cf4eef1-eab1-4030-9516-b322c5ecfe43
+		summarizeBy: none
+		sourceColumn: Pickable
+
+		annotation SummarizationSetBy = Automatic
+
+	column Sellable
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: f4439ab4-1066-42c7-aeb4-38f654b36dde
+		summarizeBy: none
+		sourceColumn: Sellable
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Active Lot'
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: c0bf8906-0e0c-4a48-a3e7-9226e1e50179
+		summarizeBy: none
+		sourceColumn: Active Lot
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Lot Name'
+		dataType: string
+		lineageTag: bc45ad0e-c16a-4754-bded-dd5715bbdca0
+		summarizeBy: none
+		sourceColumn: Lot Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Lot Expiration'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 012396c7-182d-4f19-81e9-4870b930778e
+		summarizeBy: none
+		sourceColumn: Lot Expiration
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Days Until Lot Expiration'
+		dataType: int64
+		formatString: 0
+		lineageTag: 2510ab04-cb6f-41bf-b198-efbba34088d7
+		summarizeBy: sum
+		sourceColumn: Days Until Lot Expiration
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 03f4ac04-d784-4cc2-861b-ebad46b19f8c
+		summarizeBy: none
+		sourceColumn: created_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 46157af0-13f8-4b2e-8698-cd8862361a65
+		summarizeBy: none
+		sourceColumn: created_at_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Adjusted Location Type' =
+			
+			VAR ManualType = item_locations_manual[Location Type]
+			VAR PrimarySwitch =
+			    SWITCH(
+			        ManualType,
+			        "Bin-12", "Bin Feet",
+			        "Bin-6", "Bin Feet",
+			        "Bin-8", "Bin Feet",
+			        "Bin-24", "Bin Feet",
+			        "R-Pallet", "R-Pallet",
+			        "Pallet", "Pallet",
+			        "None"
+			    )
+			RETURN
+			    IF(
+			        ISBLANK(PrimarySwitch),
+			        SWITCH(TRUE(),
+			            LEFT(ManualType, 6) = "Pallet", "Pallet",
+			            LEFT(ManualType, 3) = "Bin", "Bin Feet",
+			            BLANK()
+			        ),
+			        PrimarySwitch
+			    )
+		lineageTag: 644c7912-d049-4f7b-b3ce-619c74d6de3b
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Linear Bin Ft' =
+			
+			SWITCH(item_locations_manual[Location Type],
+			"Bin-12",1,
+			"Bin-6",0.5,
+			"Bin-8",0.67,
+			"Bin-24",2,
+			"Bin-4",0.33
+			)
+		lineageTag: b4beed8d-fb12-4b75-837f-b0652ec756d7
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column warehouse_code
+		dataType: string
+		lineageTag: 3d457c14-114d-41eb-a48c-5bc0864ff5ca
+		summarizeBy: none
+		sourceColumn: warehouse_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Warehouse UUID' =
+			
+			SWITCH(
+			    TRUE(),
+			    item_locations_manual[Warehouse] = "BSF - Las Vegas", "V2FyZWhvdXNlOjg3NzA1",
+			    item_locations_manual[Warehouse] = "Primary", "V2FyZWhvdXNlOjgxMzE=",
+			    item_locations_manual[Warehouse] = "MSO-HOLDING", "V2FyZWhvdXNlOjEwNTMg==",
+			    item_locations_manual[Warehouse] = "Big Sky Fulfillment - Charlotte", "V2FyZWhvdXNlOjIyNTQ=",
+			    BLANK()
+			)
+		lineageTag: 4d59b3f2-ff1b-409f-9736-2378fee91951
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition item_locations_manual = m
+		mode: import
+		source =
+				let
+				    Source = PowerPlatform.Dataflows(null),
+				    Workspaces = Source{[Id="Workspaces"]}[Data],
+				    #"2df93ede-c6d5-4e10-a0ee-0fac8ac11c0b" = Workspaces{[workspaceId="2df93ede-c6d5-4e10-a0ee-0fac8ac11c0b"]}[Data],
+				    #"92a73884-2c4c-49d8-8559-5b732846ea0c" = #"2df93ede-c6d5-4e10-a0ee-0fac8ac11c0b"{[dataflowId="92a73884-2c4c-49d8-8559-5b732846ea0c"]}[Data],
+				    item_locations_manual_ = #"92a73884-2c4c-49d8-8559-5b732846ea0c"{[entity="item_locations_manual",version=""]}[Data],
+				    #"Renamed Columns" = Table.RenameColumns(item_locations_manual_,{{"Location", "location_name"}}),
+				    #"Uppercased Text" = Table.TransformColumns(#"Renamed Columns",{{"location_name", Text.Upper, type text}}),
+				    #"Trimmed Text" = Table.TransformColumns(#"Uppercased Text",{{"location_name", Text.Trim, type text}}),
+				    #"Cleaned Text" = Table.TransformColumns(#"Trimmed Text",{{"location_name", Text.Clean, type text}}),
+				    #"Renamed Columns1" = Table.RenameColumns(#"Cleaned Text",{{"Creation Date", "created_at"}}),
+				    #"Duplicated Column" = Table.DuplicateColumn(#"Renamed Columns1", "created_at", "created_at - Copy"),
+				    #"Renamed Columns2" = Table.RenameColumns(#"Duplicated Column",{{"created_at - Copy", "created_at_date"}}),
+				    #"Extracted Date" = Table.TransformColumns(#"Renamed Columns2",{{"created_at_date", DateTime.Date, type date}}),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Extracted Date",{{"warehouse_code", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

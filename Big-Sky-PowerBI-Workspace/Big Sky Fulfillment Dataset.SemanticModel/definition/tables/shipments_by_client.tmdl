@@ -1,0 +1,105 @@
+table shipments_by_client
+	lineageTag: 7c3c8b5b-335d-4a0c-92c8-a4d854c40bb7
+
+	column account_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 52287df5-43bc-48e7-b2cd-0f0efe916223
+		summarizeBy: sum
+		sourceColumn: account_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column warehouse_id
+		dataType: int64
+		formatString: 0
+		lineageTag: a0f0c2a2-95fb-4f62-abd9-639ed7924815
+		summarizeBy: sum
+		sourceColumn: warehouse_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column order_number
+		dataType: string
+		lineageTag: e25e2a0a-9e20-4065-a3ad-86486ce21974
+		summarizeBy: none
+		sourceColumn: order_number
+
+		annotation SummarizationSetBy = Automatic
+
+	column order_id
+		dataType: int64
+		formatString: 0
+		lineageTag: c429cbac-33df-48ec-8b94-49ce68d177fc
+		summarizeBy: sum
+		sourceColumn: order_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column order_uuid
+		dataType: string
+		lineageTag: 6a2c3600-769d-4ec2-b0fd-498e07c6bc2c
+		summarizeBy: none
+		sourceColumn: order_uuid
+
+		annotation SummarizationSetBy = Automatic
+
+	column allocated_at_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: bfe0cf8c-290a-4a05-9453-2f67f7e7bd3d
+		summarizeBy: none
+		sourceColumn: allocated_at_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column shipment_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 3ca7bc45-01c9-4f2d-b1de-b0635e97e5f6
+		summarizeBy: sum
+		sourceColumn: shipment_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column Client
+		dataType: string
+		lineageTag: 7bf256ab-b45c-40ef-9fb4-0c34d6c21c01
+		summarizeBy: none
+		sourceColumn: Client
+
+		annotation SummarizationSetBy = Automatic
+
+	column partner_order_id
+		dataType: string
+		lineageTag: f9dbad85-7bd6-4ba9-bbe1-6826b8b65490
+		summarizeBy: none
+		sourceColumn: partner_order_id
+
+		annotation SummarizationSetBy = Automatic
+
+	partition shipments_by_client = m
+		mode: import
+		source =
+				let
+				    Source = PowerPlatform.Dataflows(null),
+				    Workspaces = Source{[Id="Workspaces"]}[Data],
+				    #"2df93ede-c6d5-4e10-a0ee-0fac8ac11c0b" = Workspaces{[workspaceId="2df93ede-c6d5-4e10-a0ee-0fac8ac11c0b"]}[Data],
+				    #"92a73884-2c4c-49d8-8559-5b732846ea0c" = #"2df93ede-c6d5-4e10-a0ee-0fac8ac11c0b"{[dataflowId="92a73884-2c4c-49d8-8559-5b732846ea0c"]}[Data],
+				    order_allocated_ = #"92a73884-2c4c-49d8-8559-5b732846ea0c"{[entity="order_allocated",version=""]}[Data],
+				    #"Removed Other Columns" = Table.SelectColumns(order_allocated_,{"account_id", "warehouse_id", "order_number", "order_id", "order_uuid", "partner_order_id", "allocated_at_date"}),
+				    #"Merged Queries" = Table.NestedJoin(#"Removed Other Columns", {"partner_order_id"}, shipments, {"partner_order_id"}, "shipments", JoinKind.LeftOuter),
+				    #"Expanded shipments" = Table.ExpandTableColumn(#"Merged Queries", "shipments", {"shipment_id"}, {"shipment_id"}),
+				    #"Merged Queries1" = Table.NestedJoin(#"Expanded shipments", {"account_id"}, account_ID_to_client, {"account_id"}, "account_ID_to_client", JoinKind.LeftOuter),
+				    #"Expanded account_ID_to_client" = Table.ExpandTableColumn(#"Merged Queries1", "account_ID_to_client", {"Client"}, {"Client"}),
+				    #"Removed Duplicates" = Table.Distinct(#"Expanded account_ID_to_client"),
+				    #"Removed Duplicates1" = Table.Distinct(#"Removed Duplicates", {"shipment_id"})
+				in
+				    #"Removed Duplicates1"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,70 @@
+table 'Product Locations'
+	lineageTag: e63d0098-e8fa-4c38-8c64-5f165ac57d01
+
+	column Warehouse
+		dataType: string
+		lineageTag: f5201256-abee-413f-9476-ceea3ee8dc5a
+		summarizeBy: none
+		sourceColumn: Warehouse
+
+		annotation SummarizationSetBy = Automatic
+
+	column Location
+		dataType: string
+		lineageTag: caf97cbe-8a1b-4377-83d7-8fcf86772a54
+		summarizeBy: none
+		sourceColumn: Location
+
+		annotation SummarizationSetBy = Automatic
+
+	column Type
+		dataType: string
+		lineageTag: ed68112f-ac04-46de-8fe5-d2b593d93ede
+		summarizeBy: none
+		sourceColumn: Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column Pickable
+		dataType: string
+		lineageTag: 4ea5cc06-c4e7-4f7d-9ebf-91ea1b471e68
+		summarizeBy: none
+		sourceColumn: Pickable
+
+		annotation SummarizationSetBy = Automatic
+
+	column Sellable
+		dataType: string
+		lineageTag: bce9d008-5a3a-424c-bfdf-0160a23f95e4
+		summarizeBy: none
+		sourceColumn: Sellable
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Warehouse UUID' =
+			
+			SWITCH(
+			    TRUE(),
+			    'Product Locations'[Warehouse] = "BSF - Las Vegas", "V2FyZWhvdXNlOjg3NzA1",
+			    'Product Locations'[Warehouse] = "Primary", "V2FyZWhvdXNlOjgxMzE=",
+			    'Product Locations'[Warehouse] = "MSO-HOLDING", "V2FyZWhvdXNlOjEwNTMg==",
+			    'Product Locations'[Warehouse] = "Big Sky Fulfillment - Charlotte", "V2FyZWhvdXNlOjIyNTQ=",
+			    BLANK()
+			)
+		lineageTag: 4c22a70b-2178-4230-91a3-dd390cc9c370
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Product Locations' = m
+		mode: import
+		source =
+				let
+				    Source = PowerPlatform.Dataflows(null),
+				    Workspaces = Source{[Id="Workspaces"]}[Data],
+				    #"2df93ede-c6d5-4e10-a0ee-0fac8ac11c0b" = Workspaces{[workspaceId="2df93ede-c6d5-4e10-a0ee-0fac8ac11c0b"]}[Data],
+				    #"11212156-858f-4573-b9ed-1e1c9511d6f2" = #"2df93ede-c6d5-4e10-a0ee-0fac8ac11c0b"{[dataflowId="11212156-858f-4573-b9ed-1e1c9511d6f2"]}[Data],
+				    #"Product Locations_" = #"11212156-858f-4573-b9ed-1e1c9511d6f2"{[entity="Product Locations",version=""]}[Data]
+				in
+				    #"Product Locations_"
+

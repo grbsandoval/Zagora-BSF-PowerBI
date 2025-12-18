@@ -1,0 +1,281 @@
+table shipments
+	lineageTag: 6fdbc8ad-7cd8-4065-9769-a17186b69025
+
+	column id
+		dataType: int64
+		formatString: 0
+		lineageTag: e9bf88d2-5461-4470-92c4-6ed47a40232e
+		summarizeBy: sum
+		sourceColumn: id
+
+		annotation SummarizationSetBy = Automatic
+
+	column shipment_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 954e78ee-a128-4972-8bf3-02f51b9ec5fd
+		summarizeBy: sum
+		sourceColumn: shipment_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column warehouse
+		dataType: string
+		lineageTag: 5f768090-ffbd-4ad5-9591-c5672c1b6f17
+		summarizeBy: none
+		sourceColumn: warehouse
+
+		annotation SummarizationSetBy = Automatic
+
+	column warehouse_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 2c2b35ae-266a-4a2e-8bc9-a243ab6b1e27
+		summarizeBy: sum
+		sourceColumn: warehouse_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column warehouse_uuid
+		dataType: string
+		lineageTag: 3789a037-8cd0-4afc-a10d-ad7d963a6aca
+		summarizeBy: none
+		sourceColumn: warehouse_uuid
+
+		annotation SummarizationSetBy = Automatic
+
+	column partner_order_id
+		dataType: string
+		lineageTag: f104c3dd-f535-42a0-b6e1-fe9d592cd63f
+		summarizeBy: none
+		sourceColumn: partner_order_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column order_number
+		dataType: string
+		lineageTag: 44f628f9-345b-4f1e-b1f1-a84c93f6195d
+		summarizeBy: none
+		sourceColumn: order_number
+
+		annotation SummarizationSetBy = Automatic
+
+	column tracking_number
+		dataType: string
+		lineageTag: 4310b826-7222-4483-aba9-525818c34f7d
+		summarizeBy: none
+		sourceColumn: tracking_number
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: c93fd57c-778c-404a-97b8-71dc334d74ab
+		summarizeBy: none
+		sourceColumn: created_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: e1788819-0015-4efc-a004-f7d7cc5932a7
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at_CST_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: dc9981e7-bb92-465e-8120-e767e5761be2
+		summarizeBy: none
+		sourceColumn: created_at_CST_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column created_at_CST_time
+		dataType: dateTime
+		formatString: Long Time
+		lineageTag: a1d17cf0-74a6-49cb-aa75-67513d05b581
+		summarizeBy: none
+		sourceColumn: created_at_CST_time
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Time
+
+	column shipment_uuid
+		dataType: string
+		lineageTag: 4604b9be-e282-4517-8527-c99b50c59c14
+		summarizeBy: none
+		sourceColumn: shipment_uuid
+
+		annotation SummarizationSetBy = Automatic
+
+	column package_number
+		dataType: int64
+		formatString: 0
+		lineageTag: 10514e95-86d4-45f7-a6bc-40bcc9e4b6a5
+		summarizeBy: sum
+		sourceColumn: package_number
+
+		annotation SummarizationSetBy = Automatic
+
+	column total_packages
+		dataType: int64
+		formatString: 0
+		lineageTag: 8c0505d7-2444-4308-b46c-a42a0e30ca58
+		summarizeBy: sum
+		sourceColumn: total_packages
+
+		annotation SummarizationSetBy = Automatic
+
+	column shipping_method
+		dataType: string
+		lineageTag: 96845091-b91c-4b85-9286-418c74302861
+		summarizeBy: none
+		sourceColumn: shipping_method
+
+		annotation SummarizationSetBy = Automatic
+
+	column shipping_carrier
+		dataType: string
+		lineageTag: cc04e36d-c9f5-4152-898a-f6cf253b9a02
+		summarizeBy: none
+		sourceColumn: shipping_carrier
+
+		annotation SummarizationSetBy = Automatic
+
+	column shipping_address
+		dataType: string
+		lineageTag: 7b20cfb8-cba5-428f-b5a9-493a379669b5
+		summarizeBy: none
+		sourceColumn: shipping_address
+
+		annotation SummarizationSetBy = Automatic
+
+	column completed
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: bb134a83-6138-4abd-a175-23ce46bca939
+		summarizeBy: none
+		sourceColumn: completed
+
+		annotation SummarizationSetBy = Automatic
+
+	column custom_tracking_url
+		dataType: string
+		lineageTag: bcc50b0c-c9ea-44f8-b950-871938b7eae5
+		summarizeBy: none
+		sourceColumn: custom_tracking_url
+
+		annotation SummarizationSetBy = Automatic
+
+	column order_uuid
+		dataType: string
+		lineageTag: e4cf7a19-1bf5-4add-ae8b-52adb03a0d14
+		summarizeBy: none
+		sourceColumn: order_uuid
+
+		annotation SummarizationSetBy = Automatic
+
+	column order_gift_note
+		dataType: string
+		lineageTag: 3d23016f-248d-4ca4-b1ff-0a57069a9f9e
+		summarizeBy: none
+		sourceColumn: order_gift_note
+
+		annotation SummarizationSetBy = Automatic
+
+	column package
+		dataType: string
+		lineageTag: bcae1f0f-517b-4ee3-a320-11a2523a86de
+		summarizeBy: none
+		sourceColumn: package
+
+		annotation SummarizationSetBy = Automatic
+
+	column line_items
+		dataType: string
+		lineageTag: da85ca5f-33b8-4a05-b84a-c1256cb445c8
+		summarizeBy: none
+		sourceColumn: line_items
+
+		annotation SummarizationSetBy = Automatic
+
+	column warehouse_code
+		dataType: string
+		lineageTag: 21763d89-c651-4480-a8c4-7c86e2686cf1
+		summarizeBy: none
+		sourceColumn: warehouse_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Client [old]'
+		dataType: string
+		lineageTag: ef5c6c51-c5ad-4ec9-9cb5-4ea0aae26c09
+		summarizeBy: none
+		sourceColumn: Client [old]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Wholesale
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 9d56ecc1-baaf-41cb-9fec-f5a87945f954
+		summarizeBy: none
+		sourceColumn: Wholesale
+
+		annotation SummarizationSetBy = Automatic
+
+	column account_id =
+			
+			VAR FirstAccount =
+			    MINX(
+			        FILTER(order_allocated, order_allocated[order_uuid] = shipments[order_uuid]),
+			        order_allocated[account_id]
+			    )
+			RETURN
+			FirstAccount
+		formatString: 0
+		lineageTag: 980cf739-fe17-400d-9106-218ca6dd4c4f
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column Client =
+			
+			LOOKUPVALUE(shipments_by_client[Client],shipments_by_client[shipment_id],shipments[shipment_id])
+		lineageTag: 67b59688-a1e5-4260-9bae-e30d3bd2d44a
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition shipments = m
+		mode: import
+		source =
+				let
+				    Source = PowerPlatform.Dataflows(null),
+				    Workspaces = Source{[Id="Workspaces"]}[Data],
+				    #"2df93ede-c6d5-4e10-a0ee-0fac8ac11c0b" = Workspaces{[workspaceId="2df93ede-c6d5-4e10-a0ee-0fac8ac11c0b"]}[Data],
+				    #"92a73884-2c4c-49d8-8559-5b732846ea0c" = #"2df93ede-c6d5-4e10-a0ee-0fac8ac11c0b"{[dataflowId="92a73884-2c4c-49d8-8559-5b732846ea0c"]}[Data],
+				    shipments_ = #"92a73884-2c4c-49d8-8559-5b732846ea0c"{[entity="shipments",version=""]}[Data],
+				    #"Duplicated Column" = Table.DuplicateColumn(shipments_, "created_at_CST", "created_at_CST - Copy"),
+				    #"Renamed Columns" = Table.RenameColumns(#"Duplicated Column",{{"created_at_CST", "created_at_CST_date"}, {"created_at_CST - Copy", "created_at_CST_time"}}),
+				    #"Added Custom" = Table.AddColumn(#"Renamed Columns", "Wholesale", each if [total_packages] is null then 0 else if [total_packages] > 5 then 1 else 0),
+				    #"Renamed Columns1" = Table.RenameColumns(#"Added Custom",{{"Client", "Client [old]"}}),
+				    #"Changed Type1" = Table.TransformColumnTypes(#"Renamed Columns1",{{"Wholesale", type logical}}),
+				    #"Extracted Date" = Table.TransformColumns(#"Changed Type1",{{"created_at_CST_date", DateTime.Date, type date}}),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Extracted Date",{{"id", Int64.Type}}),
+				    #"Extracted Time" = Table.TransformColumns(#"Changed Type",{{"created_at_CST_time", DateTime.Time, type time}})
+				in
+				    #"Extracted Time"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

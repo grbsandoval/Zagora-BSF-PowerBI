@@ -1,0 +1,49 @@
+table 'Date Aggregation'
+	lineageTag: e6cd4aac-d6f9-46b9-b005-5500a9442bdd
+
+	column 'Date Aggregation'
+		lineageTag: 86009275-8d60-476c-8422-7e19b3394a9b
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'Parameter Order'
+
+		relatedColumnDetails
+			groupByColumn: 'Parameter Fields'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Parameter Fields'
+		isHidden
+		lineageTag: fb645d44-fe08-4613-87ad-d57c24b82e8c
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'Parameter Order'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Parameter Order'
+		isHidden
+		formatString: 0
+		lineageTag: c46f899d-20d2-49de-b118-919bf2c99197
+		summarizeBy: sum
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Date Aggregation' = calculated
+		mode: import
+		source =
+				{
+				    ("Date", NAMEOF('primary_date'[Date]), 0),
+				    ("Start of Week", NAMEOF('primary_date'[Start of Week]), 1),
+				    ("Month-Year", NAMEOF('primary_date'[Month-Year]), 2)
+				}
+
+	annotation PBI_Id = d04e296687b24b10b812cb958167a360
+

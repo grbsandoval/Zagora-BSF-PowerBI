@@ -1,0 +1,133 @@
+expression primary_quickbook_accounts =
+		let
+		    Source = QuickBooksOnline.Tables(null),
+		    Account_Table = Source{[Name="Account",Kind="Table"]}[Data]
+		in
+		    Account_Table
+	lineageTag: a7be7179-a957-46fa-9e72-dbfdb7a4d950
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression primary_quickbook_gusto =
+		let
+		    Source = QuickBooksOnline.Tables(null),
+		    Journal_Entry_Table = Source{[Name="Journal_Entry",Kind="Table"]}[Data],
+		    #"Filtered Rows1" = Table.SelectRows(Journal_Entry_Table, each [Transaction_Date] > #date(2023, 12, 31)),
+		    #"Expanded JournalEntry_Line" = Table.ExpandTableColumn(#"Filtered Rows1", "JournalEntry_Line", {"Line_Amount", "Line_Detail_AccountRef_Value", "Line_Detail_ClassRef_Value", "Line_Detail_PostingType"}, {"JournalEntry_Line.Line_Amount", "JournalEntry_Line.Line_Detail_AccountRef_Value", "JournalEntry_Line.Line_Detail_ClassRef_Value", "JournalEntry_Line.Line_Detail_PostingType"}),
+		    #"Merged Queries1" = Table.NestedJoin(#"Expanded JournalEntry_Line", {"JournalEntry_Line.Line_Detail_AccountRef_Value"}, primary_quickbook_accounts, {"Id"}, "primary_quickbook_accounts", JoinKind.LeftOuter),
+		    #"Expanded primary_quickbook_accounts" = Table.ExpandTableColumn(#"Merged Queries1", "primary_quickbook_accounts", {"Name", "Fully_Qualified_Name"}, {"primary_quickbook_accounts.Name", "primary_quickbook_accounts.Fully_Qualified_Name"}),
+		    #"Split Column by Delimiter" = Table.SplitColumn(#"Expanded primary_quickbook_accounts", "primary_quickbook_accounts.Fully_Qualified_Name", Splitter.SplitTextByDelimiter(":", QuoteStyle.Csv), {"primary_quickbook_accounts.Fully_Qualified_Name.1", "primary_quickbook_accounts.Fully_Qualified_Name.2"}),
+		    #"Renamed Columns1" = Table.RenameColumns(#"Split Column by Delimiter",{{"primary_quickbook_accounts.Name", "GL Name"}, {"primary_quickbook_accounts.Fully_Qualified_Name.1", "GL Category"}}),
+		    #"Removed Columns" = Table.RemoveColumns(#"Renamed Columns1",{"primary_quickbook_accounts.Fully_Qualified_Name.2"}),
+		    #"Filtered Rows" = Table.SelectRows(#"Removed Columns", each ([GL Category] = "Payroll Expenses" or [GL Category] = "Warehouse Labor")),
+		    #"Merged Queries" = Table.NestedJoin(#"Filtered Rows", {"JournalEntry_Line.Line_Detail_ClassRef_Value"}, primary_quickbook_classes, {"Id"}, "primary_quickbook_classes", JoinKind.LeftOuter),
+		    #"Expanded primary_quickbook_classes" = Table.ExpandTableColumn(#"Merged Queries", "primary_quickbook_classes", {"Name"}, {"primary_quickbook_classes.Name"}),
+		    #"Removed Duplicates" = Table.Distinct(#"Expanded primary_quickbook_classes"),
+		    #"Removed Other Columns" = Table.SelectColumns(#"Removed Duplicates",{"Document_Number", "Transaction_Date", "JournalEntry_Line.Line_Amount", "GL Name", "GL Category", "primary_quickbook_classes.Name"}),
+		    #"Renamed Columns" = Table.RenameColumns(#"Removed Other Columns",{{"primary_quickbook_classes.Name", "Class"}, {"Document_Number", "Name"}, {"JournalEntry_Line.Line_Amount", "Total_Amount"}})
+		in
+		    #"Renamed Columns"
+	lineageTag: 126bff6d-10e8-443e-a12c-d4f7a5a142c4
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression primary_quickbook_temp =
+		let
+		    Source = QuickBooksOnline.Tables(null),
+		    Bill_Table = Source{[Name="Bill",Kind="Table"]}[Data],
+		    #"Filtered Rows1" = Table.SelectRows(Bill_Table, each [Transaction_Date] > #date(2023, 12, 31)),
+		    #"Expanded Bill_Account_Based_Expense_Line" = Table.ExpandTableColumn(#"Filtered Rows1", "Bill_Account_Based_Expense_Line", {"Line_Detail_ClassRef_Value", "Line_Detail_AccountRef_Value"}, {"Bill_Account_Based_Expense_Line.Line_Detail_ClassRef_Value", "Bill_Account_Based_Expense_Line.Line_Detail_AccountRef_Value"}),
+		    #"Merged Queries1" = Table.NestedJoin(#"Expanded Bill_Account_Based_Expense_Line", {"Bill_Account_Based_Expense_Line.Line_Detail_AccountRef_Value"}, primary_quickbook_accounts, {"Id"}, "primary_quickbook_accounts", JoinKind.LeftOuter),
+		    #"Expanded primary_quickbook_accounts" = Table.ExpandTableColumn(#"Merged Queries1", "primary_quickbook_accounts", {"Fully_Qualified_Name"}, {"primary_quickbook_accounts.Fully_Qualified_Name"}),
+		    #"Split Column by Delimiter" = Table.SplitColumn(#"Expanded primary_quickbook_accounts", "primary_quickbook_accounts.Fully_Qualified_Name", Splitter.SplitTextByDelimiter(":", QuoteStyle.Csv), {"primary_quickbook_accounts.Fully_Qualified_Name.1", "primary_quickbook_accounts.Fully_Qualified_Name.2"}),
+		    #"Renamed Columns1" = Table.RenameColumns(#"Split Column by Delimiter",{{"primary_quickbook_accounts.Fully_Qualified_Name.1", "GL Category"}, {"primary_quickbook_accounts.Fully_Qualified_Name.2", "GL Name"}}),
+		    #"Filtered Rows" = Table.SelectRows(#"Renamed Columns1", each ([GL Category] = "Warehouse Labor")),
+		    #"Merged Queries" = Table.NestedJoin(#"Filtered Rows", {"Bill_Account_Based_Expense_Line.Line_Detail_ClassRef_Value"}, primary_quickbook_classes, {"Id"}, "primary_quickbook_classes", JoinKind.LeftOuter),
+		    #"Expanded primary_quickbook_classes" = Table.ExpandTableColumn(#"Merged Queries", "primary_quickbook_classes", {"Name"}, {"primary_quickbook_classes.Name"}),
+		    #"Removed Other Columns" = Table.SelectColumns(#"Expanded primary_quickbook_classes",{"Document_Number", "Transaction_Date", "VendorRef_Name", "Total_Amount", "GL Category", "GL Name", "primary_quickbook_classes.Name"}),
+		    #"Removed Duplicates" = Table.Distinct(#"Removed Other Columns"),
+		    #"Renamed Columns" = Table.RenameColumns(#"Removed Duplicates",{{"primary_quickbook_classes.Name", "Class"}, {"VendorRef_Name", "Name"}})
+		in
+		    #"Renamed Columns"
+	lineageTag: 7e5e464c-51e6-4335-925c-0988efb7acf8
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression primary_quickbook_invoices =
+		let
+		    Source = QuickBooksOnline.Tables(null),
+		    Invoice_Table = Source{[Name="Invoice",Kind="Table"]}[Data],
+		    #"Removed Other Columns" = Table.SelectColumns(Invoice_Table,{"Id", "Document_Number", "Transaction_Date", "CustomerRef_Name", "Due_Date", "Total_Amount", "Balance"}),
+		    #"Removed Duplicates" = Table.Distinct(#"Removed Other Columns")
+		in
+		    #"Removed Duplicates"
+	lineageTag: 054b87dd-72cc-4fb1-8f73-e77f054b3b0c
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Exception
+
+expression primary_quickbook_bills =
+		let
+		    Source = QuickBooksOnline.Tables(null),
+		    Bill_Table = Source{[Name="Bill",Kind="Table"]}[Data],
+		    #"Expanded Bill_Account_Based_Expense_Line" = Table.ExpandTableColumn(Bill_Table, "Bill_Account_Based_Expense_Line", {"Line_Detail_ClassRef_Value"}, {"Bill_Account_Based_Expense_Line.Line_Detail_ClassRef_Value"}),
+		    #"Merged Queries" = Table.NestedJoin(#"Expanded Bill_Account_Based_Expense_Line", {"Bill_Account_Based_Expense_Line.Line_Detail_ClassRef_Value"}, primary_quickbook_classes, {"Id"}, "primary_quickbook_classes", JoinKind.LeftOuter),
+		    #"Expanded primary_quickbook_classes" = Table.ExpandTableColumn(#"Merged Queries", "primary_quickbook_classes", {"Name"}, {"primary_quickbook_classes.Name"}),
+		    #"Renamed Columns" = Table.RenameColumns(#"Expanded primary_quickbook_classes",{{"primary_quickbook_classes.Name", "Class"}}),
+		    #"Removed Other Columns" = Table.SelectColumns(#"Renamed Columns",{"Id", "Document_Number", "Transaction_Date", "VendorRef_Name", "Total_Amount", "Due_Date", "Balance", "Class"}),
+		    #"Removed Duplicates" = Table.Distinct(#"Removed Other Columns")
+		in
+		    #"Removed Duplicates"
+	lineageTag: 134abe52-738a-4539-b3e8-d25cf605fbde
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Exception
+
+expression primary_quickbook_classes =
+		let
+		    Source = QuickBooksOnline.Tables(null),
+		    Class_Table = Source{[Name="Class",Kind="Table"]}[Data],
+		    #"Removed Other Columns" = Table.SelectColumns(Class_Table,{"Id", "Name"})
+		in
+		    #"Removed Other Columns"
+	lineageTag: 52778703-e3c5-4b88-8d2c-c6a8696b1907
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Exception
+
+expression primary_quickbook_payroll =
+		let
+		    Source = Table.Combine({primary_quickbook_temp, primary_quickbook_gusto}),
+		    #"Removed Columns" = Table.RemoveColumns(Source,{"Document_Number"})
+		in
+		    #"Removed Columns"
+	lineageTag: c015ffab-39a2-4d0d-a774-19cd26d93253
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Exception
+
+expression account_ID_to_client =
+		let
+		    Source = PowerPlatform.Dataflows(null),
+		    Workspaces = Source{[Id="Workspaces"]}[Data],
+		    #"2df93ede-c6d5-4e10-a0ee-0fac8ac11c0b" = Workspaces{[workspaceId="2df93ede-c6d5-4e10-a0ee-0fac8ac11c0b"]}[Data],
+		    #"92a73884-2c4c-49d8-8559-5b732846ea0c" = #"2df93ede-c6d5-4e10-a0ee-0fac8ac11c0b"{[dataflowId="92a73884-2c4c-49d8-8559-5b732846ea0c"]}[Data],
+		    account_ID_to_client_ = #"92a73884-2c4c-49d8-8559-5b732846ea0c"{[entity="account_ID_to_client",version=""]}[Data]
+		in
+		    account_ID_to_client_
+	lineageTag: 6200cef2-f868-4ac3-8354-1a93c860e799
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,26 @@
+table prmLASMin
+	lineageTag: 809922ba-e9fa-4d05-ab96-5a4d2f8bf636
+
+	measure 'prmLASMin Value' = SELECTEDVALUE('prmLASMin'[prmLASMin], 27)
+		formatString: 0
+		lineageTag: eb00b93f-468a-4794-a122-438109dc376b
+
+	column prmLASMin
+		formatString: 0
+		lineageTag: c2f16d37-0900-4f38-a0b9-82d11835216b
+		summarizeBy: none
+		sourceColumn: [Value]
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 0
+				}
+
+		annotation SummarizationSetBy = User
+
+	partition prmLASMin = calculated
+		mode: import
+		source = GENERATESERIES(0, 1000, 1)
+
+	annotation PBI_Id = 44c41fc1f1f740ccad99e26f97445b88
+

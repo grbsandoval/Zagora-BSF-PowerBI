@@ -1,0 +1,25 @@
+table primary_carriers
+	lineageTag: 6a3fe463-0169-457b-ac7b-3082707e93a4
+
+	column Carrier
+		dataType: string
+		lineageTag: bcb28347-1017-430e-8022-55c443dd4984
+		summarizeBy: none
+		sourceColumn: Carrier
+
+		annotation SummarizationSetBy = Automatic
+
+	partition primary_carriers = m
+		mode: import
+		source =
+				let
+				    Source = primary_shipments,
+				    #"Removed Other Columns" = Table.SelectColumns(Source,{"Carrier"}),
+				    #"Removed Duplicates" = Table.Distinct(#"Removed Other Columns")
+				in
+				    #"Removed Duplicates"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

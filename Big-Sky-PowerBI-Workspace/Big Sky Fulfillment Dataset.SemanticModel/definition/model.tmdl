@@ -1,0 +1,42 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		fastCombine
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_QueryOrder = ["client_invoices","primary_clients","primary_shipments","lojistic_shipment_detail","primary_carriers","packages","shipments","inventory_changes","inventory_updates","item_locations_manual","primary_locations","primary_quickbook_invoices","primary_quickbook_bills","primary_quickbook_accounts","primary_quickbook_gusto","primary_quickbook_temp","primary_quickbook_classes","primary_quickbook_payroll","Capacity Levels","QB AP","QB AR","primary_warehouses","Product Locations","order_allocated","account_ID_to_client","shipments_by_client"]
+
+annotation __PBI_TimeIntelligenceEnabled = 0
+
+ref table client_invoices
+ref table primary_clients
+ref table primary_shipments
+ref table primary_date
+ref table measures_table
+ref table lojistic_shipment_detail
+ref table 'Date Aggregation'
+ref table primary_carriers
+ref table packages
+ref table shipments
+ref table primary_time
+ref table inventory_changes
+ref table inventory_updates
+ref table item_locations_manual
+ref table prmLASMin
+ref table prmLASMax
+ref table prmLASMedian
+ref table primary_locations
+ref table 'Location Capacity'
+ref table 'Capacity Levels'
+ref table primary_warehouses
+ref table 'Product Locations'
+ref table 'QB AR'
+ref table 'QB AP'
+ref table order_allocated
+ref table shipments_by_client
+
+ref cultureInfo en-US
+

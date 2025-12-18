@@ -1,0 +1,61 @@
+table 'QB AP'
+	lineageTag: 8998e8ea-4a5a-4400-a11b-6197a5fd3d94
+
+	column Date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 701ae4ca-0dbb-419e-a4d4-29ae006f2745
+		summarizeBy: none
+		sourceColumn: Date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Client
+		dataType: string
+		lineageTag: 2bb8aff4-e5d6-4cb5-a96d-f58c55a2215f
+		summarizeBy: none
+		sourceColumn: Client
+
+		annotation SummarizationSetBy = Automatic
+
+	column Bucket
+		dataType: string
+		lineageTag: 7bdbef33-5469-4d42-b8d9-da8836f977e3
+		summarizeBy: none
+		sourceColumn: Bucket
+
+		annotation SummarizationSetBy = Automatic
+
+	column Balance
+		dataType: double
+		lineageTag: 27ca82af-121c-49a2-97f8-9da5abe4dd7e
+		summarizeBy: sum
+		sourceColumn: Balance
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'QB AP' = m
+		mode: import
+		source =
+				let
+				    Source = PowerPlatform.Dataflows(null),
+				    Workspaces = Source{[Id="Workspaces"]}[Data],
+				    #"2df93ede-c6d5-4e10-a0ee-0fac8ac11c0b" = Workspaces{[workspaceId="2df93ede-c6d5-4e10-a0ee-0fac8ac11c0b"]}[Data],
+				    #"11212156-858f-4573-b9ed-1e1c9511d6f2" = #"2df93ede-c6d5-4e10-a0ee-0fac8ac11c0b"{[dataflowId="11212156-858f-4573-b9ed-1e1c9511d6f2"]}[Data],
+				    #"QB AP and AR_" = #"11212156-858f-4573-b9ed-1e1c9511d6f2"{[entity="QB AP",version=""]}[Data],
+				    #"Uppercased Text" = Table.TransformColumns(#"QB AP and AR_",{{"Client", Text.Upper, type text}}),
+				    #"Trimmed Text" = Table.TransformColumns(#"Uppercased Text",{{"Client", Text.Trim, type text}}),
+				    #"Cleaned Text" = Table.TransformColumns(#"Trimmed Text",{{"Client", Text.Clean, type text}}),
+				    #"Capitalized Each Word" = Table.TransformColumns(#"Cleaned Text",{{"Client", Text.Proper, type text}}),
+				    #"Sorted Rows" = Table.Sort(#"Capitalized Each Word",{{"Date", Order.Ascending}})
+				in
+				    #"Sorted Rows"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

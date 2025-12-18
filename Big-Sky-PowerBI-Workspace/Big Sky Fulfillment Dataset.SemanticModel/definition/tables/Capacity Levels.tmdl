@@ -1,0 +1,61 @@
+table 'Capacity Levels'
+	lineageTag: 9a2ffbce-30ea-4bcf-b458-66ef765ea6b2
+
+	column Date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 4cbcb1a6-fb2b-4ccd-9df2-d7d64eb2d6cf
+		summarizeBy: none
+		sourceColumn: Date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Warehouse
+		dataType: string
+		lineageTag: 4651bf68-7605-42da-a7ea-830f5f90c2dc
+		summarizeBy: none
+		sourceColumn: Warehouse
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pallet Capacity'
+		dataType: int64
+		formatString: 0
+		lineageTag: eb411400-9347-4ccc-b82c-1bd967484bec
+		summarizeBy: sum
+		sourceColumn: Pallet Capacity
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Refrigerator Capacity'
+		dataType: int64
+		formatString: 0
+		lineageTag: a14fad44-5075-41dd-8b9c-69bc884ea551
+		summarizeBy: sum
+		sourceColumn: Refrigerator Capacity
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Bin Space Capacity'
+		dataType: int64
+		formatString: 0
+		lineageTag: 9000184f-500b-4ab7-bf37-18d77c91dc50
+		summarizeBy: sum
+		sourceColumn: Bin Space Capacity
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Capacity Levels' = m
+		mode: import
+		source =
+				let
+				    Source = PowerPlatform.Dataflows(null),
+				    Workspaces = Source{[Id="Workspaces"]}[Data],
+				    #"2df93ede-c6d5-4e10-a0ee-0fac8ac11c0b" = Workspaces{[workspaceId="2df93ede-c6d5-4e10-a0ee-0fac8ac11c0b"]}[Data],
+				    #"11212156-858f-4573-b9ed-1e1c9511d6f2" = #"2df93ede-c6d5-4e10-a0ee-0fac8ac11c0b"{[dataflowId="11212156-858f-4573-b9ed-1e1c9511d6f2"]}[Data],
+				    #"Capacity Levels_" = #"11212156-858f-4573-b9ed-1e1c9511d6f2"{[entity="Capacity Levels",version=""]}[Data]
+				in
+				    #"Capacity Levels_"
+

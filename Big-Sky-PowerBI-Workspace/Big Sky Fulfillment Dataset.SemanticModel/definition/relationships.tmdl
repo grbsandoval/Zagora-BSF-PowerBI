@@ -1,0 +1,96 @@
+relationship 6af5cb20-15b2-8b2d-59f5-cc7af7bc0bdc
+	fromColumn: client_invoices.Customer_name_customer
+	toColumn: primary_clients.Client
+
+relationship 41ffa735-1a6a-0f8c-c9b3-b633250ad3c8
+	fromColumn: primary_shipments.Customer_name_customer
+	toColumn: primary_clients.Client
+
+relationship fa124ca4-3ac8-56bc-d23b-230150e60444
+	fromColumn: client_invoices.'Date (w/o nulls)'
+	toColumn: primary_date.Date
+
+relationship d0e9978d-0f19-6382-0203-7a4cd2996945
+	fromColumn: primary_shipments.'Ship Date'
+	toColumn: primary_date.Date
+
+relationship 972c80b9-95d5-7216-c6d3-f2d0c7e71ec4
+	fromColumn: client_invoices.Carrier_shipment
+	toColumn: primary_carriers.Carrier
+
+relationship 1330b76a-f022-a4e3-26b2-45b240d5b1cc
+	fromColumn: primary_shipments.Carrier
+	toColumn: primary_carriers.Carrier
+
+relationship 169b3f09-9859-398d-6630-793752378881
+	fromColumn: shipments.created_at_CST_date
+	toColumn: primary_date.Date
+
+relationship 8ab1473f-6493-f35f-1de7-37ec238d4c2f
+	fromColumn: shipments.created_at_CST_time
+	toColumn: primary_time.'Time Label'
+
+relationship 045f7c49-9aba-2fcc-0f54-f8e117a81c69
+	fromColumn: inventory_changes.created_at_date
+	toColumn: primary_date.Date
+
+relationship a0814a3a-8ea1-4acd-98e0-c01e1e3075bc
+	fromColumn: item_locations_manual.location_name
+	toColumn: primary_locations.location_name
+
+relationship 8987d390-38b4-3bb4-95d0-66ac851329c9
+	fromColumn: inventory_changes.location_name
+	toColumn: primary_locations.location_name
+
+relationship 87d73008-c1f4-b3aa-2c12-b01a0746e141
+	fromColumn: 'Capacity Levels'.Date
+	toColumn: primary_date.Date
+
+relationship adfa4a89-7268-50f0-d383-f81dd360ca4a
+	fromColumn: 'QB AP'.Date
+	toColumn: primary_date.Date
+
+relationship 2548843d-c75e-8818-1400-e5384a3defd2
+	fromColumn: 'QB AR'.Date
+	toColumn: primary_date.Date
+
+relationship 5e62d804-3b41-a287-24a7-4aad534607f1
+	fromColumn: 'QB AR'.Client
+	toColumn: primary_clients.Client
+
+relationship 7854626e-0873-bde5-7b01-c23b2bafba2c
+	fromColumn: 'QB AP'.Client
+	toColumn: primary_clients.Client
+
+relationship 5f1c5e3f-205c-8262-4b4d-900c4b9f9ed7
+	fromColumn: 'Location Capacity'.Date
+	toColumn: primary_date.Date
+
+relationship 1053d85e-bc91-2d26-9d2d-8b4936e43ea3
+	fromColumn: shipments.Client
+	toColumn: primary_clients.Client
+
+relationship 9b6f4a70-96f3-fa78-18cd-ce9f1d5f8aff
+	fromColumn: shipments.warehouse_uuid
+	toColumn: primary_warehouses.warehouse_uuid
+
+relationship d1c69ab3-36b0-3f96-1a85-697b363c99d9
+	fromColumn: inventory_changes.warehouse_uuid
+	toColumn: primary_warehouses.warehouse_uuid
+
+relationship 8988a57f-a212-5f70-d7f8-7bdb454cdd51
+	fromColumn: inventory_updates.updated_warehouse_uuid
+	toColumn: primary_warehouses.warehouse_uuid
+
+relationship ae95cdf1-318b-13b5-e4cb-5d99f22ab79b
+	fromColumn: item_locations_manual.'Warehouse UUID'
+	toColumn: primary_warehouses.warehouse_uuid
+
+relationship 90eaba32-6179-a6fa-e092-a13b0135fbbf
+	fromColumn: 'Product Locations'.'Warehouse UUID'
+	toColumn: primary_warehouses.warehouse_uuid
+
+relationship fcf92c07-c08f-7199-b1a6-cb0513f6b133
+	fromColumn: 'Location Capacity'.'Warehouse UUID'
+	toColumn: primary_warehouses.warehouse_uuid
+

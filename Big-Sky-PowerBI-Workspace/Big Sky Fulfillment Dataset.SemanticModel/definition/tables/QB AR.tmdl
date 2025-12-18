@@ -1,0 +1,60 @@
+table 'QB AR'
+	lineageTag: 207a7351-b7cd-4dbc-a979-00ed6d9e5cff
+
+	column Date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 741e2afa-8b59-4dce-a45b-efaf7cf833df
+		summarizeBy: none
+		sourceColumn: Date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Client
+		dataType: string
+		lineageTag: 89f95801-73f7-4b2d-86f2-408b04f2713d
+		summarizeBy: none
+		sourceColumn: Client
+
+		annotation SummarizationSetBy = Automatic
+
+	column Bucket
+		dataType: string
+		lineageTag: f1816f21-fbf9-4a62-b328-0cbb20053e91
+		summarizeBy: none
+		sourceColumn: Bucket
+
+		annotation SummarizationSetBy = Automatic
+
+	column Balance
+		dataType: double
+		lineageTag: e5e58e0b-694d-4f16-b3e9-3b286c6da16e
+		summarizeBy: sum
+		sourceColumn: Balance
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'QB AR' = m
+		mode: import
+		source =
+				let
+				    Source = PowerPlatform.Dataflows(null),
+				    Workspaces = Source{[Id="Workspaces"]}[Data],
+				    #"2df93ede-c6d5-4e10-a0ee-0fac8ac11c0b" = Workspaces{[workspaceId="2df93ede-c6d5-4e10-a0ee-0fac8ac11c0b"]}[Data],
+				    #"11212156-858f-4573-b9ed-1e1c9511d6f2" = #"2df93ede-c6d5-4e10-a0ee-0fac8ac11c0b"{[dataflowId="11212156-858f-4573-b9ed-1e1c9511d6f2"]}[Data],
+				    #"QB AP and AR_" = #"11212156-858f-4573-b9ed-1e1c9511d6f2"{[entity="QB AR",version=""]}[Data],
+				    #"Uppercased Text" = Table.TransformColumns(#"QB AP and AR_",{{"Client", Text.Upper, type text}}),
+				    #"Trimmed Text" = Table.TransformColumns(#"Uppercased Text",{{"Client", Text.Trim, type text}}),
+				    #"Cleaned Text" = Table.TransformColumns(#"Trimmed Text",{{"Client", Text.Clean, type text}}),
+				    #"Capitalized Each Word" = Table.TransformColumns(#"Cleaned Text",{{"Client", Text.Proper, type text}})
+				in
+				    #"Capitalized Each Word"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

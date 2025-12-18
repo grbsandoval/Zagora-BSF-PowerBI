@@ -1,0 +1,192 @@
+table order_allocated
+	lineageTag: 3bfb11fd-eecd-490a-a8c0-511688b2d734
+
+	column webhook_type
+		dataType: string
+		lineageTag: f7f2cf03-a020-4d28-ab18-22bed18aa5c1
+		summarizeBy: none
+		sourceColumn: webhook_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column allocation_reference
+		dataType: int64
+		formatString: 0
+		lineageTag: 0515291d-2693-40a4-93db-74c859a2639d
+		summarizeBy: sum
+		sourceColumn: allocation_reference
+
+		annotation SummarizationSetBy = Automatic
+
+	column account_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 3e156943-045e-479f-bd1d-5c05d8be0f0d
+		summarizeBy: sum
+		sourceColumn: account_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column account_uuid
+		dataType: string
+		lineageTag: 90788614-68c7-4f5a-9691-51d06f82cf6b
+		summarizeBy: none
+		sourceColumn: account_uuid
+
+		annotation SummarizationSetBy = Automatic
+
+	column warehouse_id
+		dataType: int64
+		formatString: 0
+		lineageTag: cfeb3906-daba-402b-ad6f-ef8c7ebe5c30
+		summarizeBy: sum
+		sourceColumn: warehouse_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column warehouse_uuid
+		dataType: string
+		lineageTag: 7ca7655b-2d0b-42db-a2f7-34f94cd87f81
+		summarizeBy: none
+		sourceColumn: warehouse_uuid
+
+		annotation SummarizationSetBy = Automatic
+
+	column allocated_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: aea432bc-7ac1-4b70-b223-aea8fee8a674
+		summarizeBy: none
+		sourceColumn: allocated_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column order_number
+		dataType: string
+		lineageTag: be336ecb-c0c7-46e0-92f7-fcaa4152394e
+		summarizeBy: none
+		sourceColumn: order_number
+
+		annotation SummarizationSetBy = Automatic
+
+	column order_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 1c002507-adbc-4e7d-965b-b2e8a8890584
+		summarizeBy: sum
+		sourceColumn: order_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column order_uuid
+		dataType: string
+		lineageTag: d0161400-fbaa-43b4-ad2d-2f63198b0439
+		summarizeBy: none
+		sourceColumn: order_uuid
+
+		annotation SummarizationSetBy = Automatic
+
+	column partner_order_id
+		dataType: string
+		lineageTag: 42ce2313-c528-4f6f-9d05-ba10a5496ac5
+		summarizeBy: none
+		sourceColumn: partner_order_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column ready_to_ship
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 1b763785-79d6-4571-bc7a-f90e30d01f52
+		summarizeBy: none
+		sourceColumn: ready_to_ship
+
+		annotation SummarizationSetBy = Automatic
+
+	column line_item_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 2cf47ea8-d84e-4d56-80d3-97d00dc19d05
+		summarizeBy: sum
+		sourceColumn: line_item_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column item_uuid
+		dataType: string
+		lineageTag: 5dd0ed24-078f-464a-a42d-744a85427d82
+		summarizeBy: none
+		sourceColumn: item_uuid
+
+		annotation SummarizationSetBy = Automatic
+
+	column partner_line_item_id
+		dataType: string
+		lineageTag: 0b0c06bc-2324-4f51-bc4e-74da7b98176f
+		summarizeBy: none
+		sourceColumn: partner_line_item_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column quantity
+		dataType: int64
+		formatString: 0
+		lineageTag: 68fc842c-0955-4331-9c91-edebc10826fc
+		summarizeBy: sum
+		sourceColumn: quantity
+
+		annotation SummarizationSetBy = Automatic
+
+	column sku
+		dataType: string
+		lineageTag: 7c47c97a-fea3-4589-b9ab-09fb3e476b99
+		summarizeBy: none
+		sourceColumn: sku
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_kit_component
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 0f157ffe-3abb-4348-ac23-43a8c04ed029
+		summarizeBy: none
+		sourceColumn: is_kit_component
+
+		annotation SummarizationSetBy = Automatic
+
+	column line_item_created_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: b43fc012-b3c3-42f9-a38b-3ef3ef749908
+		summarizeBy: none
+		sourceColumn: line_item_created_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column allocated_at_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: c4b7847c-9a9e-4c06-880b-a4055fde8951
+		summarizeBy: none
+		sourceColumn: allocated_at_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	partition order_allocated = m
+		mode: import
+		source =
+				let
+				    Source = PowerPlatform.Dataflows(null),
+				    Workspaces = Source{[Id="Workspaces"]}[Data],
+				    #"2df93ede-c6d5-4e10-a0ee-0fac8ac11c0b" = Workspaces{[workspaceId="2df93ede-c6d5-4e10-a0ee-0fac8ac11c0b"]}[Data],
+				    #"92a73884-2c4c-49d8-8559-5b732846ea0c" = #"2df93ede-c6d5-4e10-a0ee-0fac8ac11c0b"{[dataflowId="92a73884-2c4c-49d8-8559-5b732846ea0c"]}[Data],
+				    order_allocated_ = #"92a73884-2c4c-49d8-8559-5b732846ea0c"{[entity="order_allocated",version=""]}[Data]
+				in
+				    order_allocated_
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

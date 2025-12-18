@@ -1,0 +1,117 @@
+table packages
+	lineageTag: 32a0f46a-e0a2-416b-a722-bdc8de9c5164
+
+	column id
+		dataType: int64
+		formatString: 0
+		lineageTag: f6ad6ce2-428a-43d5-8c65-17be145dacf7
+		summarizeBy: sum
+		sourceColumn: id
+
+		annotation SummarizationSetBy = Automatic
+
+	column shipment_id
+		dataType: int64
+		formatString: 0
+		lineageTag: cf2e554e-e75d-48e7-8f5c-de2a444355db
+		summarizeBy: sum
+		sourceColumn: shipment_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column name
+		dataType: string
+		lineageTag: 5b40fab9-baeb-4c0c-9719-9c9ce8524d2d
+		summarizeBy: none
+		sourceColumn: name
+
+		annotation SummarizationSetBy = Automatic
+
+	column tracking_number
+		dataType: string
+		lineageTag: df29773a-f775-4472-8530-8dd7c20614b0
+		summarizeBy: none
+		sourceColumn: tracking_number
+
+		annotation SummarizationSetBy = Automatic
+
+	column weight_in_oz
+		dataType: double
+		lineageTag: fc7c9278-8a2e-4524-93d4-e807ef8170ac
+		summarizeBy: sum
+		sourceColumn: weight_in_oz
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column width
+		dataType: double
+		lineageTag: 10af16ba-1647-4315-8522-5d322b548698
+		summarizeBy: sum
+		sourceColumn: width
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column length
+		dataType: double
+		lineageTag: 54a6f896-da21-4278-8ea5-f9ec6a5a7e67
+		summarizeBy: sum
+		sourceColumn: length
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column height
+		dataType: double
+		lineageTag: 15facc77-a2fe-497c-8b12-2686126dbed1
+		summarizeBy: sum
+		sourceColumn: height
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column box_name
+		dataType: string
+		lineageTag: 27d25212-94bf-471a-931e-da595167c0e3
+		summarizeBy: none
+		sourceColumn: box_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 187e5cc5-b9c9-4725-8250-df72d472f3c5
+		summarizeBy: none
+		sourceColumn: created_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: c0c0729f-89ea-449a-bbca-07f85f7f9dc8
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		annotation SummarizationSetBy = Automatic
+
+	partition packages = m
+		mode: import
+		source =
+				let
+				    Source = PowerPlatform.Dataflows(null),
+				    Workspaces = Source{[Id="Workspaces"]}[Data],
+				    #"2df93ede-c6d5-4e10-a0ee-0fac8ac11c0b" = Workspaces{[workspaceId="2df93ede-c6d5-4e10-a0ee-0fac8ac11c0b"]}[Data],
+				    #"92a73884-2c4c-49d8-8559-5b732846ea0c" = #"2df93ede-c6d5-4e10-a0ee-0fac8ac11c0b"{[dataflowId="92a73884-2c4c-49d8-8559-5b732846ea0c"]}[Data],
+				    packages_ = #"92a73884-2c4c-49d8-8559-5b732846ea0c"{[entity="packages",version=""]}[Data]
+				in
+				    packages_
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,26 @@
+table prmLASMax
+	lineageTag: 06c4b7b6-6a40-4271-bc75-0680ebe151e3
+
+	measure 'prmLASMax Value' = SELECTEDVALUE('prmLASMax'[prmLASMax], 872)
+		formatString: 0
+		lineageTag: a8769e6e-cb2e-4b1d-9b25-d22bc506d17f
+
+	column prmLASMax
+		formatString: 0
+		lineageTag: 4372c758-89ce-485e-93e4-6144f57d08e1
+		summarizeBy: none
+		sourceColumn: [Value]
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 0
+				}
+
+		annotation SummarizationSetBy = User
+
+	partition prmLASMax = calculated
+		mode: import
+		source = GENERATESERIES(0, 1000, 1)
+
+	annotation PBI_Id = cd5588913b7149e890916f8e5f67f14d
+

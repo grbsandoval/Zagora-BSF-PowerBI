@@ -1,0 +1,233 @@
+table inventory_updates
+	lineageTag: 10741ff4-0dd8-40ca-ada1-69476e8d3ae9
+
+	column account_id
+		dataType: int64
+		formatString: 0
+		lineageTag: d2eb8636-2e98-42e2-873d-e619a58b248d
+		summarizeBy: sum
+		sourceColumn: account_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column account_uuid
+		dataType: string
+		lineageTag: ece243b7-4336-41b1-b971-040e5442c795
+		summarizeBy: none
+		sourceColumn: account_uuid
+
+		annotation SummarizationSetBy = Automatic
+
+	column sku
+		dataType: string
+		lineageTag: b7d5b4f7-b404-4367-973b-fcd522823e6b
+		summarizeBy: none
+		sourceColumn: sku
+
+		annotation SummarizationSetBy = Automatic
+
+	column inventory
+		dataType: string
+		lineageTag: 55c2bc74-63c8-48e9-a565-f6b6049df544
+		summarizeBy: none
+		sourceColumn: inventory
+
+		annotation SummarizationSetBy = Automatic
+
+	column backorder_quantity
+		dataType: string
+		lineageTag: d4696fbd-bf9f-4b96-acd2-4d07d726264f
+		summarizeBy: none
+		sourceColumn: backorder_quantity
+
+		annotation SummarizationSetBy = Automatic
+
+	column on_hand
+		dataType: string
+		lineageTag: 6eb14cc4-2695-4f9f-8f0b-caee06d287d7
+		summarizeBy: none
+		sourceColumn: on_hand
+
+		annotation SummarizationSetBy = Automatic
+
+	column virtual
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 15bd715f-f28f-4563-a10d-b92d09417e3e
+		summarizeBy: none
+		sourceColumn: virtual
+
+		annotation SummarizationSetBy = Automatic
+
+	column sell_ahead
+		dataType: int64
+		formatString: 0
+		lineageTag: a12e2db9-e0bf-4f3c-a7ac-66a30aa61d7d
+		summarizeBy: sum
+		sourceColumn: sell_ahead
+
+		annotation SummarizationSetBy = Automatic
+
+	column qty_in_totes
+		dataType: int64
+		formatString: 0
+		lineageTag: c367eaf6-2445-407b-83a4-dc414a35fe2d
+		summarizeBy: sum
+		sourceColumn: qty_in_totes
+
+		annotation SummarizationSetBy = Automatic
+
+	column reserve
+		dataType: int64
+		formatString: 0
+		lineageTag: 3715c3de-b90e-4725-8941-d8878aa52940
+		summarizeBy: sum
+		sourceColumn: reserve
+
+		annotation SummarizationSetBy = Automatic
+
+	column non_sellable
+		dataType: int64
+		formatString: 0
+		lineageTag: 3997e856-b2b2-4302-962f-8f5851fd1e14
+		summarizeBy: sum
+		sourceColumn: non_sellable
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_warehouse_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 2ef6c3f9-0bf3-4624-8cae-af87d379ece6
+		summarizeBy: sum
+		sourceColumn: updated_warehouse_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_warehouse_uuid
+		dataType: string
+		lineageTag: de5bbfd3-f729-44c1-b954-cf22444a9059
+		summarizeBy: none
+		sourceColumn: updated_warehouse_uuid
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_warehouse_identifier
+		dataType: string
+		lineageTag: ede4a52e-a4a0-4bb8-b133-2304658f6f3b
+		summarizeBy: none
+		sourceColumn: updated_warehouse_identifier
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_warehouse_inventory
+		dataType: string
+		lineageTag: 06264422-e2b9-4e05-8837-95a300762c81
+		summarizeBy: none
+		sourceColumn: updated_warehouse_inventory
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_warehouse_backorder_quantity
+		dataType: string
+		lineageTag: a265055d-db64-429f-b83d-ef9a8ad9fe43
+		summarizeBy: none
+		sourceColumn: updated_warehouse_backorder_quantity
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_warehouse_on_hand
+		dataType: string
+		lineageTag: 6b3ad860-0346-4f8b-b1f4-96199b9fddf6
+		summarizeBy: none
+		sourceColumn: updated_warehouse_on_hand
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_warehouse_sell_ahead
+		dataType: int64
+		formatString: 0
+		lineageTag: 9fec56cc-5035-49c4-a7fd-d46c7719f80e
+		summarizeBy: sum
+		sourceColumn: updated_warehouse_sell_ahead
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_warehouse_qty_in_totes
+		dataType: int64
+		formatString: 0
+		lineageTag: 311ed7aa-0ed1-4068-803f-a292661ee2db
+		summarizeBy: sum
+		sourceColumn: updated_warehouse_qty_in_totes
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_warehouse_reserve
+		dataType: int64
+		formatString: 0
+		lineageTag: f6085e4b-8deb-444d-94f8-13b92951a55b
+		summarizeBy: sum
+		sourceColumn: updated_warehouse_reserve
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_warehouse_non_sellable
+		dataType: int64
+		formatString: 0
+		lineageTag: 905a6361-8ddd-41a5-ad97-d5878f4abc17
+		summarizeBy: sum
+		sourceColumn: updated_warehouse_non_sellable
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 5a3a8cf7-b5f6-486a-a01b-a1f29ee4c5a5
+		summarizeBy: none
+		sourceColumn: created_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 8f75edab-6a9f-4697-ad23-2507b727ef3e
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column warehouse_code
+		dataType: string
+		lineageTag: 3e9a4401-b826-4d2c-a671-7385464bf77f
+		summarizeBy: none
+		sourceColumn: warehouse_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column Client
+		dataType: string
+		lineageTag: 47719607-469a-4f43-9c35-2fada25d5c05
+		summarizeBy: none
+		sourceColumn: Client
+
+		annotation SummarizationSetBy = Automatic
+
+	partition inventory_updates = m
+		mode: import
+		source =
+				let
+				    Source = PowerPlatform.Dataflows(null),
+				    Workspaces = Source{[Id="Workspaces"]}[Data],
+				    #"2df93ede-c6d5-4e10-a0ee-0fac8ac11c0b" = Workspaces{[workspaceId="2df93ede-c6d5-4e10-a0ee-0fac8ac11c0b"]}[Data],
+				    #"92a73884-2c4c-49d8-8559-5b732846ea0c" = #"2df93ede-c6d5-4e10-a0ee-0fac8ac11c0b"{[dataflowId="92a73884-2c4c-49d8-8559-5b732846ea0c"]}[Data],
+				    inventory_updates_ = #"92a73884-2c4c-49d8-8559-5b732846ea0c"{[entity="inventory_updates",version=""]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(inventory_updates_,{{"Client", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

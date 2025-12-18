@@ -1,0 +1,618 @@
+table client_invoices
+	lineageTag: 5df28175-d866-46f5-b1e4-50422efaf8f7
+
+	column Date_charge
+		dataType: dateTime
+		formatString: dd-mmm-yy
+		lineageTag: c6814d8a-c166-44bd-a302-4afe17330179
+		summarizeBy: none
+		sourceColumn: Date_charge
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column Category_charge
+		dataType: string
+		lineageTag: a16ea143-0759-4ffe-b8ad-4674ddbb8ff1
+		summarizeBy: none
+		sourceColumn: Category_charge
+
+		annotation SummarizationSetBy = Automatic
+
+	column Fee_charge
+		dataType: string
+		lineageTag: 922dc9a3-c808-4bea-9e7e-fc57d07a018c
+		summarizeBy: none
+		sourceColumn: Fee_charge
+
+		annotation SummarizationSetBy = Automatic
+
+	column Type_charge
+		dataType: string
+		lineageTag: e90fcf6d-b238-4381-88fb-91a40309f01e
+		summarizeBy: none
+		sourceColumn: Type_charge
+
+		annotation SummarizationSetBy = Automatic
+
+	column Label_charge
+		dataType: string
+		lineageTag: 4abbe02b-aaec-4c8d-b897-bfbd420ed9ee
+		summarizeBy: none
+		sourceColumn: Label_charge
+
+		annotation SummarizationSetBy = Automatic
+
+	column Description_charge
+		dataType: string
+		lineageTag: ad74cc79-c288-479c-a3d7-056d52f4ad0f
+		summarizeBy: none
+		sourceColumn: Description_charge
+
+		annotation SummarizationSetBy = Automatic
+
+	column Unit_rate_charge
+		dataType: double
+		lineageTag: 03e4cc7d-685d-40ef-bbb0-518926f865b4
+		summarizeBy: sum
+		sourceColumn: Unit_rate_charge
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Quantity_charge
+		dataType: double
+		lineageTag: e73de1a3-851e-4704-a528-4fb78433b907
+		summarizeBy: sum
+		sourceColumn: Quantity_charge
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Total_charge
+		dataType: double
+		lineageTag: e8674c90-0da2-401d-b0b6-175a707bf77c
+		summarizeBy: sum
+		sourceColumn: Total_charge
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Order_#_shipment
+		dataType: string
+		lineageTag: 80d31d9d-1314-4aca-9dca-da313298772a
+		summarizeBy: none
+		sourceColumn: Order_#_shipment
+
+		annotation SummarizationSetBy = Automatic
+
+	column Order_date_shipment
+		dataType: string
+		lineageTag: 47206bcb-8cfd-4bc2-96cb-e4eee99337ad
+		summarizeBy: none
+		sourceColumn: Order_date_shipment
+
+		annotation SummarizationSetBy = Automatic
+
+	column Tracking_#_shipment
+		dataType: string
+		lineageTag: 8149bda4-5c19-4f68-89ad-b00bf5b1507d
+		summarizeBy: none
+		sourceColumn: Tracking_#_shipment
+
+		annotation SummarizationSetBy = Automatic
+
+	column Quoted_cost_shipment
+		dataType: double
+		lineageTag: 84d87831-68d9-4062-8bd4-b16cda7e5baf
+		summarizeBy: sum
+		sourceColumn: Quoted_cost_shipment
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Carrier_shipment
+		dataType: string
+		lineageTag: e1a20c92-f832-4762-8816-9cfd4a54578c
+		summarizeBy: none
+		sourceColumn: Carrier_shipment
+
+		annotation SummarizationSetBy = Automatic
+
+	column Method_shipment
+		dataType: string
+		lineageTag: 115e1057-9c10-41a3-bc07-50d17938c49b
+		summarizeBy: none
+		sourceColumn: Method_shipment
+
+		annotation SummarizationSetBy = Automatic
+
+	column Box_shipment
+		dataType: string
+		lineageTag: e68475f2-1723-42b8-a855-3bca701ede73
+		summarizeBy: none
+		sourceColumn: Box_shipment
+
+		annotation SummarizationSetBy = Automatic
+
+	column Weight_shipment
+		dataType: double
+		lineageTag: 9db4cce5-b33d-4275-96ff-42c78fda6417
+		summarizeBy: sum
+		sourceColumn: Weight_shipment
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Height_shipment
+		dataType: double
+		lineageTag: 85b488bd-b67e-4698-ab05-5ab28f21b996
+		summarizeBy: sum
+		sourceColumn: Height_shipment
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Length_shipment
+		dataType: double
+		lineageTag: 81b45a34-68ee-48f1-8a45-82fb199f205e
+		summarizeBy: sum
+		sourceColumn: Length_shipment
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Width_shipment
+		dataType: double
+		lineageTag: 56d67fc4-2ef4-402d-b22e-afb8631df909
+		summarizeBy: sum
+		sourceColumn: Width_shipment
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column SKU_units_ordered_shipment
+		dataType: double
+		lineageTag: f694210a-e342-4004-9fd7-b911716ea687
+		summarizeBy: sum
+		sourceColumn: SKU_units_ordered_shipment
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column SKU_units_shipped_shipment
+		dataType: double
+		lineageTag: 70e79278-c814-4b59-ae84-67140cce03f8
+		summarizeBy: sum
+		sourceColumn: SKU_units_shipped_shipment
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Country_shipment
+		dataType: string
+		lineageTag: 6a8ba3fc-a1eb-4eb5-adae-46199c45d48c
+		summarizeBy: none
+		sourceColumn: Country_shipment
+
+		annotation SummarizationSetBy = Automatic
+
+	column State_shipment
+		dataType: string
+		lineageTag: bba2fae1-3aa8-4a33-ad52-9ccfecb0bb9a
+		summarizeBy: none
+		sourceColumn: State_shipment
+
+		annotation SummarizationSetBy = Automatic
+
+	column City_shipment
+		dataType: string
+		lineageTag: d62e56a7-c797-4107-bcaa-a7927b639b66
+		summarizeBy: none
+		sourceColumn: City_shipment
+
+		annotation SummarizationSetBy = Automatic
+
+	column Postal_code_shipment
+		dataType: string
+		lineageTag: 41156901-06f5-40cc-a397-b3ef910783f8
+		summarizeBy: none
+		sourceColumn: Postal_code_shipment
+
+		annotation SummarizationSetBy = Automatic
+
+	column Ship_to_shipment
+		dataType: string
+		lineageTag: e9ef7e49-6b9b-4163-bda4-b20d842cf541
+		summarizeBy: none
+		sourceColumn: Ship_to_shipment
+
+		annotation SummarizationSetBy = Automatic
+
+	column SKUs_ordered_shipment
+		dataType: double
+		lineageTag: 928c96a1-b86a-4bee-acf5-9f742a3262ed
+		summarizeBy: sum
+		sourceColumn: SKUs_ordered_shipment
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column SKUs_shipped_shipment
+		dataType: double
+		lineageTag: a7b23b72-8e9d-4afc-8b9f-18d16f681db1
+		summarizeBy: sum
+		sourceColumn: SKUs_shipped_shipment
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Units_ordered_shipment
+		dataType: double
+		lineageTag: 63841af9-d8de-49ba-8095-c8fe20734e1f
+		summarizeBy: sum
+		sourceColumn: Units_ordered_shipment
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Units_shipped_shipment
+		dataType: double
+		lineageTag: 25c1e61d-9c1e-498e-afe7-fb9ac61acec5
+		summarizeBy: sum
+		sourceColumn: Units_shipped_shipment
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column SKU_product
+		dataType: string
+		lineageTag: d3a977c9-4615-473a-85e2-759b42328db2
+		summarizeBy: none
+		sourceColumn: SKU_product
+
+		annotation SummarizationSetBy = Automatic
+
+	column Name_product
+		dataType: string
+		lineageTag: 4eea43da-d460-4378-956d-31db26cf5da9
+		summarizeBy: none
+		sourceColumn: Name_product
+
+		annotation SummarizationSetBy = Automatic
+
+	column Weight_in_oz_product
+		dataType: double
+		lineageTag: 9a77bb4b-61a2-48d1-be61-c06f90975e68
+		summarizeBy: sum
+		sourceColumn: Weight_in_oz_product
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Height_product
+		dataType: double
+		lineageTag: 47f117df-aa79-47d6-a73e-75f8be7d2115
+		summarizeBy: sum
+		sourceColumn: Height_product
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Length_product
+		dataType: double
+		lineageTag: 8f8c7b75-a38f-4941-9da6-e1b499ecea09
+		summarizeBy: sum
+		sourceColumn: Length_product
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Width_product
+		dataType: double
+		lineageTag: d467e70f-426c-414a-92ef-6a2bf3d3ae84
+		summarizeBy: sum
+		sourceColumn: Width_product
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Bin_type_bin_storage
+		dataType: string
+		lineageTag: c59c62e6-209d-44e6-b8a6-5cfdeda30e45
+		summarizeBy: none
+		sourceColumn: Bin_type_bin_storage
+
+		annotation SummarizationSetBy = Automatic
+
+	column Days_occupied_bin_storage
+		dataType: double
+		lineageTag: 2defa298-e51a-4b94-a127-54c8445c4139
+		summarizeBy: sum
+		sourceColumn: Days_occupied_bin_storage
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Reason_return
+		dataType: string
+		lineageTag: 83ef86d0-d101-4d2a-8d22-0ab665e31b8a
+		summarizeBy: none
+		sourceColumn: Reason_return
+
+		annotation SummarizationSetBy = Automatic
+
+	column SKU_units_returned_return
+		dataType: double
+		lineageTag: 0da07f44-def4-43a4-b2d1-0a32d3b4bd3d
+		summarizeBy: sum
+		sourceColumn: SKU_units_returned_return
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Units_received_return
+		dataType: double
+		lineageTag: c2ee1304-ea85-4dea-8238-fb007687abfb
+		summarizeBy: sum
+		sourceColumn: Units_received_return
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Units_restocked_return
+		dataType: double
+		lineageTag: 45423530-82fc-4f5b-a5c8-2eadb1fb49bb
+		summarizeBy: sum
+		sourceColumn: Units_restocked_return
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column SKU_units_received_return
+		dataType: double
+		lineageTag: ba3c55fb-5d78-4e60-b013-61555a5fa5f4
+		summarizeBy: sum
+		sourceColumn: SKU_units_received_return
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column SKU_units_restocked_return
+		dataType: double
+		lineageTag: f6c2c345-0a96-4764-99da-88875ffa8c21
+		summarizeBy: sum
+		sourceColumn: SKU_units_restocked_return
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column RMA_tracking_#_return
+		dataType: string
+		lineageTag: 768fca5c-a816-40bb-bd00-e611ed6af5f5
+		summarizeBy: none
+		sourceColumn: RMA_tracking_#_return
+
+		annotation SummarizationSetBy = Automatic
+
+	column RMA_carrier_return
+		dataType: string
+		lineageTag: 8c1c847b-4cad-48bb-89b1-908b012ece89
+		summarizeBy: none
+		sourceColumn: RMA_carrier_return
+
+		annotation SummarizationSetBy = Automatic
+
+	column RMA_method_return
+		dataType: string
+		lineageTag: 63d5c681-d4fd-4df1-93f2-da4d5808b73b
+		summarizeBy: none
+		sourceColumn: RMA_method_return
+
+		annotation SummarizationSetBy = Automatic
+
+	column RMA_box_code_return
+		dataType: string
+		lineageTag: 0b9dd414-4544-4c2e-b806-87c347b21862
+		summarizeBy: none
+		sourceColumn: RMA_box_code_return
+
+		annotation SummarizationSetBy = Automatic
+
+	column RMA_box_weight_return
+		dataType: double
+		lineageTag: 14fe301c-de4f-4b71-ba5c-b6154ff2a365
+		summarizeBy: sum
+		sourceColumn: RMA_box_weight_return
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column RMA_country_return
+		dataType: string
+		lineageTag: a05559c0-4c09-4359-870e-20372e63dabb
+		summarizeBy: none
+		sourceColumn: RMA_country_return
+
+		annotation SummarizationSetBy = Automatic
+
+	column RMA_state_return
+		dataType: string
+		lineageTag: 65f5a5a4-ec62-4625-960e-33a41411e344
+		summarizeBy: none
+		sourceColumn: RMA_state_return
+
+		annotation SummarizationSetBy = Automatic
+
+	column RMA_city_return
+		dataType: string
+		lineageTag: 9de87180-f841-47da-8930-9529124d72f7
+		summarizeBy: none
+		sourceColumn: RMA_city_return
+
+		annotation SummarizationSetBy = Automatic
+
+	column RMA_postal_code_return
+		dataType: string
+		lineageTag: 018b57de-1b6d-4968-9178-bee3c4e490db
+		summarizeBy: none
+		sourceColumn: RMA_postal_code_return
+
+		annotation SummarizationSetBy = Automatic
+
+	column RMA_ship_to_return
+		dataType: string
+		lineageTag: 03e7253b-a938-4c8c-8a92-06aeec402b43
+		summarizeBy: none
+		sourceColumn: RMA_ship_to_return
+
+		annotation SummarizationSetBy = Automatic
+
+	column RMA_quoted_cost_return
+		dataType: double
+		lineageTag: 0af33bb8-0b2d-4240-977a-578ece1d194e
+		summarizeBy: sum
+		sourceColumn: RMA_quoted_cost_return
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Customer_name_customer
+		dataType: string
+		lineageTag: 51f3a7f8-2fca-46e2-a5b4-cffeff3bac71
+		summarizeBy: none
+		sourceColumn: Customer_name_customer
+
+		annotation SummarizationSetBy = Automatic
+
+	column Customer_ID_customer
+		dataType: string
+		lineageTag: 02a1bfe5-4efc-4e00-a544-27fa4988882b
+		summarizeBy: none
+		sourceColumn: Customer_ID_customer
+
+		annotation SummarizationSetBy = Automatic
+
+	column Bill_#_bill
+		dataType: string
+		lineageTag: fb7dc971-9c2c-4b44-b120-811b80722b05
+		summarizeBy: none
+		sourceColumn: Bill_#_bill
+
+		annotation SummarizationSetBy = Automatic
+
+	column Period_start_bill
+		dataType: dateTime
+		formatString: dd-mmm-yy
+		lineageTag: efc40d03-48a0-4a81-aa22-d11eae7521ee
+		summarizeBy: none
+		sourceColumn: Period_start_bill
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column Period_end_bill
+		dataType: dateTime
+		formatString: dd-mmm-yy
+		lineageTag: 3d8959c1-4cdd-4ca6-a815-5181a7a75503
+		summarizeBy: none
+		sourceColumn: Period_end_bill
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column Billed_label_cost_label_reconciliation
+		dataType: double
+		lineageTag: 297b90a6-3e79-425b-a875-fb1e593e4939
+		summarizeBy: sum
+		sourceColumn: Billed_label_cost_label_reconciliation
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Reconciled_label_cost_label_reconciliation
+		dataType: double
+		lineageTag: ca296324-cca5-412a-8d1f-d1db9d56d269
+		summarizeBy: sum
+		sourceColumn: Reconciled_label_cost_label_reconciliation
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Date (w/o nulls)' =
+			
+			IF(
+			    ISBLANK(client_invoices[Date_charge]),
+			    client_invoices[Period_end_bill],
+			    client_invoices[Date_charge]
+			)
+		formatString: dd-mmm-yy
+		lineageTag: 68c998da-8850-40ac-9c4d-47b3412778e0
+		summarizeBy: none
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	partition client_invoices = m
+		mode: import
+		source =
+				let
+				    Source = PowerPlatform.Dataflows(null),
+				    Workspaces = Source{[Id="Workspaces"]}[Data],
+				    #"2df93ede-c6d5-4e10-a0ee-0fac8ac11c0b" = Workspaces{[workspaceId="2df93ede-c6d5-4e10-a0ee-0fac8ac11c0b"]}[Data],
+				    #"92a73884-2c4c-49d8-8559-5b732846ea0c" = #"2df93ede-c6d5-4e10-a0ee-0fac8ac11c0b"{[dataflowId="92a73884-2c4c-49d8-8559-5b732846ea0c"]}[Data],
+				    client_invoices_ = #"92a73884-2c4c-49d8-8559-5b732846ea0c"{[entity="client_invoices",version=""]}[Data],
+				    #"Removed Duplicates" = Table.Distinct(client_invoices_),
+				    #"Uppercased Text" = Table.TransformColumns(#"Removed Duplicates",{{"Customer_name_customer", Text.Upper, type text}}),
+				    #"Trimmed Text" = Table.TransformColumns(#"Uppercased Text",{{"Customer_name_customer", Text.Trim, type text}}),
+				    #"Cleaned Text" = Table.TransformColumns(#"Trimmed Text",{{"Customer_name_customer", Text.Clean, type text}}),
+				    #"Capitalized Each Word" = Table.TransformColumns(#"Cleaned Text",{{"Customer_name_customer", Text.Proper, type text}})
+				in
+				    #"Capitalized Each Word"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

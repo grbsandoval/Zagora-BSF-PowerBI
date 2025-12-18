@@ -1,0 +1,26 @@
+table prmLASMedian
+	lineageTag: 7dd32de7-7ecb-41e8-b995-d254908f0885
+
+	measure 'prmLASMedian Value' = SELECTEDVALUE('prmLASMedian'[prmLASMedian], 184)
+		formatString: 0
+		lineageTag: 45f30418-3021-4162-8777-154ebd9da9ca
+
+	column prmLASMedian
+		formatString: 0
+		lineageTag: 25ba81d5-de3c-47bc-be52-10fcedff4e03
+		summarizeBy: none
+		sourceColumn: [Value]
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 0
+				}
+
+		annotation SummarizationSetBy = User
+
+	partition prmLASMedian = calculated
+		mode: import
+		source = GENERATESERIES(0, 1000, 1)
+
+	annotation PBI_Id = 6a5e84a42acc4e4d848289939496b498
+

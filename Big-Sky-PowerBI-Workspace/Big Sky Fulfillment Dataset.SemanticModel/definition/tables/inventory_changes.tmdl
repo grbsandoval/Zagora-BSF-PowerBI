@@ -1,0 +1,287 @@
+table inventory_changes
+	lineageTag: f10f313d-8ba0-488b-a394-0c7ddbd07e41
+
+	column account_uuid
+		dataType: string
+		lineageTag: c9cd126d-58d6-4d42-ac30-ef36686680a4
+		summarizeBy: none
+		sourceColumn: account_uuid
+
+		annotation SummarizationSetBy = Automatic
+
+	column account_id
+		dataType: int64
+		formatString: 0
+		lineageTag: f3a617e1-8f82-4588-93b7-a0d2871c3722
+		summarizeBy: sum
+		sourceColumn: account_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column warehouse_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 09c3ac12-defd-41ba-9e30-639e9ff8eae3
+		summarizeBy: sum
+		sourceColumn: warehouse_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column warehouse_uuid
+		dataType: string
+		lineageTag: 581af315-82c1-4c94-91e7-a4c5af7f3998
+		summarizeBy: none
+		sourceColumn: warehouse_uuid
+
+		annotation SummarizationSetBy = Automatic
+
+	column user_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 6f737aed-e8ce-4f9d-8ea7-e7aa65d86630
+		summarizeBy: sum
+		sourceColumn: user_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column user_uuid
+		dataType: string
+		lineageTag: f8fe2145-5fb3-42e0-a664-bdc8e8871d13
+		summarizeBy: none
+		sourceColumn: user_uuid
+
+		annotation SummarizationSetBy = Automatic
+
+	column sku
+		dataType: string
+		lineageTag: 77bcee80-8e1b-4d1a-ba0b-5aa135042254
+		summarizeBy: none
+		sourceColumn: sku
+
+		annotation SummarizationSetBy = Automatic
+
+	column quantity
+		dataType: int64
+		formatString: 0
+		lineageTag: b1ca408e-28fc-4230-a355-525ef28527d3
+		summarizeBy: sum
+		sourceColumn: quantity
+
+		annotation SummarizationSetBy = Automatic
+
+	column location_name
+		dataType: string
+		lineageTag: f5ab86ed-6888-4c92-b4e2-cbe27b8df9a6
+		summarizeBy: none
+		sourceColumn: location_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column previous_on_hand
+		dataType: int64
+		formatString: 0
+		lineageTag: e95252e6-9731-4104-b1b3-371cdac06f32
+		summarizeBy: sum
+		sourceColumn: previous_on_hand
+
+		annotation SummarizationSetBy = Automatic
+
+	column timestamp
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: def867aa-fec8-4c1b-84f4-c46806b46aa7
+		summarizeBy: none
+		sourceColumn: timestamp
+
+		annotation SummarizationSetBy = Automatic
+
+	column reason
+		dataType: string
+		lineageTag: 22324a32-0aa0-4c37-b057-9c3b3e0de560
+		summarizeBy: none
+		sourceColumn: reason
+
+		annotation SummarizationSetBy = Automatic
+
+	column source
+		dataType: string
+		lineageTag: 7ebb53bc-8e83-4462-b566-0d20f92ea5ec
+		summarizeBy: none
+		sourceColumn: source
+
+		annotation SummarizationSetBy = Automatic
+
+	column lot_id
+		dataType: int64
+		formatString: 0
+		lineageTag: b541d148-795d-40a1-8276-c96f6a4f4584
+		summarizeBy: sum
+		sourceColumn: lot_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column lot_uuid
+		dataType: string
+		lineageTag: a2545b66-fbd5-4706-9a70-73658bb2821b
+		summarizeBy: none
+		sourceColumn: lot_uuid
+
+		annotation SummarizationSetBy = Automatic
+
+	column lot_expiration
+		dataType: dateTime
+		formatString: dd-mmm-yy
+		lineageTag: edc6e8e5-d273-4b0b-8266-e9c2619d2885
+		summarizeBy: none
+		sourceColumn: lot_expiration
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column created_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: e1112f97-d26d-4892-9db5-5c2e5e2d76f7
+		summarizeBy: none
+		sourceColumn: created_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 12098970-2e97-4fd1-8793-8336f86d0f68
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 233b384a-29e3-4075-87f9-42391c6d0046
+		summarizeBy: none
+		sourceColumn: created_at_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Location Type (manual)' =
+			
+			CALCULATE(
+			    MAX('Product Locations'[Type]),
+			    FILTER(
+			        'Product Locations',
+			        'Product Locations'[Location] = inventory_changes[location_name]
+			    )
+			)
+		lineageTag: 749da768-5740-4e81-8dc5-2eb12290d3cf
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Linear Bin Ft' =
+			
+			SWITCH(inventory_changes[Location Type (manual)],
+			"Bin-12",1,
+			"Bin-6",0.5,
+			"Bin-8",0.67,
+			"Bin-24",2,
+			"Bin-4",0.33,
+			"Shelf",8
+			)
+		lineageTag: 85d5d47a-2b93-445e-94e5-631f550095fd
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Location Type' =
+			
+			VAR ManualType = inventory_changes[Location Type (manual)]
+			VAR PrimarySwitch =
+			    SWITCH(
+			        ManualType,
+			        "Bin-12", "Bin Feet",
+			        "Bin-6", "Bin Feet",
+			        "Bin-8", "Bin Feet",
+			        "Bin-4", "Bin Feet",
+			        "Bin-24", "Bin Feet",
+			        "Bin Space","Bin Feet",
+			        "R-Pallet", "R-Pallet",
+			        "Pallet", "Pallet",
+			        "Pallet (Pickable)", "Pallet",
+			        "2X Pallet","Pallet",
+			        "Area","Area",
+			        "AUDIT(NO CHARGE)","AUDIT(NO CHARGE)",
+			        "Shelf","Bin Feet",
+			        "Cart","Cart",
+			        "None","None",
+			        BLANK(),"None"
+			    )
+			RETURN
+			    IF(
+			        ISBLANK(PrimarySwitch),
+			        SWITCH(TRUE(),
+			            LEFT(ManualType, 6) = "Pallet", "Pallet",
+			            LEFT(ManualType, 3) = "Bin", "Bin Feet",
+			            BLANK()
+			        ),
+			        PrimarySwitch
+			    )
+		lineageTag: 03fb2769-6ad2-4204-af12-66fcf0ad8aed
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Updated On Hand' = inventory_changes[previous_on_hand]+inventory_changes[quantity]
+		formatString: 0
+		lineageTag: 6c1e5625-d7ad-4869-af67-bc48e9acda4c
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column warehouse_code
+		dataType: string
+		lineageTag: c6e0a0fb-35f0-460c-bc8b-cf06b90fd56d
+		summarizeBy: none
+		sourceColumn: warehouse_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column Client
+		dataType: string
+		lineageTag: b2bf25fd-b7f5-4c8a-851a-67232c7de0f1
+		summarizeBy: none
+		sourceColumn: Client
+
+		annotation SummarizationSetBy = Automatic
+
+	partition inventory_changes = m
+		mode: import
+		source =
+				let
+				    Source = PowerPlatform.Dataflows(null),
+				    Workspaces = Source{[Id="Workspaces"]}[Data],
+				    #"2df93ede-c6d5-4e10-a0ee-0fac8ac11c0b" = Workspaces{[workspaceId="2df93ede-c6d5-4e10-a0ee-0fac8ac11c0b"]}[Data],
+				    #"92a73884-2c4c-49d8-8559-5b732846ea0c" = #"2df93ede-c6d5-4e10-a0ee-0fac8ac11c0b"{[dataflowId="92a73884-2c4c-49d8-8559-5b732846ea0c"]}[Data],
+				    inventory_changes_ = #"92a73884-2c4c-49d8-8559-5b732846ea0c"{[entity="inventory_changes",version=""]}[Data],
+				    #"Duplicated Column" = Table.DuplicateColumn(inventory_changes_, "created_at", "created_at - Copy"),
+				    #"Renamed Columns" = Table.RenameColumns(#"Duplicated Column",{{"created_at - Copy", "created_at_date"}}),
+				    #"Extracted Date" = Table.TransformColumns(#"Renamed Columns",{{"created_at_date", DateTime.Date, type date}}),
+				    #"Uppercased Text" = Table.TransformColumns(#"Extracted Date",{{"location_name", Text.Upper, type text}}),
+				    #"Trimmed Text" = Table.TransformColumns(#"Uppercased Text",{{"location_name", Text.Trim, type text}}),
+				    #"Cleaned Text" = Table.TransformColumns(#"Trimmed Text",{{"location_name", Text.Clean, type text}}),
+				    #"Removed Columns" = Table.RemoveColumns(#"Cleaned Text",{"webhook_type"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

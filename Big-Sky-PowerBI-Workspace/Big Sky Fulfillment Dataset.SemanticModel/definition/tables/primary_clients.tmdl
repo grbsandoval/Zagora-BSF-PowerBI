@@ -1,0 +1,47 @@
+table primary_clients
+	lineageTag: 5db22c37-7f49-4e24-a9a9-c75a27a26828
+
+	column Client
+		dataType: string
+		lineageTag: 72cb66e5-4975-41f4-b7c8-b8b2b7a80016
+		summarizeBy: none
+		sourceColumn: Client
+
+		annotation SummarizationSetBy = Automatic
+
+	column account_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 0339b478-a011-4731-adef-871e75100ec4
+		summarizeBy: sum
+		sourceColumn: account_id
+
+		annotation SummarizationSetBy = Automatic
+
+	partition primary_clients = m
+		mode: import
+		source =
+				let
+				    Source = PowerPlatform.Dataflows(null),
+				    Workspaces = Source{[Id="Workspaces"]}[Data],
+				    #"2df93ede-c6d5-4e10-a0ee-0fac8ac11c0b" = Workspaces{[workspaceId="2df93ede-c6d5-4e10-a0ee-0fac8ac11c0b"]}[Data],
+				    #"92a73884-2c4c-49d8-8559-5b732846ea0c" = #"2df93ede-c6d5-4e10-a0ee-0fac8ac11c0b"{[dataflowId="92a73884-2c4c-49d8-8559-5b732846ea0c"]}[Data],
+				    primary_clients_ = #"92a73884-2c4c-49d8-8559-5b732846ea0c"{[entity="primary_clients",version=""]}[Data],
+				    #"Appended Query" = Table.Combine({primary_clients_, #"QB AP", #"QB AR"}),
+				    #"Removed Other Columns" = Table.SelectColumns(#"Appended Query",{"Client"}),
+				    #"Uppercased Text" = Table.TransformColumns(#"Removed Other Columns",{{"Client", Text.Upper, type text}}),
+				    #"Trimmed Text" = Table.TransformColumns(#"Uppercased Text",{{"Client", Text.Trim, type text}}),
+				    #"Cleaned Text" = Table.TransformColumns(#"Trimmed Text",{{"Client", Text.Clean, type text}}),
+				    #"Capitalized Each Word" = Table.TransformColumns(#"Cleaned Text",{{"Client", Text.Proper, type text}}),
+				    #"Removed Duplicates" = Table.Distinct(#"Capitalized Each Word"),
+				    #"Merged Queries" = Table.NestedJoin(#"Removed Duplicates", {"Client"}, account_ID_to_client, {"Client"}, "account_ID_to_client", JoinKind.LeftOuter),
+				    #"Expanded account_ID_to_client" = Table.ExpandTableColumn(#"Merged Queries", "account_ID_to_client", {"account_id"}, {"account_id"}),
+				    #"Sorted Rows" = Table.Buffer(Table.Sort(#"Expanded account_ID_to_client",{{"account_id", Order.Descending}})),
+				    #"Removed Duplicates1" = Table.Distinct(#"Sorted Rows", {"Client"})
+				in
+				    #"Removed Duplicates1"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

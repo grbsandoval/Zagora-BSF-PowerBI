@@ -1,0 +1,114 @@
+table primary_shipments
+	lineageTag: 9913b93b-6326-480a-ad37-5bf4cb9bd623
+
+	column Tracking_#_shipment
+		dataType: string
+		lineageTag: 02460992-30fa-4dd9-ae6d-8611428f6315
+		summarizeBy: none
+		sourceColumn: Tracking_#_shipment
+
+		annotation SummarizationSetBy = Automatic
+
+	column Customer_name_customer
+		dataType: string
+		lineageTag: dc134a5c-af9c-4e57-94b4-6839f376b1c1
+		summarizeBy: none
+		sourceColumn: Customer_name_customer
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Quoted Label Cost'
+		dataType: double
+		lineageTag: f5c55a40-9379-4b20-9236-bf72429b09f9
+		summarizeBy: sum
+		sourceColumn: Quoted Label Cost
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Marked Up Label Cost'
+		dataType: double
+		lineageTag: d4660771-ea64-47da-adf1-03a13ca1e540
+		summarizeBy: sum
+		sourceColumn: Marked Up Label Cost
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Reconciled Amount Billed'
+		dataType: double
+		lineageTag: ee03494e-ce48-4673-b4da-65f6d5e8b828
+		summarizeBy: sum
+		sourceColumn: Reconciled Amount Billed
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Reconciled (Invoiced) Label Cost Imported'
+		dataType: double
+		lineageTag: 0287348c-fd35-4f6d-b50a-00bda88e9301
+		summarizeBy: sum
+		sourceColumn: Reconciled (Invoiced) Label Cost Imported
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Lojistic Net Shipment Cost'
+		dataType: double
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: 2caf6ab3-9ad1-4383-9b61-bf04e15c35ec
+		summarizeBy: sum
+		sourceColumn: Lojistic Net Shipment Cost
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Ship Date'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 6c9b4a32-8ec4-4f27-873c-2a59fa107668
+		summarizeBy: none
+		sourceColumn: Ship Date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Carrier
+		dataType: string
+		lineageTag: 64dbc969-c4fb-4c8d-bc92-57bbfedde808
+		summarizeBy: none
+		sourceColumn: Carrier
+
+		annotation SummarizationSetBy = Automatic
+
+	partition primary_shipments = m
+		mode: import
+		source =
+				let
+				    Source = PowerPlatform.Dataflows(null),
+				    Workspaces = Source{[Id="Workspaces"]}[Data],
+				    #"2df93ede-c6d5-4e10-a0ee-0fac8ac11c0b" = Workspaces{[workspaceId="2df93ede-c6d5-4e10-a0ee-0fac8ac11c0b"]}[Data],
+				    #"92a73884-2c4c-49d8-8559-5b732846ea0c" = #"2df93ede-c6d5-4e10-a0ee-0fac8ac11c0b"{[dataflowId="92a73884-2c4c-49d8-8559-5b732846ea0c"]}[Data],
+				    primary_shipments_ = #"92a73884-2c4c-49d8-8559-5b732846ea0c"{[entity="primary_shipments",version=""]}[Data],
+				    #"Uppercased Text" = Table.TransformColumns(primary_shipments_,{{"Customer_name_customer", Text.Upper, type text}}),
+				    #"Trimmed Text" = Table.TransformColumns(#"Uppercased Text",{{"Customer_name_customer", Text.Trim, type text}}),
+				    #"Cleaned Text" = Table.TransformColumns(#"Trimmed Text",{{"Customer_name_customer", Text.Clean, type text}}),
+				    #"Capitalized Each Word" = Table.TransformColumns(#"Cleaned Text",{{"Customer_name_customer", Text.Proper, type text}}),
+				    #"Removed Duplicates" = Table.Distinct(#"Capitalized Each Word"),
+				    #"Merged Queries" = Table.NestedJoin(#"Removed Duplicates", {"Tracking_#_shipment"}, lojistic_shipment_detail, {"Shipment_Tracking_#"}, "lojistic_shipment_detail", JoinKind.LeftOuter),
+				    #"Expanded lojistic_shipment_detail" = Table.ExpandTableColumn(#"Merged Queries", "lojistic_shipment_detail", {"Net_Shipment_Cost"}, {"lojistic_shipment_detail.Net_Shipment_Cost"}),
+				    #"Removed Duplicates1" = Table.Distinct(#"Expanded lojistic_shipment_detail"),
+				    #"Filtered Rows" = Table.SelectRows(#"Removed Duplicates1", each ([#"Tracking_#_shipment"] <> "")),
+				    #"Renamed Columns" = Table.RenameColumns(#"Filtered Rows",{{"lojistic_shipment_detail.Net_Shipment_Cost", "Lojistic Net Shipment Cost"}}),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Renamed Columns",{{"Carrier", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Exception
+

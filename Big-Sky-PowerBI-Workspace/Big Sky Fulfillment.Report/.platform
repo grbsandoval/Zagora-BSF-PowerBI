@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "Big Sky Fulfillment"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "03edd943-526d-9479-4920-d41f1b0c76ae"
+  }
+}

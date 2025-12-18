@@ -1,0 +1,500 @@
+table lojistic_shipment_detail
+	lineageTag: 4dd856e6-7410-451d-b431-341279589ca4
+
+	column Vendor
+		dataType: string
+		lineageTag: 25a3755a-4ed8-48d1-99ca-a0056f34e186
+		summarizeBy: none
+		sourceColumn: Vendor
+
+		annotation SummarizationSetBy = Automatic
+
+	column Carrier
+		dataType: string
+		lineageTag: 0f7decd2-c55a-438b-a8e1-c79aac8e712e
+		summarizeBy: none
+		sourceColumn: Carrier
+
+		annotation SummarizationSetBy = Automatic
+
+	column Account_#
+		dataType: string
+		lineageTag: 435b0fe3-24ba-4e56-ad8f-dcf61e459494
+		summarizeBy: none
+		sourceColumn: Account_#
+
+		annotation SummarizationSetBy = Automatic
+
+	column Companys
+		dataType: string
+		lineageTag: ff37fe19-17ce-4e97-af05-bed25d19d0b0
+		summarizeBy: none
+		sourceColumn: Companys
+
+		annotation SummarizationSetBy = Automatic
+
+	column Invoice_#
+		dataType: string
+		lineageTag: 1e5890fb-30d1-4d19-a459-a35fd7b33516
+		summarizeBy: none
+		sourceColumn: Invoice_#
+
+		annotation SummarizationSetBy = Automatic
+
+	column Invoice_Amount
+		dataType: double
+		lineageTag: 89cbf7b3-1d8b-4f03-b6c5-645a68523be2
+		summarizeBy: sum
+		sourceColumn: Invoice_Amount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Invoice_Date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 3866b785-0815-4eeb-87a4-28558e04087d
+		summarizeBy: none
+		sourceColumn: Invoice_Date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Transportation_Mode
+		dataType: string
+		lineageTag: 3d173f53-bfaa-4652-b5ab-39eb7c270b18
+		summarizeBy: none
+		sourceColumn: Transportation_Mode
+
+		annotation SummarizationSetBy = Automatic
+
+	column Shipment_Tracking_#
+		dataType: string
+		lineageTag: 4049370c-e1f3-435d-8c88-f4f91ad186a3
+		summarizeBy: none
+		sourceColumn: Shipment_Tracking_#
+
+		annotation SummarizationSetBy = Automatic
+
+	column Original_Cost
+		dataType: double
+		lineageTag: a0cb085d-35bd-4b4d-83cb-8491b33135ff
+		summarizeBy: sum
+		sourceColumn: Original_Cost
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Discount
+		dataType: double
+		lineageTag: 63296991-bce3-46db-bdee-2f812e6b88bd
+		summarizeBy: sum
+		sourceColumn: Discount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Net_Shipment_Cost
+		dataType: double
+		lineageTag: 2c14c16e-5495-4e19-a322-0fbae3f05465
+		summarizeBy: sum
+		sourceColumn: Net_Shipment_Cost
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Currency
+		dataType: string
+		lineageTag: 71a0e01b-8788-48b3-8071-69e5890ede2c
+		summarizeBy: none
+		sourceColumn: Currency
+
+		annotation SummarizationSetBy = Automatic
+
+	column Carrier_Service_Code
+		dataType: string
+		lineageTag: 035b4da6-fb2b-47cd-8bc9-81379c262ef5
+		summarizeBy: none
+		sourceColumn: Carrier_Service_Code
+
+		annotation SummarizationSetBy = Automatic
+
+	column Carrier_Service_Level
+		dataType: string
+		lineageTag: bc2ec23e-d944-466f-a0b4-3592394bab0d
+		summarizeBy: none
+		sourceColumn: Carrier_Service_Level
+
+		annotation SummarizationSetBy = Automatic
+
+	column Normalized_Service_Level
+		dataType: string
+		lineageTag: 5afcf4c5-a668-4ab6-b60e-60c13fade592
+		summarizeBy: none
+		sourceColumn: Normalized_Service_Level
+
+		annotation SummarizationSetBy = Automatic
+
+	column Zone
+		dataType: string
+		lineageTag: bcabced5-3adc-407d-8f94-ffb64e31f275
+		summarizeBy: none
+		sourceColumn: Zone
+
+		annotation SummarizationSetBy = Automatic
+
+	column Class
+		dataType: string
+		lineageTag: e4affbc4-2229-4969-b115-51b42971c778
+		summarizeBy: none
+		sourceColumn: Class
+
+		annotation SummarizationSetBy = Automatic
+
+	column Miles
+		dataType: string
+		lineageTag: 7112de32-f2fc-4964-9a81-71ba6dc8aa1a
+		summarizeBy: none
+		sourceColumn: Miles
+
+		annotation SummarizationSetBy = Automatic
+
+	column Ship_Date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 8e5246d5-cf35-49d5-b7ca-60a5558921fe
+		summarizeBy: none
+		sourceColumn: Ship_Date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Delivery_Date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 2213e1b4-e15a-4d4c-890b-39fb64ed83ca
+		summarizeBy: none
+		sourceColumn: Delivery_Date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Delivery_Time
+		dataType: dateTime
+		formatString: Long Time
+		lineageTag: 37520268-bb7d-4637-9c56-a376a2e5c66d
+		summarizeBy: none
+		sourceColumn: Delivery_Time
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Time
+
+	column Delivery_Signature
+		dataType: string
+		lineageTag: 918fbb6d-0652-4852-8b7f-aa21843276cf
+		summarizeBy: none
+		sourceColumn: Delivery_Signature
+
+		annotation SummarizationSetBy = Automatic
+
+	column Actual_Weight_lbs
+		dataType: double
+		lineageTag: a62dfa98-5139-4b7a-9d7f-6b3e93c497bf
+		summarizeBy: sum
+		sourceColumn: Actual_Weight_lbs
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Billed_Weight_lbs
+		dataType: double
+		lineageTag: a44fcea7-08f5-4e96-bdf7-b098dfeeecbf
+		summarizeBy: sum
+		sourceColumn: Billed_Weight_lbs
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Shipper_Name
+		dataType: string
+		lineageTag: 942fe4f5-af79-4792-8e91-e2c01633bd53
+		summarizeBy: none
+		sourceColumn: Shipper_Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column Shipper_Company
+		dataType: string
+		lineageTag: 8df0cd43-c1b9-45f5-9037-ccf8efc19eb0
+		summarizeBy: none
+		sourceColumn: Shipper_Company
+
+		annotation SummarizationSetBy = Automatic
+
+	column Shipper_Address
+		dataType: string
+		lineageTag: 4a3d7b69-84cd-40bf-906c-516b4cf09255
+		summarizeBy: none
+		sourceColumn: Shipper_Address
+
+		annotation SummarizationSetBy = Automatic
+
+	column Shipper_City
+		dataType: string
+		lineageTag: 7f881976-2966-4abb-b76a-c3bfd9ef3c09
+		summarizeBy: none
+		sourceColumn: Shipper_City
+
+		annotation SummarizationSetBy = Automatic
+
+	column Shipper_State
+		dataType: string
+		lineageTag: 42340896-cdf7-4224-897a-656df7c6dde9
+		summarizeBy: none
+		sourceColumn: Shipper_State
+
+		annotation SummarizationSetBy = Automatic
+
+	column Shipper_Postal_Code
+		dataType: string
+		lineageTag: 0df1d212-62da-4aa3-a625-5606e7b277a7
+		summarizeBy: none
+		sourceColumn: Shipper_Postal_Code
+
+		annotation SummarizationSetBy = Automatic
+
+	column Shipper_Country
+		dataType: string
+		lineageTag: 7bb9be32-292d-4ddb-bd5f-e7afc735513a
+		summarizeBy: none
+		sourceColumn: Shipper_Country
+
+		annotation SummarizationSetBy = Automatic
+
+	column Receiver_Name
+		dataType: string
+		lineageTag: 60ac77e8-99a5-4d24-9ae8-c17930519da2
+		summarizeBy: none
+		sourceColumn: Receiver_Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column Receiver_Company
+		dataType: string
+		lineageTag: d520bc1a-716b-441a-ad5a-980e7fa8b0e6
+		summarizeBy: none
+		sourceColumn: Receiver_Company
+
+		annotation SummarizationSetBy = Automatic
+
+	column Receiver_Address
+		dataType: string
+		lineageTag: 435eaf63-5b80-460a-8186-76fd7324ceb8
+		summarizeBy: none
+		sourceColumn: Receiver_Address
+
+		annotation SummarizationSetBy = Automatic
+
+	column Receiver_City
+		dataType: string
+		lineageTag: bcf9bbfa-0a63-4d95-859c-0276755a5fb0
+		summarizeBy: none
+		sourceColumn: Receiver_City
+
+		annotation SummarizationSetBy = Automatic
+
+	column Receiver_State
+		dataType: string
+		lineageTag: f486d690-86f5-4f33-9501-b6c83f432f8a
+		summarizeBy: none
+		sourceColumn: Receiver_State
+
+		annotation SummarizationSetBy = Automatic
+
+	column Receiver_Postal_Code
+		dataType: string
+		lineageTag: fb40ae43-12a2-4b6d-931f-3f3e2ce0a160
+		summarizeBy: none
+		sourceColumn: Receiver_Postal_Code
+
+		annotation SummarizationSetBy = Automatic
+
+	column Receiver_Country
+		dataType: string
+		lineageTag: 7035d80a-0a83-4c77-bd04-695d9d4e1371
+		summarizeBy: none
+		sourceColumn: Receiver_Country
+
+		annotation SummarizationSetBy = Automatic
+
+	column Bill_Option
+		dataType: string
+		lineageTag: 423d7535-ab67-4ae6-b78d-92f193588e45
+		summarizeBy: none
+		sourceColumn: Bill_Option
+
+		annotation SummarizationSetBy = Automatic
+
+	column Declared_Value
+		dataType: string
+		lineageTag: e834aba2-08e0-4431-abe4-562bb0693bd8
+		summarizeBy: none
+		sourceColumn: Declared_Value
+
+		annotation SummarizationSetBy = Automatic
+
+	column Piece_Count
+		dataType: string
+		lineageTag: 999cab27-eab8-440a-ab50-cd6ea62c543c
+		summarizeBy: none
+		sourceColumn: Piece_Count
+
+		annotation SummarizationSetBy = Automatic
+
+	column Reference_1
+		dataType: string
+		lineageTag: 0b8ea6a3-0f80-4c86-9c37-91c154d08a6b
+		summarizeBy: none
+		sourceColumn: Reference_1
+
+		annotation SummarizationSetBy = Automatic
+
+	column Reference_2
+		dataType: string
+		lineageTag: f1120815-37cd-40dd-925d-70f318885265
+		summarizeBy: none
+		sourceColumn: Reference_2
+
+		annotation SummarizationSetBy = Automatic
+
+	column Reference_3
+		dataType: string
+		lineageTag: eff5c1e2-bcb6-4a6e-a849-0383962ccb95
+		summarizeBy: none
+		sourceColumn: Reference_3
+
+		annotation SummarizationSetBy = Automatic
+
+	column Reference_4
+		dataType: string
+		lineageTag: 569ca19e-55bb-4d40-8bc7-5f9c885a0fdf
+		summarizeBy: none
+		sourceColumn: Reference_4
+
+		annotation SummarizationSetBy = Automatic
+
+	column Reference_5
+		dataType: string
+		lineageTag: ef714933-92ab-4338-a1db-405b0c4864ee
+		summarizeBy: none
+		sourceColumn: Reference_5
+
+		annotation SummarizationSetBy = Automatic
+
+	column Reference_6
+		dataType: string
+		lineageTag: 8859b7f5-17a5-48ef-87eb-206ddd4e5f6a
+		summarizeBy: none
+		sourceColumn: Reference_6
+
+		annotation SummarizationSetBy = Automatic
+
+	column Reference_7
+		dataType: string
+		lineageTag: bed7ff54-8099-4983-af75-48e567ac81f6
+		summarizeBy: none
+		sourceColumn: Reference_7
+
+		annotation SummarizationSetBy = Automatic
+
+	column Reference_8
+		dataType: string
+		lineageTag: 1e356418-41a4-4049-8e44-067a7337610a
+		summarizeBy: none
+		sourceColumn: Reference_8
+
+		annotation SummarizationSetBy = Automatic
+
+	column Gl_Code_1
+		dataType: string
+		lineageTag: 30db9eaa-1fec-41e3-a85b-0bc9807939a4
+		summarizeBy: none
+		sourceColumn: Gl_Code_1
+
+		annotation SummarizationSetBy = Automatic
+
+	column Gl_Code_2
+		dataType: string
+		lineageTag: 1306729c-bbe1-4c9e-b211-3aa676ae0a8a
+		summarizeBy: none
+		sourceColumn: Gl_Code_2
+
+		annotation SummarizationSetBy = Automatic
+
+	column Gl_Code_3
+		dataType: string
+		lineageTag: 7b0145d3-4aea-4673-b0e6-c2d60d84004c
+		summarizeBy: none
+		sourceColumn: Gl_Code_3
+
+		annotation SummarizationSetBy = Automatic
+
+	column Service
+		dataType: string
+		lineageTag: 061e0b31-e7b3-4faa-a396-d3b03ee9b3e6
+		summarizeBy: none
+		sourceColumn: Service
+
+		annotation SummarizationSetBy = Automatic
+
+	column Should_Be_Delivered_At_Datetime
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: edc4cbbd-afbc-4e42-89d3-caa10f02cebe
+		summarizeBy: none
+		sourceColumn: Should_Be_Delivered_At_Datetime
+
+		annotation SummarizationSetBy = Automatic
+
+	column Normalized_Ground_Us_Zone
+		dataType: string
+		lineageTag: 603efadc-9f4e-4c42-b767-c0391e235827
+		summarizeBy: none
+		sourceColumn: Normalized_Ground_Us_Zone
+
+		annotation SummarizationSetBy = Automatic
+
+	column Miles_v2
+		dataType: string
+		lineageTag: 17162cb2-48cc-4d26-bc45-1281482f9c77
+		summarizeBy: none
+		sourceColumn: Miles_v2
+
+		annotation SummarizationSetBy = Automatic
+
+	partition lojistic_shipment_detail = m
+		mode: import
+		source =
+				let
+				    Source = PowerPlatform.Dataflows(null),
+				    Workspaces = Source{[Id="Workspaces"]}[Data],
+				    #"2df93ede-c6d5-4e10-a0ee-0fac8ac11c0b" = Workspaces{[workspaceId="2df93ede-c6d5-4e10-a0ee-0fac8ac11c0b"]}[Data],
+				    #"6f9e176d-e21d-4302-b04e-8c8dd864a345" = #"2df93ede-c6d5-4e10-a0ee-0fac8ac11c0b"{[dataflowId="6f9e176d-e21d-4302-b04e-8c8dd864a345"]}[Data],
+				    shipment_detail_ = #"6f9e176d-e21d-4302-b04e-8c8dd864a345"{[entity="shipment_detail",version=""]}[Data]
+				in
+				    shipment_detail_
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

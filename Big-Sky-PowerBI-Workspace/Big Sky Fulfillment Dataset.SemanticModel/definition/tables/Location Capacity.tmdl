@@ -1,0 +1,298 @@
+table 'Location Capacity'
+	lineageTag: b243c3b0-c64a-4251-92e8-e53b3d629ed1
+
+	column Warehouse
+		lineageTag: 29156857-8bfc-487a-b70e-8815153707fa
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Warehouse]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Date
+		formatString: General Date
+		lineageTag: 62b7decd-cd45-4ca7-aec5-59179ff043bd
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: primary_date[Date]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Location
+		lineageTag: 674f8878-c5e4-4b90-a5bd-ad3a2a9fc28d
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Location]
+
+		annotation SummarizationSetBy = Automatic
+
+	column LatestTimestamp
+		formatString: General Date
+		lineageTag: da1890d1-f9ee-4149-9f60-9c25ed12d1b5
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [LatestTimestamp]
+
+		annotation SummarizationSetBy = Automatic
+
+	column OnHand
+		formatString: 0
+		lineageTag: 8323b5e1-738d-4e4a-ab85-b2ad58e83a88
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [OnHand]
+
+		annotation SummarizationSetBy = Automatic
+
+	column IsEmpty
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 8768558b-fe7e-46f6-adb7-6bd7df6b0c9f
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [IsEmpty]
+
+		annotation SummarizationSetBy = Automatic
+
+	column IsNotEmpty
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 50f337ed-9bdc-4409-8e46-fe9c628c45fe
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [IsNotEmpty]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Location Type'
+		lineageTag: 8c01de85-677d-4f45-bad4-695b91141ac3
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Location Type]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Linear Bin Ft'
+		lineageTag: 35a10d91-b945-46d0-8c91-64d973da528d
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Linear Bin Ft]
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Warehouse Data'
+		lineageTag: 7ba0fd6b-22cf-442c-a83c-72ad84af0413
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Warehouse Data]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Unique Location Warehouse'
+		lineageTag: 733c04d2-e2b1-4372-bb13-edab092a7fcd
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Unique Location Warehouse]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Warehouse UUID' =
+			
+			SWITCH(
+			    TRUE(),
+			    'Location Capacity'[Warehouse] = "LAS", "V2FyZWhvdXNlOjg3NzA1",
+			    'Location Capacity'[Warehouse] = "MSO", "V2FyZWhvdXNlOjEwNTMg==",
+			    'Location Capacity'[Warehouse] = "CLT", "V2FyZWhvdXNlOjIyNTQ=",
+			    BLANK()
+			)
+		lineageTag: ba24591f-b401-44b8-802a-3b7b4828eb53
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Location Capacity' = calculated
+		mode: import
+		source = ```
+				
+				VAR DateTable = 
+				    ALL('primary_date'[date])
+				
+				VAR LocationWarehouseTable = 
+				    UNION(
+				        SELECTCOLUMNS(
+				            DISTINCT(
+				                SELECTCOLUMNS(
+				                    inventory_changes,
+				                    "Location", inventory_changes[location_name],
+				                    "Warehouse", inventory_changes[warehouse_code]
+				                )
+				            ),
+				            "Location", [Location],
+				            "Warehouse", [Warehouse]
+				        ),
+				        SELECTCOLUMNS(
+				            DISTINCT(
+				                SELECTCOLUMNS(
+				                    item_locations_manual,
+				                    "Location", item_locations_manual[location_name],
+				                    "Warehouse", item_locations_manual[warehouse_code]
+				                )
+				            ),
+				            "Location", [Location],
+				            "Warehouse", [Warehouse]
+				        )
+				    )
+				
+				VAR DateLocationWarehouseCross = 
+				    GENERATE(
+				        DateTable,
+				        LocationWarehouseTable
+				    )
+				
+				VAR WithTimestamp = 
+				    ADDCOLUMNS(
+				        DateLocationWarehouseCross,
+				        "LatestTimestamp", 
+				        VAR CurrentDate = [Date]
+				        VAR CurrentLocation = [Location]
+				        VAR CurrentWarehouse = [Warehouse]
+				        RETURN
+				            CALCULATE(
+				                MAX(inventory_changes[created_at]),
+				                inventory_changes[created_at_date] = CurrentDate,
+				                inventory_changes[location_name] = CurrentLocation,
+				                inventory_changes[warehouse_code] = CurrentWarehouse
+				            )
+				    )
+				
+				VAR WithOnHand = 
+				    ADDCOLUMNS(
+				        WithTimestamp,
+				        "OnHand",
+				        VAR CurrentDate = [Date]
+				        VAR CurrentLocation = [Location]
+				        VAR CurrentWarehouse = [Warehouse]
+				        VAR LatestTime = [LatestTimestamp]
+				        RETURN
+				            IF(
+				                ISBLANK(LatestTime),
+				                // If no inventory data, check manual locations
+				                CALCULATE(
+				                    MAX(item_locations_manual[Units]),
+				                    item_locations_manual[location_name] = CurrentLocation,
+				                    item_locations_manual[Warehouse] = CurrentWarehouse
+				                ),
+				                // Get on-hand from latest inventory record
+				                CALCULATE(
+				                    MAX(inventory_changes[Updated On Hand]),
+				                    inventory_changes[created_at_date] = CurrentDate,
+				                    inventory_changes[location_name] = CurrentLocation,
+				                    inventory_changes[warehouse_code] = CurrentWarehouse,
+				                    inventory_changes[created_at] = LatestTime
+				                )
+				            )
+				    )
+				
+				VAR WithLocationType = 
+				    ADDCOLUMNS(
+				        WithOnHand,
+				        "Location Type",
+				        VAR CurrentLocation = [Location]
+				        VAR CurrentWarehouse = [Warehouse]
+				        VAR CurrentDate = [Date]
+				        VAR LatestTime = [LatestTimestamp]
+				        RETURN
+				            IF(
+				                ISBLANK(LatestTime),
+				                // If no inventory data, get from manual table
+				                CALCULATE(
+				                    MAX(item_locations_manual[Adjusted Location Type]),
+				                    item_locations_manual[location_name] = CurrentLocation,
+				                    item_locations_manual[Warehouse] = CurrentWarehouse
+				                ),
+				                // Get from inventory data
+				                CALCULATE(
+				                    MAX(inventory_changes[Location Type]),
+				                    inventory_changes[created_at_date] = CurrentDate,
+				                    inventory_changes[location_name] = CurrentLocation,
+				                    inventory_changes[warehouse_code] = CurrentWarehouse,
+				                    inventory_changes[created_at] = LatestTime
+				                )
+				            )
+				    )
+				
+				VAR WithLinearBinFt = 
+				    ADDCOLUMNS(
+				        WithLocationType,
+				        "Linear Bin Ft",
+				        VAR CurrentLocation = [Location]
+				        VAR CurrentWarehouse = [Warehouse]
+				        VAR CurrentDate = [Date]
+				        VAR LatestTime = [LatestTimestamp]
+				        RETURN
+				            IF(
+				                ISBLANK(LatestTime),
+				                // If no inventory data, get from manual table
+				                CALCULATE(
+				                    MAX(item_locations_manual[Linear Bin Ft]),
+				                    item_locations_manual[location_name] = CurrentLocation,
+				                    item_locations_manual[Warehouse] = CurrentWarehouse
+				                ),
+				                // Get from inventory data
+				                CALCULATE(
+				                    MAX(inventory_changes[Linear Bin Ft]),
+				                    inventory_changes[created_at_date] = CurrentDate,
+				                    inventory_changes[location_name] = CurrentLocation,
+				                    inventory_changes[warehouse_code] = CurrentWarehouse,
+				                    inventory_changes[created_at] = LatestTime
+				                )
+				            )
+				    )
+				
+				VAR WithWarehouseData = 
+				    ADDCOLUMNS(
+				        WithLinearBinFt,
+				        "Warehouse Data",
+				        VAR CurrentLocation = [Location]
+				        VAR CurrentWarehouse = [Warehouse]
+				        VAR CurrentDate = [Date]
+				        VAR LatestTime = [LatestTimestamp]
+				        RETURN
+				            IF(
+				                ISBLANK(LatestTime),
+				                // If no inventory data, get from manual table
+				                CALCULATE(
+				                    MAX(item_locations_manual[Warehouse]),
+				                    item_locations_manual[location_name] = CurrentLocation,
+				                    item_locations_manual[Warehouse] = CurrentWarehouse
+				                ),
+				                // Get from inventory data
+				                CALCULATE(
+				                    MAX(inventory_changes[warehouse_code]),
+				                    inventory_changes[created_at_date] = CurrentDate,
+				                    inventory_changes[location_name] = CurrentLocation,
+				                    inventory_changes[warehouse_code] = CurrentWarehouse,
+				                    inventory_changes[created_at] = LatestTime
+				                )
+				            )
+				    )
+				
+				VAR DailySnapshots = 
+				    ADDCOLUMNS(
+				        WithWarehouseData,
+				        "Unique Location Warehouse", CONCATENATE([Location], [Warehouse])
+				    )
+				
+				VAR FinalSnapshots = 
+				    ADDCOLUMNS(
+				        DailySnapshots,
+				        "IsEmpty", [OnHand] = 0,
+				        "IsNotEmpty", [OnHand] > 0
+				    )
+				
+				RETURN
+				FinalSnapshots
+				```
+
+	annotation PBI_Id = 35710df9d06e4960bac2f651ad76fd3a
+

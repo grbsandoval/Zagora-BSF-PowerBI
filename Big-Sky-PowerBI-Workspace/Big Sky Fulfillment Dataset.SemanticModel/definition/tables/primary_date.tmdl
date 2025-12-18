@@ -1,0 +1,192 @@
+table primary_date
+	lineageTag: 385273b6-7d76-4353-b65a-d5779d19b7c1
+	dataCategory: Time
+
+	column Date
+		isKey
+		formatString: dd-mmm-yy
+		lineageTag: 92175874-4b3c-46d3-ac11-39d9f92c40fd
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Date]
+		sortByColumn: Index
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column Year
+		formatString: 0
+		lineageTag: 5a74b4a6-9204-4687-a1e9-ecf0f238b49e
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Year]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Month
+		lineageTag: c3ff4433-b1c9-47dd-8b4d-083e88fc02d6
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Month]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Month Number'
+		formatString: 0
+		lineageTag: 29b45e97-ff1f-4c89-b252-8c7e4c69c76c
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Month Number]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Quarter
+		lineageTag: 7139e3a9-5cfe-4db6-9906-48daca1cf434
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Quarter]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Weekday
+		lineageTag: 10486a80-b4b2-4167-95e8-df1a184870fd
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Weekday]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Weekday Number'
+		formatString: 0
+		lineageTag: 68d3bb91-abc8-49d3-aa8d-01105bbd1f7b
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Weekday Number]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Is Weekend'
+		lineageTag: d5a6035f-7009-4e63-9730-3ff74cd1061f
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Is Weekend]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Is Holiday'
+		lineageTag: 04e7f190-864f-4342-9c0d-5c7d5baf77e1
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Is Holiday]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Week Number'
+		formatString: 0
+		lineageTag: 0bca9f1c-b7a1-4bb4-840b-918a8c3f0b6c
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Week Number]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Start of Week'
+		formatString: dd-mmm-yy
+		lineageTag: c8f56dd0-0b43-44ab-9411-c8463f5475d5
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Start of Week]
+		sortByColumn: 'Week Index'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column Index
+		isHidden
+		formatString: 0
+		lineageTag: 43242322-f519-4bb5-8e00-b503854c5fbb
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Index]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Week Index'
+		isHidden
+		formatString: 0
+		lineageTag: 84231f88-f0b1-4bc6-9210-9ca76764a300
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Week Index]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Month-Year
+		lineageTag: 6427c38f-4e25-47d0-9e7b-1b18f9341138
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Month-Year]
+		sortByColumn: 'Month-Year Index'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Month-Year Index'
+		isHidden
+		formatString: 0
+		lineageTag: 460272a4-6284-444f-bf50-de9b34c3d08d
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Month-Year Index]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Date Aggregation Group' =
+			
+			VAR SelectedGranularity = SELECTEDVALUE('Date Aggregation'[Parameter Fields])
+			RETURN
+			    SWITCH(
+			        SelectedGranularity,
+			        "Date", FORMAT(primary_date[Date], "yyyy-MM-dd"),
+			        "Start of Week", FORMAT(primary_date[Start of Week], "yyyy-MM-dd"),
+			        "Month-Year", FORMAT(primary_date[Month-Year], "yyyy-MM"),
+			        BLANK()
+			    )
+		lineageTag: 4cc34c8a-c823-4406-abf3-b35a0f2cedb2
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition primary_date = calculated
+		mode: import
+		source =
+				
+				VAR StartDate = DATE(2023,1,1)
+				VAR EndDate = DATE(2025,12,31)
+				
+				RETURN
+				ADDCOLUMNS(
+				    CALENDAR(StartDate, EndDate),
+				    "Year", YEAR([Date]),
+				    "Month", FORMAT([Date], "MMMM"),
+				    "Month Number", MONTH([Date]),
+				    "Quarter", "Q" & FORMAT([Date], "Q"),
+				    "Weekday", FORMAT([Date], "dddd"),
+				    "Weekday Number", WEEKDAY([Date], 2),  // 2 = Monday as the first day of the week
+				    "Month-Year", FORMAT([Date], "MM-YYYY"),  // Format as MM - YYYY
+				    "Is Weekend", IF(WEEKDAY([Date], 2) >= 6, "Yes", "No"),
+				    "Is Holiday", IF([Date] IN {DATE(2023,12,25), DATE(2024,1,1)}, "Yes", "No"),  // Add more holidays as needed
+				    "Week Number", WEEKNUM([Date], 1),  // 1 = Week starts on Sunday
+				    "Start of Week", [Date] - WEEKDAY([Date], 1) + 1,  // Finds the first Sunday of the week
+				    "Index", DATEDIFF([Date], EndDate, DAY) + 1,  // Descending index: latest date = 1
+				    "Week Index", DATEDIFF([Date] - WEEKDAY([Date], 1) + 1, EndDate - WEEKDAY(EndDate, 1) + 1, WEEK) + 1,  // Descending week index
+				    "Month-Year Index", DATEDIFF(EOMONTH([Date], 0), EOMONTH(EndDate, 0), MONTH) + 1  // Descending Year-Month index
+				)
+
+	annotation PBI_Id = 53d3e567dcf24803bffa864803847824
+

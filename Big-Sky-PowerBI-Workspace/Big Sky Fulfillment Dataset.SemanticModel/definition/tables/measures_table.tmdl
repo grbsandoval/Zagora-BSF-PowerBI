@@ -1,0 +1,388 @@
+table measures_table
+	lineageTag: 81aec9de-22a3-449f-8a96-d530e6ab9f21
+
+	measure 'Total Revenue' =
+			
+			SUM(client_invoices[Total_charge])
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: 22c08845-5ecf-49d1-9314-392971637377
+
+	measure 'Postage Margin Markup' =
+			
+			CALCULATE(
+			SUM(primary_shipments[Marked Up Label Cost]) - SUM(primary_shipments[Quoted Label Cost])
+			)
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: 1694f7a2-8866-418c-9bd2-f8e8f6bf5a90
+
+	measure 'Postage Margin Markup %' =
+			
+			CALCULATE(
+			[Postage Margin Markup] / SUM(client_invoices[Quoted_cost_shipment]),
+			client_invoices[Type_charge]="shipping_label_charge"
+			)
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 506a1046-415a-4129-9331-e6b1379eef25
+
+	measure 'Net Postage Margin' =
+			
+			VAR CarrierTable =
+			    SUMMARIZE(
+			        primary_shipments,
+			        primary_shipments[Carrier],
+			        "CarrierMargin",
+			        IF(
+			            ISBLANK(SUM(primary_shipments[Lojistic Net Shipment Cost])),
+			            SUM(primary_shipments[Marked Up Label Cost]) -
+			            SUM(primary_shipments[Quoted Label Cost]) +
+			            SUM(primary_shipments[Reconciled Amount Billed]),
+			            SUM(primary_shipments[Marked Up Label Cost]) -
+			            SUM(primary_shipments[Lojistic Net Shipment Cost]) +
+			            SUM(primary_shipments[Reconciled Amount Billed])
+			        )
+			    )
+			
+			RETURN
+			IF(
+			    ISINSCOPE(primary_shipments[Carrier]),
+			    -- Carrier Level Calculation (Correct as is)
+			    IF(
+			        ISBLANK(SUM(primary_shipments[Lojistic Net Shipment Cost])),
+			        SUM(primary_shipments[Marked Up Label Cost]) -
+			        SUM(primary_shipments[Quoted Label Cost]) +
+			        SUM(primary_shipments[Reconciled Amount Billed]),
+			        SUM(primary_shipments[Marked Up Label Cost]) -
+			        SUM(primary_shipments[Lojistic Net Shipment Cost]) +
+			        SUM(primary_shipments[Reconciled Amount Billed])
+			    ),
+			    -- Client Level Calculation: Sum only Carrier-Level Aggregates
+			    SUMX(CarrierTable, [CarrierMargin])
+			)
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: 3fff3186-4298-412f-9d06-4c39e0a60e41
+
+	measure 'Net Postage Margin %' =
+			
+			[Net Postage Margin] / SUM(primary_shipments[Lojistic Net Shipment Cost])
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 2bdabb22-e025-48b1-84ed-282543ee4ea8
+
+	measure Shipments =
+			
+			CALCULATE(
+			DISTINCTCOUNT(shipments[tracking_number]),
+			shipments[Wholesale]=FALSE()
+			)
+		formatString: #,0
+		lineageTag: db9a78fa-3ca4-4edd-a933-fe600e089f1c
+
+	measure 'Avg Hourly Shipments' = ```
+			
+			AVERAGEX(
+			    SUMMARIZE(
+			        primary_time,
+			        primary_time[Hour],
+			        "HourlyShipments", 
+			            CALCULATE(DISTINCTCOUNT(shipments[tracking_number]))
+			    ),
+			    [HourlyShipments]
+			)
+			```
+		formatString: #,0.00
+		lineageTag: 0fd7ffc8-1ace-48b0-a17f-b8516664659a
+
+	measure 'Avg of Daily Max Hourly Shipments' =
+			
+			VAR HourlyMaxTable =
+			
+			    SUMMARIZE(
+			
+			        ALL(primary_time[Hour]), -- Removes filter from the visual
+			
+			        primary_time[Hour],
+			
+			        "MaxHourlyShipments",
+			
+			            MAXX(
+			
+			                SUMMARIZE(
+			
+			                    ALL(primary_date[Date]),
+			
+			                    primary_date[Date],
+			
+			                    "HourlyCount",
+			
+			                        CALCULATE(DISTINCTCOUNT(shipments[tracking_number]))
+			
+			                ),
+			
+			                [HourlyCount]
+			
+			            )
+			
+			    )
+			
+			RETURN
+			
+			AVERAGEX(HourlyMaxTable, [MaxHourlyShipments])
+		formatString: #,0
+		lineageTag: 6f156e2f-e8db-405b-b16c-b6f6b9664cb9
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'Avg of Daily Min Hourly Shipments' =
+			
+			VAR HourlyMinTable =
+			
+			    SUMMARIZE(
+			
+			        ALL(primary_time[Hour]), -- Removes filter from the visual
+			
+			        primary_time[Hour],
+			
+			        "MinHourlyShipments",
+			
+			            MinX(
+			
+			                SUMMARIZE(
+			
+			                    ALL(primary_date[Date]),
+			
+			                    primary_date[Date],
+			
+			                    "HourlyCount",
+			
+			                        CALCULATE(DISTINCTCOUNT(shipments[tracking_number]))
+			
+			                ),
+			
+			                [HourlyCount]
+			
+			            )
+			
+			    )
+			
+			RETURN
+			
+			AVERAGEX(HourlyMinTable, [MinHourlyShipments])
+		formatString: #,0
+		lineageTag: 1b84f881-9478-4c56-80cc-432f603d2925
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'Linear Bin Ft (Unique by Location)' =
+			
+			CALCULATE(
+			    SUMX(
+			        VALUES(inventory_changes[location_name]),
+			        MAXX(
+			            FILTER(inventory_changes, inventory_changes[Updated On Hand] > 0),
+			            inventory_changes[Linear Bin Ft]
+			        )
+			    )
+			)
+		formatString: #,0.00
+		lineageTag: b80a7f67-f530-453c-911a-a2f77f4d0641
+
+	measure 'Location Latest On-Hand' = ```
+			
+			VAR CurrentDate = MAX(inventory_changes[created_at_date])
+			VAR CurrentLocation = MAX(inventory_changes[location_name])
+			VAR LatestTime = 
+			    CALCULATE(
+			        MAX(inventory_changes[created_at]),
+			        inventory_changes[created_at_date] = CurrentDate,
+			        inventory_changes[location_name] = CurrentLocation
+			    )
+			RETURN
+			CALCULATE(
+			    MAX(inventory_changes[Updated On Hand]),
+			    inventory_changes[created_at_date] = CurrentDate,
+			    inventory_changes[location_name] = CurrentLocation,
+			    inventory_changes[created_at] = LatestTime
+			)
+			```
+		formatString: 0
+		lineageTag: f5b2354d-55f9-4999-9c16-980b4ca190a6
+
+	measure 'Projected Volume (Next 2 Weeks by Weekday)' = ```
+			
+			VAR CurrentDate = MAX ( 'primary_date'[Date] )
+			VAR WeekdayNum = WEEKDAY ( CurrentDate, 2 ) 
+			VAR PastDates =
+			    FILTER (
+			        ALL ( 'primary_date'[Date] ),
+			        'primary_date'[Date] < CurrentDate
+			            && 'primary_date'[Date] >= CurrentDate - 14
+			            && WEEKDAY ( 'primary_date'[Date], 2 ) = WeekdayNum
+			    )
+			VAR PastAvg =
+			    AVERAGEX ( PastDates, [Shipments] )
+			RETURN
+			    PastAvg
+			```
+		formatString: #,0
+		lineageTag: ac0df812-e296-4741-ab70-3e4cf828aa21
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'Wholesale Shipments' =
+			
+			CALCULATE(
+			DISTINCTCOUNT(shipments[tracking_number]),
+			shipments[Wholesale]=TRUE()
+			)
+		formatString: #,0
+		lineageTag: 166eba00-55cc-4558-b0de-06ae6ca7af12
+
+	measure 'Wholesale Projected Volume (Next 2 Weeks by Weekday)' = ```
+			
+			VAR CurrentDate = MAX ( 'primary_date'[Date] )
+			VAR WeekdayNum = WEEKDAY ( CurrentDate, 2 ) 
+			VAR PastDates =
+			    FILTER (
+			        ALL ( 'primary_date'[Date] ),
+			        'primary_date'[Date] < CurrentDate
+			            && 'primary_date'[Date] >= CurrentDate - 14
+			            && WEEKDAY ( 'primary_date'[Date], 2 ) = WeekdayNum
+			    )
+			VAR PastAvg =
+			    AVERAGEX ( PastDates, [Wholesale Shipments] )
+			RETURN
+			    PastAvg
+			```
+		formatString: #,0
+		lineageTag: c44af8da-446a-49da-b70d-0b3218d78fcc
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'WoW AR Balance %' =
+			
+			VAR LWAR = CALCULATE(sum('QB AR'[Balance]),DATEADD(primary_date[Date],-7,DAY))
+			VAR TWAR = sum('QB AR'[Balance])
+			RETURN
+			(TWAR-LWAR)/LWAR
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: dda132ef-6a4f-444e-8063-15e3dd85fdb3
+
+	measure 'WoW AP Balance %' =
+			
+			VAR LWAP = CALCULATE(sum('QB AP'[Balance]),DATEADD(primary_date[Date],-7,DAY))
+			VAR TWAP = sum('QB AP'[Balance])
+			RETURN
+			(TWAP-LWAP)/LWAP
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 2d091d15-25a2-4a93-8170-cf0cd6c4f9c1
+
+	measure 'MoM AP Balance %' =
+			
+			VAR LWAP = CALCULATE(sum('QB AP'[Balance]),DATEADD(primary_date[Date],-1,MONTH))
+			VAR TWAP = sum('QB AP'[Balance])
+			RETURN
+			(TWAP-LWAP)/LWAP
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: b9f12f64-fed7-4621-a534-6c2e25e9d862
+
+	measure 'MoM AR Balance %' =
+			
+			VAR LWAR = CALCULATE(sum('QB AR'[Balance]),DATEADD(primary_date[Date],-1,MONTH))
+			VAR TWAR = sum('QB AR'[Balance])
+			RETURN
+			(TWAR-LWAR)/LWAR
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: ab41560c-f57b-46de-8254-e00df224b764
+
+	measure 'AR 1 - 15 % of Total' =
+			
+			VAR Balance = CALCULATE(SUM('QB AR'[Balance]),'QB AR'[Bucket]= "1 - 15")
+			VAR TotalBalance = SUM('QB AR'[Balance])
+			RETURN
+			Balance/TotalBalance
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 030d1353-6b51-4514-8177-b7e0edb8ee91
+
+	measure 'KPI Target' = 0
+		formatString: 0
+		lineageTag: a8325cc7-caeb-4222-b26b-1a53fcf7b6c0
+
+	measure 'AR Current % of Total' =
+			
+			VAR Balance = CALCULATE(SUM('QB AR'[Balance]),'QB AR'[Bucket]= "Current")
+			VAR TotalBalance = SUM('QB AR'[Balance])
+			RETURN
+			Balance/TotalBalance
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 33ca7e75-b3a9-4a95-b80f-9207650b5c77
+
+	measure 'AR 16-30 % of Total' =
+			
+			VAR Balance = CALCULATE(SUM('QB AR'[Balance]),'QB AR'[Bucket]= "16 - 30")
+			VAR TotalBalance = SUM('QB AR'[Balance])
+			RETURN
+			Balance/TotalBalance
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: a555fd25-b016-4e2a-94d8-d74b8af53ed7
+
+	measure 'AR 31 + % of Total' =
+			
+			VAR Balance = CALCULATE(SUM('QB AR'[Balance]),'QB AR'[Bucket]= "31 +")
+			VAR TotalBalance = SUM('QB AR'[Balance])
+			RETURN
+			Balance/TotalBalance
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: e97c45f5-5033-4423-93a7-fe338829c8a3
+
+	measure 'AP Current % of Total' =
+			
+			VAR Balance = CALCULATE(SUM('QB AP'[Balance]),'QB AP'[Bucket]= "Current")
+			VAR TotalBalance = SUM('QB AP'[Balance])
+			RETURN
+			Balance/TotalBalance
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: c5d545dc-d116-4aa0-8d92-e16a35fc87cc
+
+	measure 'AP 1 - 15 % of Total' =
+			
+			VAR Balance = CALCULATE(SUM('QB AP'[Balance]),'QB AP'[Bucket]= "1 - 15")
+			VAR TotalBalance = SUM('QB AP'[Balance])
+			RETURN
+			Balance/TotalBalance
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: ee1a5b8f-65f4-4c37-96df-2efa9c3b2165
+
+	measure 'AP 16-30 % of Total' =
+			
+			VAR Balance = CALCULATE(SUM('QB AP'[Balance]),'QB AP'[Bucket]= "16 - 30")
+			VAR TotalBalance = SUM('QB AP'[Balance])
+			RETURN
+			Balance/TotalBalance
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: c4d2afee-6da3-4fca-a408-a397fbc98aec
+
+	measure 'AP 31 + % of Total' =
+			
+			VAR Balance = CALCULATE(SUM('QB AP'[Balance]),'QB AP'[Bucket]= "31 +")
+			VAR TotalBalance = SUM('QB AP'[Balance])
+			RETURN
+			Balance/TotalBalance
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 1ca12180-554c-40f9-a6d5-972cdd055960
+
+	column Column
+		formatString: 0
+		lineageTag: b60817ac-84b0-4895-b04f-8dd3963bbc1d
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Column]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition measures_table = calculated
+		mode: import
+		source = Row("Column", BLANK())
+
+	annotation PBI_Id = bbbe8a332fcd4809848b06eb98599378
+
+	annotation 436ba87b-9c83-4389-a31b-ebd06a36be98 = {"Expression":""}
+
