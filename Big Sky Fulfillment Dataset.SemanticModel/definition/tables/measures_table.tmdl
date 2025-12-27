@@ -369,6 +369,47 @@ table measures_table
 		formatString: 0.00%;-0.00%;0.00%
 		lineageTag: 1ca12180-554c-40f9-a6d5-972cdd055960
 
+	measure 'Projections Next Week' =
+			
+			CALCULATE(
+			[Projected Volume (Next 2 Weeks by Weekday)],
+			DATEADD(primary_date[Date],+7,DAY)
+			)
+		formatString: #,0
+		lineageTag: 3713e77e-28b5-44ab-9c1a-01d216308240
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'Projections This Week' =
+			
+			CALCULATE (
+			    [Projected Volume (Next 2 Weeks by Weekday)],
+			    primary_date[Week Number] = WEEKNUM ( TODAY(), 2 ),
+			    primary_date[Year] = YEAR ( TODAY() )
+			)
+		formatString: #,0
+		lineageTag: 6db24259-0a8b-4801-a5de-7f6f7be58094
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'Shipments LW' =
+			
+			CALCULATE(
+			[Shipments],
+			DATEADD(primary_date[Date],-7,DAY)
+			)
+		formatString: #,0
+		lineageTag: 84434d0a-9f65-4379-898c-1a575b3d632b
+
+	measure 'Shipments LW -1' =
+			
+			CALCULATE(
+			[Shipments],
+			DATEADD(primary_date[Date],-14,DAY)
+			)
+		formatString: #,0
+		lineageTag: 719ff327-b730-400d-b334-e8f42a841ac2
+
 	column Column
 		formatString: 0
 		lineageTag: b60817ac-84b0-4895-b04f-8dd3963bbc1d

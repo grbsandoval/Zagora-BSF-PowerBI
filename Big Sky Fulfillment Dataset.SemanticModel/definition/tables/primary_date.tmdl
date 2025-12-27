@@ -162,12 +162,33 @@ table primary_date
 
 		annotation SummarizationSetBy = Automatic
 
+	column 'Weekday Short'
+		lineageTag: 4f5423ca-b81e-4801-959e-1d72e4de2440
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Weekday Short]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'This Week'
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: ef1185eb-2ce5-4bdf-a467-c4caef04b336
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [This Week]
+
+		annotation SummarizationSetBy = Automatic
+
 	partition primary_date = calculated
 		mode: import
 		source =
 				
 				VAR StartDate = DATE(2023,1,1)
 				VAR EndDate = DATE(2025,12,31)
+				
+				VAR TodayDate = TODAY()
+				VAR CurrentWeekStart =
+				    TodayDate - WEEKDAY(TodayDate, 1) + 1   -- Sunday start
 				
 				RETURN
 				ADDCOLUMNS(
@@ -176,16 +197,35 @@ table primary_date
 				    "Month", FORMAT([Date], "MMMM"),
 				    "Month Number", MONTH([Date]),
 				    "Quarter", "Q" & FORMAT([Date], "Q"),
+				
 				    "Weekday", FORMAT([Date], "dddd"),
-				    "Weekday Number", WEEKDAY([Date], 2),  // 2 = Monday as the first day of the week
-				    "Month-Year", FORMAT([Date], "MM-YYYY"),  // Format as MM - YYYY
+				    "Weekday Short", FORMAT([Date], "ddd"),
+				    "Weekday Number", WEEKDAY([Date], 2),
+				
+				    "Month-Year", FORMAT([Date], "MM-YYYY"),
 				    "Is Weekend", IF(WEEKDAY([Date], 2) >= 6, "Yes", "No"),
-				    "Is Holiday", IF([Date] IN {DATE(2023,12,25), DATE(2024,1,1)}, "Yes", "No"),  // Add more holidays as needed
-				    "Week Number", WEEKNUM([Date], 1),  // 1 = Week starts on Sunday
-				    "Start of Week", [Date] - WEEKDAY([Date], 1) + 1,  // Finds the first Sunday of the week
-				    "Index", DATEDIFF([Date], EndDate, DAY) + 1,  // Descending index: latest date = 1
-				    "Week Index", DATEDIFF([Date] - WEEKDAY([Date], 1) + 1, EndDate - WEEKDAY(EndDate, 1) + 1, WEEK) + 1,  // Descending week index
-				    "Month-Year Index", DATEDIFF(EOMONTH([Date], 0), EOMONTH(EndDate, 0), MONTH) + 1  // Descending Year-Month index
+				    "Is Holiday", IF([Date] IN {DATE(2023,12,25), DATE(2024,1,1)}, "Yes", "No"),
+				
+				    "Week Number", WEEKNUM([Date], 1),
+				    "Start of Week", [Date] - WEEKDAY([Date], 1) + 1,
+				
+				    -- 🔹 This Week flag
+				    "This Week",
+				        IF(
+				            [Date] - WEEKDAY([Date], 1) + 1 = CurrentWeekStart,
+				            TRUE,
+				            FALSE
+				        ),
+				
+				    "Index", DATEDIFF([Date], EndDate, DAY) + 1,
+				    "Week Index",
+				        DATEDIFF(
+				            [Date] - WEEKDAY([Date], 1) + 1,
+				            EndDate - WEEKDAY(EndDate, 1) + 1,
+				            WEEK
+				        ) + 1,
+				    "Month-Year Index",
+				        DATEDIFF(EOMONTH([Date], 0), EOMONTH(EndDate, 0), MONTH) + 1
 				)
 
 	annotation PBI_Id = 53d3e567dcf24803bffa864803847824

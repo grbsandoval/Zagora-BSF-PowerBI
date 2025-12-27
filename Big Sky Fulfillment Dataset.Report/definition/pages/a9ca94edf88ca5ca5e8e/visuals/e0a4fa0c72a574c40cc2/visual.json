@@ -2,19 +2,53 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
   "name": "e0a4fa0c72a574c40cc2",
   "position": {
-    "x": 25.692438402718778,
-    "y": 60.5607476635514,
+    "x": 17.320703653585927,
+    "y": 31.177266576454667,
     "z": 0,
-    "height": 663.10960067969415,
-    "width": 1220.3908241291419,
+    "height": 694.56021650879563,
+    "width": 1228.0378890392421,
     "tabOrder": 0
   },
   "visual": {
     "visualType": "pivotTable",
     "query": {
       "queryState": {
+        "Columns": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "primary_warehouses"
+                    }
+                  },
+                  "Property": "warehouse_code"
+                }
+              },
+              "queryRef": "primary_warehouses.warehouse_code",
+              "nativeQueryRef": "warehouse_code",
+              "active": true
+            }
+          ]
+        },
         "Rows": {
           "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "primary_date"
+                    }
+                  },
+                  "Property": "Weekday"
+                }
+              },
+              "queryRef": "primary_date.Weekday",
+              "nativeQueryRef": "Weekday",
+              "active": true
+            },
             {
               "field": {
                 "Column": {
@@ -43,21 +77,6 @@
               },
               "queryRef": "primary_clients.Client",
               "nativeQueryRef": "Client",
-              "active": false
-            },
-            {
-              "field": {
-                "Column": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "primary_warehouses"
-                    }
-                  },
-                  "Property": "warehouse_code"
-                }
-              },
-              "queryRef": "primary_warehouses.warehouse_code",
-              "nativeQueryRef": "warehouse_code",
               "active": false
             },
             {
@@ -102,6 +121,34 @@
                       "Entity": "measures_table"
                     }
                   },
+                  "Property": "Projections This Week"
+                }
+              },
+              "queryRef": "measures_table.Projections This Week",
+              "nativeQueryRef": "Projections This Week"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "measures_table"
+                    }
+                  },
+                  "Property": "Projections Next Week"
+                }
+              },
+              "queryRef": "measures_table.Projections Next Week",
+              "nativeQueryRef": "Projections Next Week"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "measures_table"
+                    }
+                  },
                   "Property": "Shipments"
                 }
               },
@@ -116,11 +163,11 @@
                       "Entity": "measures_table"
                     }
                   },
-                  "Property": "Wholesale Projected Volume (Next 2 Weeks by Weekday)"
+                  "Property": "Shipments LW -1"
                 }
               },
-              "queryRef": "measures_table.Wholesale Projected Volume (Next 2 Weeks by Weekday)",
-              "nativeQueryRef": "Wholesale Projected Volume (Next 2 Weeks by Weekday)"
+              "queryRef": "measures_table.Shipments LW -1",
+              "nativeQueryRef": "Shipments LW -1"
             },
             {
               "field": {
@@ -130,11 +177,11 @@
                       "Entity": "measures_table"
                     }
                   },
-                  "Property": "Wholesale Shipments"
+                  "Property": "Shipments LW"
                 }
               },
-              "queryRef": "measures_table.Wholesale Shipments",
-              "nativeQueryRef": "Wholesale Shipments"
+              "queryRef": "measures_table.Shipments Last Week",
+              "nativeQueryRef": "Shipments LW"
             }
           ]
         }
@@ -163,6 +210,25 @@
           "Rows"
         ],
         "levels": [
+          {
+            "queryRefs": [
+              "primary_date.Weekday"
+            ],
+            "isCollapsed": true,
+            "identityKeys": [
+              {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "primary_date"
+                    }
+                  },
+                  "Property": "Weekday"
+                }
+              }
+            ],
+            "isPinned": true
+          },
           {
             "queryRefs": [
               "primary_date.Date"
@@ -203,34 +269,313 @@
           },
           {
             "queryRefs": [
-              "primary_warehouses.warehouse_code"
-            ],
-            "isCollapsed": true,
-            "identityKeys": [
-              {
-                "Column": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "primary_warehouses"
-                    }
-                  },
-                  "Property": "warehouse_code"
-                }
-              }
-            ],
-            "isPinned": true
-          },
-          {
-            "queryRefs": [
               "shipments.warehouse_code"
             ],
             "isCollapsed": true,
             "isPinned": true
           }
         ],
-        "root": {}
+        "root": {
+          "children": [
+            {
+              "identityValues": [
+                {
+                  "Literal": {
+                    "Value": "'Wednesday'"
+                  }
+                }
+              ],
+              "isToggled": true
+            },
+            {
+              "identityValues": [
+                {
+                  "Literal": {
+                    "Value": "'Tuesday'"
+                  }
+                }
+              ],
+              "isToggled": true
+            },
+            {
+              "identityValues": [
+                {
+                  "Literal": {
+                    "Value": "'Friday'"
+                  }
+                }
+              ],
+              "isToggled": true
+            },
+            {
+              "identityValues": [
+                {
+                  "Literal": {
+                    "Value": "'Saturday'"
+                  }
+                }
+              ],
+              "isToggled": true
+            },
+            {
+              "identityValues": [
+                {
+                  "Literal": {
+                    "Value": "'Sunday'"
+                  }
+                }
+              ],
+              "isToggled": true
+            },
+            {
+              "identityValues": [
+                {
+                  "Literal": {
+                    "Value": "'Monday'"
+                  }
+                }
+              ],
+              "isToggled": true
+            },
+            {
+              "identityValues": [
+                {
+                  "Literal": {
+                    "Value": "'Thursday'"
+                  }
+                }
+              ],
+              "isToggled": true
+            }
+          ]
+        }
       }
     ],
     "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "37958ce80972f4b8ea09",
+        "ordinal": 0,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "primary_clients"
+              }
+            },
+            "Property": "Client"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "2b3b8aaf275a7eefee98",
+        "ordinal": 1,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "primary_date"
+              }
+            },
+            "Property": "Date"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "49038210e42195c9572d",
+        "ordinal": 2,
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "measures_table"
+              }
+            },
+            "Property": "Projected Volume (Next 2 Weeks by Weekday)"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "c1afbf0a2e61ebe7dd85",
+        "ordinal": 3,
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "measures_table"
+              }
+            },
+            "Property": "Projections Next Week"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "16e167269842f9778239",
+        "ordinal": 4,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "primary_date"
+              }
+            },
+            "Property": "This Week"
+          }
+        },
+        "type": "Categorical",
+        "filter": {
+          "Version": 2,
+          "From": [
+            {
+              "Name": "p",
+              "Entity": "primary_date",
+              "Type": 0
+            }
+          ],
+          "Where": [
+            {
+              "Condition": {
+                "In": {
+                  "Expressions": [
+                    {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Source": "p"
+                          }
+                        },
+                        "Property": "This Week"
+                      }
+                    }
+                  ],
+                  "Values": [
+                    [
+                      {
+                        "Literal": {
+                          "Value": "true"
+                        }
+                      }
+                    ]
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        "howCreated": "User"
+      },
+      {
+        "name": "7f08ce8aba92684509cf",
+        "ordinal": 5,
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "measures_table"
+              }
+            },
+            "Property": "Projections This Week"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "134b614709fb9d8200a0",
+        "ordinal": 6,
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "measures_table"
+              }
+            },
+            "Property": "Shipments"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "34a050fad3cd5215430d",
+        "ordinal": 7,
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "measures_table"
+              }
+            },
+            "Property": "Shipments LW"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "7e3a18c40f64f819b5af",
+        "ordinal": 8,
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "measures_table"
+              }
+            },
+            "Property": "Shipments LW -1"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "8bcd0ecd35e2492f4393",
+        "ordinal": 9,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "primary_warehouses"
+              }
+            },
+            "Property": "warehouse_code"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "cc992bfa7b56f229b6c7",
+        "ordinal": 10,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "shipments"
+              }
+            },
+            "Property": "warehouse_code"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "0e52531a8b3015c3815a",
+        "ordinal": 11,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "primary_date"
+              }
+            },
+            "Property": "Weekday"
+          }
+        },
+        "type": "Categorical"
+      }
+    ],
+    "filterSortOrder": "Custom"
   }
 }

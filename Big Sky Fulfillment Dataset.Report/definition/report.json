@@ -82,6 +82,7 @@
     "defaultDrillFilterOtherVisuals": true,
     "allowChangeFilterTypes": true,
     "allowInlineExploration": true,
+    "useEnhancedTooltips": true,
     "useScaledTooltips": true,
     "useDefaultAggregateDisplayName": true,
     "queryLimitOption": "None",

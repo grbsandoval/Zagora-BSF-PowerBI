@@ -28851,6 +28851,27 @@ cultureInfo en-US
 			          }
 			        }
 			      ]
+			    },
+			    "inventory_changes.warehouse": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "inventory_changes",
+			          "ConceptualProperty": "warehouse"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Warehouse": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
 			    }
 			  },
 			  "Relationships": {
