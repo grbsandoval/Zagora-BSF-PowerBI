@@ -2,8 +2,8 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definitionProperties/2.0.0/schema.json",
   "version": "4.0",
   "datasetReference": {
-    "byConnection": {
-      "connectionString": "Data Source=powerbi://api.powerbi.com/v1.0/myorg/Big-Sky-Fulfillment;initial catalog=\"Big Sky Fulfillment Dataset\";access mode=readonly;integrated security=ClaimsToken;semanticmodelid=87fca627-b466-4525-bec7-7b511ee3e691"
+    "byPath": {
+      "path": "../Big Sky Fulfillment Dataset.SemanticModel"
     }
   }
 }
