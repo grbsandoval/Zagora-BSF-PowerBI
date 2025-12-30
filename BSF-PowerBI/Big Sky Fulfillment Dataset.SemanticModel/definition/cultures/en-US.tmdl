@@ -12938,12 +12938,7 @@ cultureInfo en-US
 			            "Weight": 0.99
 			          }
 			        },
-			        {
-			          "state": {
-			            "State": "Generated",
-			            "Weight": 0.97
-			          }
-			        },
+			        {},
 			        {
 			          "shipper location": {
 			            "Type": "Noun",
@@ -13649,12 +13644,7 @@ cultureInfo en-US
 			            "Weight": 0.99
 			          }
 			        },
-			        {
-			          "state": {
-			            "State": "Generated",
-			            "Weight": 0.97
-			          }
-			        },
+			        {},
 			        {
 			          "receiver location": {
 			            "Type": "Noun",
