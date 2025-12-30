@@ -1,4 +1,15 @@
+# Power BI Desktop local metadata files (user-specific, regenerated on open)
 **/.pbi/localSettings.json
+**/.pbi/editorSettings.json
 **/.pbi/cache.abf
-BSF-PowerBI-Git-Token.rtf
+
+# Power BI culture/linguistic metadata files (auto-generated, can be large)
+**/cultures/*.tmdl
+
+# Note: .platform files should be tracked - they contain logicalId linking to Power BI Service
+
+# macOS system files
 .DS_Store
+
+# Sensitive files
+BSF-PowerBI-Git-Token.rtf
